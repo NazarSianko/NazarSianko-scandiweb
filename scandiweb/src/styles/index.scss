@@ -1,0 +1,85 @@
+@import "fonts.scss";
+@import "header.scss";
+@import 'main.scss';
+.category-title {
+    font-family: Raleway;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 67px;
+    letter-spacing: 0px;
+    text-align: left;
+    cursor:pointer;
+    &:hover {
+        color:#5ece7b;
+    }
+    &.category-active {
+        color:#5ece7b;
+    }
+    
+}
+.categories {
+    display:flex;
+    margin-bottom: 105px;
+    column-gap: 40px;
+    
+}
+.showcase-main {
+    padding-bottom: 190px;
+   
+    .showcase-main-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        .showcase-main-item {
+            &:hover {
+                filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
+                background-color: white;
+                .main-item-btn {
+                    display: block;
+                }
+            }
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            .main-item-btn {
+                position: absolute;
+                background-color: #5ece7b;
+                width: 52px;
+                height: 52px;
+                border: 1px solid #5ece7b;
+                border-radius: 50%;
+                bottom: 17%;
+                right: 7%;
+                padding-top: 5px;
+                padding-right: 10px;
+                display: none;
+            }
+            .main-item-img {
+                & img {
+                    width: 354px;
+                    height: 330px;
+                }
+              
+                margin-bottom: 24px;
+            }
+            .main-item-description {
+                font-family: Raleway;
+                font-size: 18px;
+                font-weight: 300;
+                line-height: 29px;
+                letter-spacing: 0px;
+                text-align: left;
+            }
+            .main-item-price {
+                font-family: Raleway;
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 29px;
+                letter-spacing: 0em;
+                text-align: left;
+            }
+        }
+    }
+}

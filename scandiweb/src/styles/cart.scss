@@ -1,0 +1,154 @@
+@import 'fonts.scss';
+@import 'main.scss';
+
+.cart-main {
+    .cart-title {
+        font-family: Raleway;
+        font-size: 32px;
+        font-weight: 700;
+        line-height: 40px;
+        letter-spacing: 0em;
+        text-align: left;
+        padding-bottom: 55px;
+        border-bottom: 1px solid #E5E5E5;      
+        margin-bottom: 25px;    
+      }
+    .cart-items {
+        display: flex;
+        flex-direction: column;
+        .cart-item {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            padding-bottom:20px;
+            border-bottom: 1px solid #E5E5E5;
+            margin-bottom: 24px;
+            .cart-item_left {
+                display: flex;
+                flex-direction: column;
+                row-gap: 18px;
+                .item-title {
+                    font-family: Raleway;
+                    font-size: 30px;
+                    font-weight: 600;
+                    line-height: 27px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+                .item-description {
+                    font-family: Raleway;
+                    font-size: 30px;
+                    font-weight: 400;
+                    line-height: 27px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+                .item-price {
+                    font-family: Raleway;
+                    font-size: 24px;
+                    font-weight: 700;
+                    line-height: 24px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+                .item-size {
+                    .size-text {
+                        font-family: Roboto Condensed;
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 18px;
+                        letter-spacing: 0em;
+                        text-align: center;
+                        display:inline-block;
+                        margin-bottom:10px;
+                    }
+                    .sizes {
+                        display: flex;
+                        justify-content: space-between;
+                        & * {
+                            margin-right: 8px;
+                        }
+
+                        .l,
+                        .m,
+                        .s,
+                        .xs {
+                            width: 63px;
+                            height: 45px;
+                            background: #ffffff;
+                            border: 1px solid #1d1f22;
+                            text-align: center;
+                            line-height: 45px;
+                        }
+                    }
+                }
+                .item-color {
+                    .color-text {
+                        font-family: Roboto Condensed;
+                        font-size: 18px;
+                        font-weight: 700;
+                        line-height: 18px;
+                        letter-spacing: 0em;
+                        text-align: center;
+                        display:inline-block;
+                        margin-bottom:10px;
+                    }
+                    .colors {
+                        display:flex;
+                        & * {
+                            margin-right: 8px;
+
+                        }
+                        .color {
+                            width: 32px;
+                            height: 32px;
+                            border:1px solid black;
+                        }
+                    }
+                }
+            }
+            .cart-item-right {
+                display: flex;
+                justify-content: space-between;
+                height: 288px;
+                .item-count {
+                    display:flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    margin-right: 24px;
+                    .count {
+                      
+                        font-family: Raleway;
+                        font-size: 24px;
+                        font-weight: 500;
+                        line-height: 38px;
+                        letter-spacing: 0em;
+                        text-align: center;
+
+                    }
+                    .plus,
+                    .minus {
+                        width:45px;
+                        height: 43px;
+                        border: 1px solid #1D1F22;
+                        text-align: center;
+                        line-height: 45px;
+                        font-size:30px;
+                    }
+                    .minus {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        
+                        .minus-content {
+                            display: block;
+                            width:20px;
+                            height:1px;
+                            background-color: black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
