@@ -11,11 +11,16 @@ import { Categories } from '../components';
 export class Home extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      currencyIndex: 0,
+    }
     
   }
-
-  setCategory = (index) => {
+  setCurrencyIndex = (index) => {
+    this.setCurrencyIndex(index)
     
+  }
+  setCategory = (index) => {
     this.props.data.refetch({ input: { title: this.props.data.categories[index].name } });
   };
   render() {
@@ -25,7 +30,7 @@ export class Home extends Component {
       <main className="showcase-main">
         <Categories
           setCategory={this.setCategory}
-         categoryNames = {this.props.data.categories}
+          categoryNames={this.props.data.categories}
           setCategories={this.setCategories}
         />
         <div className="showcase-main-content">
@@ -39,6 +44,7 @@ export class Home extends Component {
                   description={el.description}
                   gallery={el.gallery}
                   price={el.prices}
+                 currencyIndex={this.props.currencyIndex}
                 />
               ))
             : ''}

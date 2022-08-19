@@ -15,15 +15,11 @@ class Categories extends Component {
     });
   };
 
-
   render() {
-   
-    
-
     return (
       <div className="categories">
-        {this.props.categoryNames ?
-          this.props.categoryNames.map((el, index) => (
+        {this.props.categoryNames
+          ? this.props.categoryNames.map((el, index) => (
               <h1
                 className={
                   'category-title' +
@@ -34,11 +30,10 @@ class Categories extends Component {
                 {el.name}
               </h1>
             ))
-             : '' }
+          : ''}
       </div>
     );
   }
 }
-
 
 export default Categories;
