@@ -30,7 +30,7 @@
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: flex-start;
         .showcase-main-item {
             &:hover {
                 filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));

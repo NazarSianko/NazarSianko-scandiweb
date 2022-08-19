@@ -1,26 +1,36 @@
 import React, { Component } from 'react';
 import '../styles/index.scss';
 import HomeItem from './HomeItem';
-import client from '../apollo/client';
+import { WithApollo } from 'react-apollo';
 import { gql } from '@apollo/client';
-import { ApolloClient } from '@apollo/client';
+
 import { graphql } from '@apollo/client/react/hoc';
-import Category from './Categories';
+
+import { Categories } from '../components';
 
 export class Home extends Component {
   constructor(props) {
     super(props);
+    
   }
 
+  setCategory = (index) => {
+    
+    this.props.data.refetch({ input: { title: this.props.data.categories[index].name } });
+  };
   render() {
-    const { categories } = this.props.data;
+    const { category } = this.props.data;
 
     return (
       <main className="showcase-main">
-     
+        <Categories
+          setCategory={this.setCategory}
+         categoryNames = {this.props.data.categories}
+          setCategories={this.setCategories}
+        />
         <div className="showcase-main-content">
           {!this.props.data.loading
-            ? categories[0].products.map((el) => (
+            ? category.products.map((el) => (
                 <HomeItem
                   id={el.id}
                   name={el.name}
@@ -38,30 +48,42 @@ export class Home extends Component {
   }
 }
 
-const abc = graphql(gql`
-  query TodoAppQuery {
-    categories {
-      name
-      products {
-        id
+const CATEGORIES = graphql(
+  gql`
+    query CategoryQuery($input: CategoryInput) {
+      categories {
         name
-        inStock
-        gallery
-        description
-        category
-        prices {
-          currency {
-            label
-            symbol
+      }
+      category(input: $input) {
+        name
+        products {
+          id
+          name
+          inStock
+          gallery
+          description
+          category
+          prices {
+            currency {
+              label
+              symbol
+            }
+            amount
           }
-          amount
-        }
 
-        brand
+          brand
+        }
       }
     }
-  }
-`);
-const homeWithData = abc(Home);
+  `,
+  {
+    options: {
+      variables: {
+        input: { title: 'all' },
+      },
+    },
+  },
+);
+const homeWithData = CATEGORIES(Home);
 
 export default homeWithData;
