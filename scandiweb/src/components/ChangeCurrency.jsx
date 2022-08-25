@@ -58,6 +58,7 @@ const CURRENCY = graphql(
     query CategoryQuery {
       categories {
         products {
+          
           prices {
             currency {
               label

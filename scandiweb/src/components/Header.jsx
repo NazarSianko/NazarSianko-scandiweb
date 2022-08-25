@@ -19,7 +19,7 @@ export default class Header extends Component {
   }
   render() {
    
-    const sortItems = ['WOMAN', 'MAN', 'KIDS'];
+    const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
         <div className="header-sort">

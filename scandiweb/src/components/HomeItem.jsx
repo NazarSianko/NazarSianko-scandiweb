@@ -10,7 +10,7 @@ export default class HomeItem extends Component {
   }
 
   render() {
-    const { id, name, inStock, brand, description, gallery, price } = this.props;
+    const { id, name,  gallery, price } = this.props;
 
     return (
       <div className="showcase-main-item" onClick={() => this.props.setCurrentId(id)}>
