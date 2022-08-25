@@ -40,7 +40,7 @@ export default class ProductDescription extends Component {
               <div className="item-title">{name}</div>
               <div className="item-description">{brand}</div>
 
-              {!loading
+              {!loading && Object.keys(this.props).length !== 0
                 ? attributes.map((el, ind) => (
                     <div className="item-size">
                       <span className="size-text">

@@ -36,7 +36,7 @@ export class Home extends Component {
   };
   render() {
     const { category } = this.props.data;
-    console.log(category);
+ 
     return (
       <main className="showcase-main">
         {!this.state.currentId ? (
@@ -49,7 +49,7 @@ export class Home extends Component {
           ''
         )}
         <div className="showcase-main-content">
-          {!this.props.data.loading
+          {!this.props.data.loading && !this.props.data.error
             ? !this.state.currentId
               ? category.products.map((el) => (
                   <HomeItem

@@ -24,17 +24,19 @@ class ChangeCurrency extends Component {
     });
   };
   render() {
+    console.log(this.props.data)
+    
     return (
       <div className="header-change" onClick={() => this.openCurrencyList()}>
         <div className="currency-symbol">
-          {!this.props.data.loading
+          {  !this.props.data.loading && !this.props.data.error
             ? this.props.data.categories[0].products[0].prices[this.state.activeIndex].currency
                 .symbol
             : ''}
         </div>
-        {this.state.currencyFlag ? (
+        {this.state.currencyFlag  ? (
           <div className="currency-list">
-            {!this.props.data.loading
+            {!this.props.data.loading && !this.props.data.error
               ? this.props.data.categories[0].products[0].prices.map((el, index) => (
                   <div
                     className={
