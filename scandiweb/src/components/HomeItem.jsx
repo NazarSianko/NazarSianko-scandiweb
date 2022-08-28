@@ -10,10 +10,10 @@ export default class HomeItem extends Component {
   }
 
   render() {
-    const { id, name,  gallery, price } = this.props;
+    const { name, gallery, price, id } = this.props;
 
     return (
-      <div className="showcase-main-item" onClick={() => this.props.setCurrentId(id)}>
+      <div className="showcase-main-item" onClick={() => this.props.setCurrentId(this.props.id)}>
         <div className="main-item-img">
           <img src={gallery[0]} alt="product"></img>
         </div>

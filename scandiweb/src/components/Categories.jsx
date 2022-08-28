@@ -16,7 +16,6 @@ class Categories extends Component {
   };
 
   render() {
-    console.log(this.state)
     return (
       <div className="categories">
         {this.props.categoryNames

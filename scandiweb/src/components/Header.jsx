@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/header.scss';
 import ChangeCurrency from './ChangeCurrency';
+import { NavLink } from 'react-router-dom';
 
 export default class Header extends Component {
   constructor(props) {
@@ -15,10 +16,9 @@ export default class Header extends Component {
     });
   };
   setCurrencyIndex = (index) => {
-    this.props.setCurrencyIndex(index)
-  }
+    this.props.setCurrencyIndex(index);
+  };
   render() {
-   
     const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
@@ -33,18 +33,19 @@ export default class Header extends Component {
             </div>
           ))}
         </div>
-        <div className="header-logo">
-          <img src="./a-logo.png" alt="logo"></img>
-        </div>
-        <div className="header-right">
-          
-            <ChangeCurrency setCurrencyIndex = {this.setCurrencyIndex}/>
-            
-        
-        
-          <div className="header-cart">
-            <img src="./Empty Cart.png"></img>
+        <NavLink to="/">
+          <div className="header-logo">
+            <img src="./a-logo.png" alt="logo"></img>
           </div>
+        </NavLink>
+        <div className="header-right">
+          <ChangeCurrency setCurrencyIndex={this.setCurrencyIndex} />
+
+          <NavLink to="/cart">
+            <div className="header-cart">
+              <img src="./Empty Cart.png"></img>
+            </div>
+          </NavLink>
         </div>
       </header>
     );

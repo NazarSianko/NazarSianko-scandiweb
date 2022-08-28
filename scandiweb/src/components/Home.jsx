@@ -9,13 +9,13 @@ import { graphql } from '@apollo/client/react/hoc';
 
 import { Categories } from '../components';
 import { ProductDescription } from '../components';
+import { Routes, Route, NavLink } from 'react-router-dom';
 
 export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currencyIndex: 0,
-      currentId: '',
     };
   }
   setCurrencyIndex = (index) => {
@@ -25,9 +25,7 @@ export class Home extends Component {
     this.props.data.refetch({ input: { title: this.props.data.categories[index].name } });
   };
   setCurrentId = (id) => {
-    this.setState({
-      currentId: id,
-    });
+    this.props.setCurrentId(id);
   };
   clearCurrentId = () => {
     this.setState({
@@ -36,7 +34,7 @@ export class Home extends Component {
   };
   render() {
     const { category } = this.props.data;
- 
+
     return (
       <main className="showcase-main">
         {!this.state.currentId ? (
@@ -50,8 +48,9 @@ export class Home extends Component {
         )}
         <div className="showcase-main-content">
           {!this.props.data.loading && !this.props.data.error
-            ? !this.state.currentId
-              ? category.products.map((el) => (
+            ? //? !this.state.currentId
+              category.products.map((el) => (
+                <NavLink to={`/pdp/${el.id}`}>
                   <HomeItem
                     id={el.id}
                     name={el.name}
@@ -63,10 +62,11 @@ export class Home extends Component {
                     currencyIndex={this.props.currencyIndex}
                     setCurrentId={this.setCurrentId}
                   />
-                ))
-              : category.products.map((el) =>
+                </NavLink>
+              ))
+            : /* : category.products.map((el) =>
                   el.id === this.state.currentId ? (
-                    <ProductDescription
+                                   <ProductDescription
                       id={el.id}
                       name={el.name}
                       clearId={this.clearCurrentId}
@@ -79,11 +79,11 @@ export class Home extends Component {
                       gallery={el.gallery}
                       price={el.prices}
                     />
-                  ) : (
+                  )  : (
                     ''
                   ),
-                )
-            : ''}
+                )*/
+              ''}
         </div>
       </main>
     );
@@ -96,6 +96,7 @@ const CATEGORIES = graphql(
       categories {
         name
       }
+
       category(input: $input) {
         name
         products {

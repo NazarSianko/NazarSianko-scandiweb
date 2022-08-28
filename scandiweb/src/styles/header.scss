@@ -33,7 +33,7 @@
         }
     }
     .header-logo {
-        margin-left: -120px;
+        margin-left:-70px;
         margin-top: 15px;
     }
     .header-right {
@@ -60,7 +60,7 @@
                 padding: 10px 0px;
                 display: flex;
                 flex-direction: column;
-
+                z-index: 10;
                 position: absolute;
 
                 top: 30px;
