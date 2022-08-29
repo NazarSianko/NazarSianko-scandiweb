@@ -91,8 +91,31 @@
         }
     }
     .header-cart {
+       position:relative;
         & img {
             margin-top: 5px;
+            
         }
+        .cart-counter {
+            position: absolute;
+            top: 0;
+            left: 60%;
+            color:white;
+            background: #1D1F22;
+            border-radius: 60px;
+            min-width: 20px;
+            min-height: 20px;
+            text-align: center;
+                        font-family: Roboto;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 20px;
+            letter-spacing: 0em;
+            text-align: center;
+
+           
+            
+        }
+        
     }
 }

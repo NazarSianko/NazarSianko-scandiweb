@@ -1,134 +1,34 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import '../styles/cart.scss';
+import Cartitem from './Cartitem';
+import {  store } from '../redux/store';
+import { plusCartItem } from '../redux/actions/cart';
 
-export default class Cart extends Component {
+ class Cart extends Component {
+  plusItem = (id) => {
+
+    store.dispatch(plusCartItem(id))
+  }
   render() {
+  console.log(this.props)
+  const {items} = this.props
+  const pizzas = Object.keys(items).map((key) => {
+    return items[key].items[0];
+  });
     return (
       <main className="cart-main">
         <h1 className="cart-title">CART</h1>
         <div className="cart-items">
-          <div className="cart-item">
-            <div className="cart-item_left">
-              <div className="item-title">Apollo</div>
-              <div className="item-description">Running Short</div>
-              <div className="item-price">$50.00</div>
-              <div className="item-size">
-                <span className="size-text">
-                  SIZE:<br></br>
-                </span>
-                <div className="sizes">
-                  <div className="xs">XS</div>
-                  <div className="s">S</div>
-                  <div className="m">M</div>
-                  <div className="l">L</div>
-                </div>
-              </div>
-              <div className="item-color">
-                <span className="color-text">
-                  COLOR:<br></br>
-                </span>
-                <div className="colors">
-                  <div className="color"></div>
-                  <div className="color"></div>
-                  <div className="color"></div>
-                </div>
-              </div>
-            </div>
-            <div className="cart-item-right">
-              <div className="item-count">
-                <div className="plus">+</div>
-                <div className="count">1</div>
-                <div className="minus">
-                  <span className="minus-content"></span>
-                </div>
-              </div>
-              <div className="item-img">
-                <img src="./Product D.png" alt="cart img"></img>
-              </div>
-            </div>
-          </div>
-          <div className="cart-item">
-            <div className="cart-item_left">
-              <div className="item-title">Apollo</div>
-              <div className="item-description">Running Short</div>
-              <div className="item-price">$50.00</div>
-              <div className="item-size">
-                <span className="size-text">
-                  SIZE:<br></br>
-                </span>
-                <div className="sizes">
-                  <div className="xs">XS</div>
-                  <div className="s">S</div>
-                  <div className="m">M</div>
-                  <div className="l">L</div>
-                </div>
-              </div>
-              <div className="item-color">
-                <span className="color-text">
-                  COLOR:<br></br>
-                </span>
-                <div className="colors">
-                  <div className="color"></div>
-                  <div className="color"></div>
-                  <div className="color"></div>
-                </div>
-              </div>
-            </div>
-            <div className="cart-item-right">
-              <div className="item-count">
-                <div className="plus">+</div>
-                <div className="count">1</div>
-                <div className="minus">
-                  <span className="minus-content"></span>
-                </div>
-              </div>
-              <div className="item-img">
-                <img src="./Product D.png" alt="cart img"></img>
-              </div>
-            </div>
-          </div>
-          <div className="cart-item">
-            <div className="cart-item_left">
-              <div className="item-title">Apollo</div>
-              <div className="item-description">Running Short</div>
-              <div className="item-price">$50.00</div>
-              <div className="item-size">
-                <span className="size-text">
-                  SIZE:<br></br>
-                </span>
-                <div className="sizes">
-                  <div className="xs">XS</div>
-                  <div className="s">S</div>
-                  <div className="m">M</div>
-                  <div className="l">L</div>
-                </div>
-              </div>
-              <div className="item-color">
-                <span className="color-text">
-                  COLOR:<br></br>
-                </span>
-                <div className="colors">
-                  <div className="color"></div>
-                  <div className="color"></div>
-                  <div className="color"></div>
-                </div>
-              </div>
-            </div>
-            <div className="cart-item-right">
-              <div className="item-count">
-                <div className="plus">+</div>
-                <div className="count">1</div>
-                <div className="minus">
-                  <span className="minus-content"></span>
-                </div>
-              </div>
-              <div className="item-img">
-                <img src="./Product D.png" alt="cart img"></img>
-              </div>
-            </div>
-          </div>
+          {pizzas? pizzas.map(el => <Cartitem  id = {el.id} price = {el.price} brand = {el.brand} name = {el.name} image={el.image} itemsCount={items[el.id].items.length} plusItem ={this.plusItem} />) : ''}
+         
         </div>
       </main>
     );
   }
 }
+const mapStateToProps = state => ({
+  items: state.cart.items,
+  totalCount: state.cart.totalCount
+});
+export default connect(mapStateToProps)(Cart);

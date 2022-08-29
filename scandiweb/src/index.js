@@ -2,20 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './styles/main.scss';
 import App from './App';
-import {  ApolloProvider } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client';
 import client from './apollo/client';
-import { BrowserRouter, Route,Routes,HashRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, HashRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
 root.render(
-  <React.StrictMode>
-    <HashRouter>
-      <ApolloProvider client={client}>
-    <App />
-
+  <HashRouter>
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </ApolloProvider>
-    </HashRouter>
-
-  </React.StrictMode>
+  </HashRouter>,
 );
-

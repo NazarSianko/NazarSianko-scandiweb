@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import '../styles/header.scss';
 import ChangeCurrency from './ChangeCurrency';
 import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-export default class Header extends Component {
+ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeIndex: 0,
+    
     };
   }
   setActive = (index) => {
@@ -19,6 +21,7 @@ export default class Header extends Component {
     this.props.setCurrencyIndex(index);
   };
   render() {
+    console.log(this.props)
     const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
@@ -44,6 +47,7 @@ export default class Header extends Component {
           <NavLink to="/cart">
             <div className="header-cart">
               <img src="./Empty Cart.png"></img>
+              { this.props.totalCount ? <div className ="cart-counter">{this.props.totalCount}</div> : ''} 
             </div>
           </NavLink>
         </div>
@@ -51,3 +55,8 @@ export default class Header extends Component {
     );
   }
 }
+const mapStateToProps = state => ({
+  
+  totalCount: state.cart.totalCount
+});
+export default connect(mapStateToProps)(Header)

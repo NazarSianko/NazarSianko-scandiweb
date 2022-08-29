@@ -110,6 +110,15 @@
                 display: flex;
                 justify-content: space-between;
                 height: 288px;
+                .item-img {
+                    width: 200px;
+                    height: 288px;
+                    & img {
+                        width: 200px;
+                        height: 288px;
+                    }
+                }
+                
                 .item-count {
                     display: flex;
                     flex-direction: column;

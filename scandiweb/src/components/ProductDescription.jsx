@@ -3,6 +3,8 @@ import '../styles/pdp.scss';
 import { gql } from '@apollo/client';
 import { NavLink } from 'react-router-dom';
 import { graphql } from '@apollo/client/react/hoc';
+import { persistor, store } from '../redux/store';
+import { addItem } from '../redux/actions/cart';
 
 class ProductDescription extends Component {
   constructor(props) {
@@ -12,7 +14,20 @@ class ProductDescription extends Component {
       currentId: '',
     };
   }
+  setCartItem = () => {
+    const obj = {
+      id: this.props.data.product.id,
+      price:  this.props.data.product.prices[this.props.currencyIndex].currency.symbol +
+        ' ' +
+        this.props.data.product.prices[this.props.currencyIndex].amount,
+      brand: this.props.data.product.brand,
+      name: this.props.data.product.name,
+      image: this.props.data.product.gallery[0],
 
+    };
+    store.dispatch(addItem(obj));
+ 
+  };
   setImageId = (index) => {
     this.setState({
       imgIndex: index,
@@ -32,18 +47,9 @@ class ProductDescription extends Component {
       ? 'active'
       : '';
   };
-  /*setCategory = () => {
-    this.props.data.refetch({ id: `${this.props.id}`});
-  };
-  componentDidMount = () => {
-    this.setCategory();
-    
-    }
-  */
-  render() {
-    //const { attributes, name, brand, gallery, prices } = this.props.data.product;
 
-    console.log(this.props);
+  render() {
+
     return (
       <div className="pdp-main">
         {!this.props.data.loading && !this.props.data.error ? (
@@ -109,7 +115,7 @@ class ProductDescription extends Component {
                       this.props.data.product.prices[this.props.currencyIndex].amount}
                   </span>
                 </div>
-                <button className="pdp-button" onClick={() => this.setCategory()}>
+                <button className="pdp-button" onClick={() => this.setCartItem()}>
                   <span>ADD TO CART</span>
                 </button>
                 <div className="item-about">
