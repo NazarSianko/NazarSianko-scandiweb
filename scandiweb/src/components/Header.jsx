@@ -21,7 +21,7 @@ import { connect } from 'react-redux';
     this.props.setCurrencyIndex(index);
   };
   render() {
-    console.log(this.props)
+   
     const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
@@ -29,6 +29,7 @@ import { connect } from 'react-redux';
           {sortItems.map((el, index) => (
             <div
               onClick={() => this.setActive(index)}
+              key ={el}
               className={
                 'sort-item' + ' ' + `${this.state.activeIndex == index ? 'sort-item-active' : ''}`
               }>

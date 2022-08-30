@@ -43,7 +43,7 @@ export class App extends Component {
               }
             />
 
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<Cart currencyIndex={this.state.currencyIndex} />} />
             <Route
               path={'/pdp/:id'}
               element={

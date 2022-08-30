@@ -37,21 +37,20 @@ export class Home extends Component {
 
     return (
       <main className="showcase-main">
-        {!this.state.currentId ? (
+       
           <Categories
             setCategory={this.setCategory}
             categoryNames={this.props.data.categories}
             setCategories={this.setCategories}
           />
-        ) : (
-          ''
-        )}
+       
         <div className="showcase-main-content">
           {!this.props.data.loading && !this.props.data.error
             ? //? !this.state.currentId
               category.products.map((el) => (
                 <NavLink to={`/pdp/${el.id}`}>
                   <HomeItem
+                   key={el.id}
                     id={el.id}
                     name={el.name}
                     inStock={el.inStock}

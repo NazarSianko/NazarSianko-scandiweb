@@ -164,6 +164,10 @@
             border: none;
             margin-bottom: 20px;
             cursor:pointer;
+            
+            &:active {
+                box-shadow: 0 0 0 4px #cbd6ee;
+            }
 
             & span {
                 font-family: Raleway;

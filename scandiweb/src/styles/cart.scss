@@ -2,6 +2,7 @@
 @import "main.scss";
 
 .cart-main {
+    position:relative;
     .cart-title {
         font-family: Raleway;
         font-size: 32px;
@@ -12,6 +13,26 @@
         padding-bottom: 55px;
         border-bottom: 1px solid #e5e5e5;
         margin-bottom: 25px;
+    }
+    .cart-clear {
+        position:absolute;
+        top:15px;
+        right:0;
+        cursor:pointer;
+        display: flex;
+        align-items: center;
+        & span {
+            color: #b6b6b6;
+            font-family: Raleway;
+            font-size: 18px;
+            font-weight: 300;
+            line-height: 29px;
+            letter-spacing: 0px;
+            text-align: left;
+            margin-left:5px;
+            display:inline-block;
+        
+        }
     }
     .cart-items {
         display: flex;
@@ -60,29 +81,38 @@
                         letter-spacing: 0em;
                         text-align: center;
                         display: inline-block;
-                        margin-bottom: 10px;
+                        margin-bottom: 8px;
                     }
                     .sizes {
                         display: flex;
-                        justify-content: space-between;
+                        justify-content: flex-start;
+                        
                         & * {
-                            margin-right: 8px;
+                            margin-right: 10px;
                         }
-
-                        .l,
-                        .m,
-                        .s,
-                        .xs {
+        
+                        .size {
                             width: 63px;
                             height: 45px;
-                            background: #ffffff;
+                            background-color: #ffffff;
                             border: 1px solid #1d1f22;
                             text-align: center;
                             line-height: 45px;
+                            cursor:pointer;
+                            box-sizing: border-box;
+                            
+                            &.active {
+                                background-color: black;
+                                color:white;
+                            }
+                            &.active-color {
+                                border:3px solid #5ECE7B;
+                            }
                         }
                     }
                 }
                 .item-color {
+                    margin-bottom: 20px;
                     .color-text {
                         font-family: Roboto Condensed;
                         font-size: 18px;
@@ -110,12 +140,33 @@
                 display: flex;
                 justify-content: space-between;
                 height: 288px;
+              
                 .item-img {
                     width: 200px;
                     height: 288px;
+                    position: relative;
                     & img {
                         width: 200px;
                         height: 288px;
+                    }
+                    .arrow-left,
+                    .arrow-right {
+                        width:24px;
+                        height: 24px;
+                        position:absolute;
+                        cursor: pointer;
+                        
+                        & img {
+                            width:24px;
+                            height: 24px;
+                        }
+                        bottom:15px;
+                    }
+                    .arrow-right {
+                        left:60%;
+                    }
+                    .arrow-left {
+                        left:25%
                     }
                 }
                 
@@ -133,15 +184,18 @@
                         text-align: center;
                     }
                     .plus,
-                    .minus {
+                    .minus
+                     {
+                        &:active {
+                            box-shadow: 0 0 0 4px #cbd6ee;
+                        }
                         width: 45px;
                         height: 43px;
                         border: 1px solid #1d1f22;
                         text-align: center;
                         line-height: 45px;
                         font-size: 30px;
-                    }
-                    .minus {
+                        cursor:pointer;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -153,6 +207,24 @@
                             background-color: black;
                         }
                     }
+                }
+                .delete {
+                    &:active {
+                        box-shadow: 0 0 0 4px #cbd6ee;
+                    }
+                    width: 45px;
+                    height: 43px;
+                    border: 1px solid #1d1f22;
+                    text-align: center;
+                    line-height: 45px;
+                    font-size: 30px;
+                    cursor:pointer;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-family: Raleway;
+                    margin-left:24px;
+                    
                 }
             }
         }

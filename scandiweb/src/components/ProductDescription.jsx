@@ -17,12 +17,11 @@ class ProductDescription extends Component {
   setCartItem = () => {
     const obj = {
       id: this.props.data.product.id,
-      price:  this.props.data.product.prices[this.props.currencyIndex].currency.symbol +
-        ' ' +
-        this.props.data.product.prices[this.props.currencyIndex].amount,
+      price:  this.props.data.product.prices,
       brand: this.props.data.product.brand,
       name: this.props.data.product.name,
-      image: this.props.data.product.gallery[0],
+      image: this.props.data.product.gallery,
+      attributes: this.props.data.product.attributes
 
     };
     store.dispatch(addItem(obj));
@@ -49,7 +48,7 @@ class ProductDescription extends Component {
   };
 
   render() {
-
+   
     return (
       <div className="pdp-main">
         {!this.props.data.loading && !this.props.data.error ? (
