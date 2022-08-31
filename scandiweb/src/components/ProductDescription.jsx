@@ -11,9 +11,12 @@ class ProductDescription extends Component {
     super(props);
     this.state = {
       imgIndex: 0,
-      currentId: '',
+      id:  this.props.id,
+      [this. props.data.product ? this.props.data.product.attributes.map(el => el.name) : ''] : 0
+   
     };
   }
+  
   setCartItem = () => {
     const obj = {
       id: this.props.data.product.id,
@@ -21,8 +24,9 @@ class ProductDescription extends Component {
       brand: this.props.data.product.brand,
       name: this.props.data.product.name,
       image: this.props.data.product.gallery,
-      attributes: this.props.data.product.attributes
-
+      attributes: this.props.data.product.attributes,
+      objState: this.state,
+      setActiveClass: this.setActiveClass
     };
     store.dispatch(addItem(obj));
  
@@ -35,13 +39,13 @@ class ProductDescription extends Component {
   createMarkUp = () => ({
     __html: this.props.data.product ? this.props.data.product.description : '',
   });
-  setActiveClass = (id, index) => {
-    return Object.keys(this.state).find((keysItem) => keysItem == id) == id &&
-      this.state[id] == index &&
+  setActiveClass = (id, index ,obj) => {
+    return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
+      obj[id] == index &&
       id == 'Color'
       ? 'active-color'
-      : Object.keys(this.state).find((keysItem) => keysItem == id) == id &&
-        this.state[id] == index &&
+      : Object.keys(obj).find((keysItem) => keysItem == id) == id &&
+        obj[id] == index &&
         id !== 'Color'
       ? 'active'
       : '';
@@ -49,6 +53,7 @@ class ProductDescription extends Component {
 
   render() {
    
+      console.log(this.state)
     return (
       <div className="pdp-main">
         {!this.props.data.loading && !this.props.data.error ? (
@@ -87,7 +92,7 @@ class ProductDescription extends Component {
                     <div className="sizes">
                       {el.items.map((item, index) => (
                         <div
-                          className={'size' + ' ' + `${this.setActiveClass(el.id, index)}`}
+                          className={'size' + ' ' + `${this.setActiveClass(el.id, index, this.state)}`}
                           style={{
                             background: `${el.name === 'Color' ? item.value : ''}`,
                             width: `${el.name === 'Color' ? '39px' : ''}`,
@@ -109,9 +114,9 @@ class ProductDescription extends Component {
                   <span className="price-text">PRICE:</span>
                   <br></br>
                   <span>
-                    {this.props.data.product.prices[this.props.currencyIndex].currency.symbol +
+                    {this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0].currency.symbol +
                       ' ' +
-                      this.props.data.product.prices[this.props.currencyIndex].amount}
+                      this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0].amount}
                   </span>
                 </div>
                 <button className="pdp-button" onClick={() => this.setCartItem()}>

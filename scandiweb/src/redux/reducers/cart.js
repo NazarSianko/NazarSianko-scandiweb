@@ -10,15 +10,16 @@ const initialState = {
  const cart = (state = initialState, action) => {
     switch (action.type) {
       case 'ADD_ITEM': {
-        const currentPizzaItems = !state.items[action.payload.id]
+        const objState = JSON.stringify(action.payload.objState)
+        const currentPizzaItems = !state.items[objState]
         ? [action.payload]
-        : [...state.items[action.payload.id].items, action.payload];
+        : [...state.items[objState].items, action.payload];
       
 
       
       const newItems = {
         ...state.items,
-        [action.payload.id]: {
+        [objState]: {
           items: currentPizzaItems,
           
         },
@@ -34,14 +35,14 @@ const initialState = {
         };
       }
       case 'PLUS_CART_ITEM': {
-      
+        const objState = JSON.stringify(action.payload)
         const newObjItems = [
-          ...state.items[action.payload].items,
-          state.items[action.payload].items[0],
+          ...state.items[objState].items,
+          state.items[objState].items[0],
         ];
         const newItems = {
           ...state.items,
-          [action.payload]: {
+          [objState]: {
             items: newObjItems,
            
           },
@@ -58,12 +59,13 @@ const initialState = {
         };
       }
       case 'MINUS_CART_ITEM': {
-        const oldItems = state.items[action.payload].items;
+        const objState = JSON.stringify(action.payload)
+        const oldItems = state.items[objState].items;
         const newObjItems =
-          oldItems.length > 1 ? state.items[action.payload].items.slice(1) : oldItems;
+          oldItems.length > 1 ? state.items[ objState].items.slice(1) : oldItems;
         const newItems = {
           ...state.items,
-          [action.payload]: {
+          [ objState]: {
             items: newObjItems,
            
           },
@@ -78,12 +80,13 @@ const initialState = {
         };
       }
       case 'REMOVE_CART_ITEM': {
+        const objState = JSON.stringify(action.payload)
         const newItems = {
           ...state.items,
         };
-        const currentTotalPrice = newItems[action.payload].totalPrice;
-        const currentTotalCount = newItems[action.payload].items.length;
-        delete newItems[action.payload];
+        const currentTotalPrice = newItems[objState].totalPrice;
+        const currentTotalCount = newItems[objState].items.length;
+        delete newItems[objState];
        
         return {
           ...state,

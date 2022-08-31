@@ -7,7 +7,7 @@ class ChangeCurrency extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0,
+      activeIndex: sessionStorage.getItem('currencyIndex') || 0,
       currencyFlag: false,
     };
   }
@@ -16,6 +16,7 @@ class ChangeCurrency extends Component {
     this.setState({
       activeIndex: index,
     });
+    sessionStorage.setItem('currencyIndex',index)
     this.props.setCurrencyIndex(index);
   };
   openCurrencyList = () => {

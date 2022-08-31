@@ -6,14 +6,14 @@ import { store } from '../redux/store';
 import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from '../redux/actions/cart';
 
 class Cart extends Component {
-  plusItem = (id) => {
-    store.dispatch(plusCartItem(id));
+  plusItem = (objState) => {
+    store.dispatch(plusCartItem(objState));
   };
-  minusItem = (id) => {
-    store.dispatch(minusCartItem(id));
+  minusItem = (objState) => {
+    store.dispatch(minusCartItem(objState));
   };
-  deleteItem = (id) => {
-    store.dispatch(deleteCartItem(id));
+  deleteItem = (objState) => {
+    store.dispatch(deleteCartItem(objState));
   };
   onClearCart = () => {
     if (window.confirm("Do you really want to clear Cart ?")) {
@@ -28,6 +28,7 @@ class Cart extends Component {
     const pizzas = Object.keys(items).map((key) => {
       return items[key].items[0];
     });
+
     return (
       <main className="cart-main">
         <h1 className="cart-title">CART</h1>
@@ -44,12 +45,14 @@ class Cart extends Component {
                   brand={el.brand}
                   name={el.name}
                   image={el.image}
-                  itemsCount={items[el.id].items.length}
+                  itemsCount={items[JSON.stringify(el.objState)].items.length}
                   plusItem={this.plusItem}
                   minusItem={this.minusItem}
                   deleteItem={this.deleteItem}
                   currencyIndex={this.props.currencyIndex}
                   attributes = {el.attributes}
+                  state = {el.objState}
+                  setActiveClass = {el.setActiveClass}
                 />
               ))
             : ''}

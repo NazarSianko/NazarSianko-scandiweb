@@ -23,25 +23,25 @@ class Cartitem extends Component {
     }
   };
   plusItem = () => {
-    this.props.plusItem(this.props.id);
+    this.props.plusItem(this.props.state);
   };
   minusItem = () => {
-    this.props.minusItem(this.props.id);
+    this.props.minusItem(this.props.state);
   };
   deleteItem = () => {
-    this.props.deleteItem(this.props.id);
+    this.props.deleteItem(this.props.state);
   };
   render() {
-    const { brand, name, id, price, image, itemsCount, attributes } = this.props;
-    console.log(attributes)
+    const { brand, name, id, price, image, itemsCount, attributes, state,setActiveClass } = this.props;
+ console.log(state)
     return (
       <div className="cart-item">
         <div className="cart-item_left">
           <div className="item-title">{name}</div>
           <div className="item-description">{brand}</div>
-          <div className="item-price">{ price[this.props.currencyIndex].currency.symbol +
+          <div className="item-price">{ price[sessionStorage.getItem('currencyIndex') || 0].currency.symbol +
         ' ' +
-   (price[this.props.currencyIndex].amount*itemsCount).toFixed(2) }</div>
+   (price[sessionStorage.getItem('currencyIndex') || 0].amount*itemsCount).toFixed(2) }</div>
            {attributes.map((el) => (
                   <div className="item-size">
                     <span className="size-text">
@@ -49,9 +49,9 @@ class Cartitem extends Component {
                       <br></br>
                     </span>
                     <div className="sizes">
-                      {el.items.map((item) => (
+                      {el.items.map((item,index) => (
                         <div
-                          className={'size'}
+                        className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
                           style={{
                             background: `${el.name === 'Color' ? item.value : ''}`,
                             width: `${el.name === 'Color' ? '39px' : ''}`,
@@ -78,12 +78,14 @@ class Cartitem extends Component {
           </div>
           <div className="item-img">
             <img src={`${image[this.state.imgIndex]}`} alt="cart img"></img>
-            <div className="arrow-left" onClick={this.prevImg}>
+            
+            {  image.length  > 1 ? <div> <div className="arrow-left" onClick={this.prevImg}>
               <img src="./left.png"></img>
             </div>
             <div className="arrow-right" onClick={this.nextImg}>
               <img src="./right.png"></img>
-            </div>
+            </div>  </div> : ''}
+            
           </div>
           <div className="delete" onClick={this.deleteItem}>
             x
