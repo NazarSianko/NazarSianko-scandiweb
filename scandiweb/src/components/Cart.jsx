@@ -16,14 +16,11 @@ class Cart extends Component {
     store.dispatch(deleteCartItem(objState));
   };
   onClearCart = () => {
-    if (window.confirm("Do you really want to clear Cart ?")) {
-      store.dispatch(clearCart())
+    if (window.confirm('Do you really want to clear Cart ?')) {
+      store.dispatch(clearCart());
     }
-   
- 
   };
   render() {
-   
     const { items } = this.props;
     const pizzas = Object.keys(items).map((key) => {
       return items[key].items[0];
@@ -50,9 +47,9 @@ class Cart extends Component {
                   minusItem={this.minusItem}
                   deleteItem={this.deleteItem}
                   currencyIndex={this.props.currencyIndex}
-                  attributes = {el.attributes}
-                  state = {el.objState}
-                  setActiveClass = {el.setActiveClass}
+                  attributes={el.attributes}
+                  state={el.objState}
+                  setActiveClass={el.setActiveClass}
                 />
               ))
             : ''}

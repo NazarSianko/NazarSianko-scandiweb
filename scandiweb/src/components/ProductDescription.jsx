@@ -11,25 +11,35 @@ class ProductDescription extends Component {
     super(props);
     this.state = {
       imgIndex: 0,
-      id:  this.props.id,
-      [this. props.data.product ? this.props.data.product.attributes.map(el => el.name) : ''] : 0
-   
+      id: this.props.id,
     };
   }
-  
+  static getDerivedStateFromProps(props, state) {
+    if (!state.activeAttributes) {
+      return {
+        activeAttributes: props.data.product
+          ? props.data.product.attributes.reduce((obj, el) => {
+              obj[el.name] = 0;
+              return obj;
+            }, {})
+          : '',
+      };
+    }
+    return state;
+  }
+
   setCartItem = () => {
     const obj = {
       id: this.props.data.product.id,
-      price:  this.props.data.product.prices,
+      price: this.props.data.product.prices,
       brand: this.props.data.product.brand,
       name: this.props.data.product.name,
       image: this.props.data.product.gallery,
       attributes: this.props.data.product.attributes,
       objState: this.state,
-      setActiveClass: this.setActiveClass
+      setActiveClass: this.setActiveClass,
     };
     store.dispatch(addItem(obj));
- 
   };
   setImageId = (index) => {
     this.setState({
@@ -39,7 +49,7 @@ class ProductDescription extends Component {
   createMarkUp = () => ({
     __html: this.props.data.product ? this.props.data.product.description : '',
   });
-  setActiveClass = (id, index ,obj) => {
+  /*setActiveClass = (id, index ,obj) => {
     return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
       obj[id] == index &&
       id == 'Color'
@@ -50,10 +60,10 @@ class ProductDescription extends Component {
       ? 'active'
       : '';
   };
+*/
 
   render() {
-   
-      console.log(this.state)
+    console.log(this.state);
     return (
       <div className="pdp-main">
         {!this.props.data.loading && !this.props.data.error ? (
@@ -92,7 +102,15 @@ class ProductDescription extends Component {
                     <div className="sizes">
                       {el.items.map((item, index) => (
                         <div
-                          className={'size' + ' ' + `${this.setActiveClass(el.id, index, this.state)}`}
+                          className={
+                            'size' +
+                            ' ' +
+                            `${this.props.setActiveClass(
+                              el.id,
+                              index,
+                              this.state.activeAttributes,
+                            )}`
+                          }
                           style={{
                             background: `${el.name === 'Color' ? item.value : ''}`,
                             width: `${el.name === 'Color' ? '39px' : ''}`,
@@ -100,8 +118,10 @@ class ProductDescription extends Component {
                           }}
                           onClick={() =>
                             this.setState((state) => ({
-                              ...state,
-                              [el.id]: index,
+                              activeAttributes: {
+                                ...state.activeAttributes,
+                                [el.id]: index,
+                              },
                             }))
                           }>
                           {el.name === 'Color' ? '' : item.value}
@@ -114,9 +134,11 @@ class ProductDescription extends Component {
                   <span className="price-text">PRICE:</span>
                   <br></br>
                   <span>
-                    {this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0].currency.symbol +
+                    {this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0]
+                      .currency.symbol +
                       ' ' +
-                      this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0].amount}
+                      this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0]
+                        .amount}
                   </span>
                 </div>
                 <button className="pdp-button" onClick={() => this.setCartItem()}>

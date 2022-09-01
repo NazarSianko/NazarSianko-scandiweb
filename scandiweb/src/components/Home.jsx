@@ -37,31 +37,32 @@ export class Home extends Component {
 
     return (
       <main className="showcase-main">
-       
-          <Categories
-            setCategory={this.setCategory}
-            categoryNames={this.props.data.categories}
-            setCategories={this.setCategories}
-          />
-       
+        <Categories
+          setCategory={this.setCategory}
+          categoryNames={this.props.data.categories}
+          setCategories={this.setCategories}
+        />
+
         <div className="showcase-main-content">
           {!this.props.data.loading && !this.props.data.error
             ? //? !this.state.currentId
               category.products.map((el) => (
-                <NavLink to={`/pdp/${el.id}`}>
-                  <HomeItem
-                   key={el.id}
-                    id={el.id}
-                    name={el.name}
-                    inStock={el.inStock}
-                    brand={el.brand}
-                    description={el.description}
-                    gallery={el.gallery}
-                    price={el.prices}
-                    currencyIndex={this.props.currencyIndex}
-                    setCurrentId={this.setCurrentId}
-                  />
-                </NavLink>
+                // <NavLink to={`/pdp/${el.id}`}>
+                <HomeItem
+                  key={el.id}
+                  id={el.id}
+                  name={el.name}
+                  inStock={el.inStock}
+                  brand={el.brand}
+                  description={el.description}
+                  gallery={el.gallery}
+                  price={el.prices}
+                  attributes={el.attributes}
+                  currencyIndex={this.props.currencyIndex}
+                  setCurrentId={this.setCurrentId}
+                  setActiveClass={this.props.setActiveClass}
+                />
+                //</NavLink>
               ))
             : /* : category.products.map((el) =>
                   el.id === this.state.currentId ? (

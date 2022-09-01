@@ -11,6 +11,7 @@ export class App extends Component {
     this.state = {
       currencyIndex: 0,
       currentId: sessionStorage.getItem('id') || '',
+      objState: {},
     };
   }
   setCurrentId = (id) => {
@@ -24,7 +25,17 @@ export class App extends Component {
       currencyIndex: index,
     });
   };
-
+  setActiveClass = (id, index ,obj) => {
+    return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
+      obj[id] == index &&
+      id == 'Color'
+      ? 'active-color'
+      : Object.keys(obj).find((keysItem) => keysItem == id) == id &&
+        obj[id] == index &&
+        id !== 'Color'
+      ? 'active'
+      : '';
+  };
   render() {
  
     return (
@@ -39,6 +50,7 @@ export class App extends Component {
                   client={client}
                   currencyIndex={this.state.currencyIndex}
                   setCurrentId={this.setCurrentId}
+                  setActiveClass = {this.setActiveClass}
                 />
               }
             />
@@ -50,6 +62,8 @@ export class App extends Component {
                 <ProductDescription
                   currencyIndex={this.state.currencyIndex}
                   id={this.state.currentId}
+                  setActiveClass = {this.setActiveClass}
+                 
                 />
               }
             />

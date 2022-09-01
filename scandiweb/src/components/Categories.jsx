@@ -19,14 +19,14 @@ class Categories extends Component {
     return (
       <div className="categories">
         {this.props.categoryNames
-          ? this.props.categoryNames.map((el, index) => ( 
+          ? this.props.categoryNames.map((el, index) => (
               <h1
                 className={
                   'category-title' +
                   ' ' +
                   `${this.state.activeIndex === index ? 'category-active' : ''}`
                 }
-                key = {el.name}
+                key={el.name}
                 onClick={() => this.setActiveCategory(index)}>
                 {el.name}
               </h1>

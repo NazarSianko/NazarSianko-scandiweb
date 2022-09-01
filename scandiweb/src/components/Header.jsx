@@ -4,12 +4,11 @@ import ChangeCurrency from './ChangeCurrency';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
- class Header extends Component {
+class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
       activeIndex: 0,
-    
     };
   }
   setActive = (index) => {
@@ -21,7 +20,6 @@ import { connect } from 'react-redux';
     this.props.setCurrencyIndex(index);
   };
   render() {
-   
     const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
@@ -29,7 +27,7 @@ import { connect } from 'react-redux';
           {sortItems.map((el, index) => (
             <div
               onClick={() => this.setActive(index)}
-              key ={el}
+              key={el}
               className={
                 'sort-item' + ' ' + `${this.state.activeIndex == index ? 'sort-item-active' : ''}`
               }>
@@ -48,7 +46,11 @@ import { connect } from 'react-redux';
           <NavLink to="/cart">
             <div className="header-cart">
               <img src="./Empty Cart.png"></img>
-              { this.props.totalCount ? <div className ="cart-counter">{this.props.totalCount}</div> : ''} 
+              {this.props.totalCount ? (
+                <div className="cart-counter">{this.props.totalCount}</div>
+              ) : (
+                ''
+              )}
             </div>
           </NavLink>
         </div>
@@ -56,8 +58,7 @@ import { connect } from 'react-redux';
     );
   }
 }
-const mapStateToProps = state => ({
-  
-  totalCount: state.cart.totalCount
+const mapStateToProps = (state) => ({
+  totalCount: state.cart.totalCount,
 });
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps)(Header);
