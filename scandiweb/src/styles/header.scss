@@ -1,5 +1,6 @@
 @import "fonts.scss";
 @import "main.scss";
+
 .showcase-header {
     padding-left: 15px;
     display: flex;
@@ -8,6 +9,7 @@
     box-sizing: border-box;
     height: 80px;
     margin-bottom: 80px;
+
     .header-sort {
         display: flex;
         font-family: "Raleway";
@@ -33,7 +35,7 @@
         }
     }
     .header-logo {
-        margin-left:-70px;
+        margin-left: -70px;
         margin-top: 15px;
     }
     .header-right {
@@ -60,7 +62,7 @@
                 padding: 10px 0px;
                 display: flex;
                 flex-direction: column;
-                z-index: 10;
+                z-index: 15;
                 position: absolute;
 
                 top: 30px;
@@ -89,33 +91,244 @@
                 }
             }
         }
+        .cart-overlay {
+            position: absolute;
+            top: 49px;
+            left: -150px;
+
+            min-width: 325px;
+            max-height: 677px;
+            overflow: auto;
+
+            padding: 32px 16px;
+            display: flex;
+            flex-direction: column;
+            row-gap: 40px;
+            box-sizing: border-box;
+            z-index: 12;
+            background-color: #ffffff;
+            .overlay-tittle {
+                font-family: Raleway;
+                font-size: 16px;
+                font-weight: 700;
+                line-height: 26px;
+                letter-spacing: 0em;
+                .overlay-quantity {
+                    font-family: Raleway;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 26px;
+                    letter-spacing: 0em;
+                    text-align: right;
+                }
+            }
+            .overlay-item {
+                display: flex;
+                justify-content: space-between;
+
+                .overlay-item_left {
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 8px;
+                    .item-name,
+                    .item-brand {
+                        font-family: Raleway;
+                        font-size: 16px;
+                        font-weight: 300;
+                        line-height: 26px;
+                        letter-spacing: 0px;
+                        text-align: left;
+                    }
+                    .item-brand {
+                        margin-top: -8px;
+                    }
+                    .item-price {
+                        font-family: Raleway;
+                        font-size: 16px;
+                        font-weight: 500;
+                        line-height: 26px;
+                        letter-spacing: 0em;
+                        text-align: left;
+                    }
+                    .item-size {
+                        .size-text {
+                            font-family: Source Sans Pro;
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 22px;
+                            letter-spacing: 0em;
+                            text-align: center;
+
+                            margin-bottom: 8px;
+                        }
+                        .sizes {
+                            display: flex;
+                            justify-content: flex-start;
+
+                            & * {
+                                margin-right: 10px;
+                            }
+
+                            .size {
+                                width: 24px;
+                                height: 24px;
+                                background-color: #ffffff;
+                                border: 1px solid #1d1f22;
+                                text-align: center;
+                                line-height: 22px;
+                                cursor: pointer;
+                                box-sizing: border-box;
+                                font-family: Source Sans Pro;
+                                overflow: hidden;
+
+                                &.active {
+                                    background-color: black;
+                                    color: white;
+                                }
+                                &.active-color {
+                                    border: 3px solid #5ece7b;
+                                }
+                            }
+                        }
+                    }
+                    .item-color {
+                        margin-bottom: 20px;
+                        .color-text {
+                            font-family: Source Sans Pro;
+                            font-size: 14px;
+                            font-weight: 400;
+                            line-height: 22px;
+                            letter-spacing: 0em;
+                            text-align: center;
+
+                            margin-bottom: 10px;
+                        }
+                        .colors {
+                            display: flex;
+                            & * {
+                                margin-right: 8px;
+                            }
+                            .color {
+                                width: 124px;
+                                height: 124px;
+                                border: 1px solid black;
+                            }
+                        }
+                    }
+                }
+                .overlay-item_right {
+                    display: flex;
+                    height: 190px;
+                    .item-count {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: space-between;
+                        margin-right: 8px;
+                        .plus,
+                        .minus {
+                            &:active {
+                                box-shadow: 0 0 0 4px #e9f0ff;
+                            }
+                            width: 24px;
+                            height: 24px;
+                            border: 1px solid #1d1f22;
+                            text-align: center;
+                            line-height: 24px;
+                            font-size: 20px;
+                            cursor: pointer;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+
+                            .minus-content {
+                                display: block;
+                                width: 10px;
+                                height: 1px;
+                                background-color: black;
+                            }
+                        }
+                        .count {
+                            font-family: Raleway;
+                            font-size: 16px;
+                            font-weight: 500;
+                            line-height: 38px;
+                            letter-spacing: 0em;
+                            text-align: center;
+                        }
+                    }
+                    .item-img {
+                        & img {
+                            width: 121px;
+                            height: 190px;
+                        }
+                    }
+                }
+            }
+            .overlay-total {
+                display: flex;
+                justify-content: space-between;
+                .total,
+                .price {
+                    font-family: Roboto;
+                    font-size: 16px;
+                    font-weight: 500;
+                    line-height: 18px;
+                    letter-spacing: 0em;
+                    text-align: left;
+                }
+            }
+            .overlay-btns {
+                font-family: Raleway;
+                font-size: 14px;
+                font-weight: 600;
+                line-height: 17px;
+                letter-spacing: 0em;
+                text-align: center;
+                display: flex;
+                justify-content: space-between;
+                & button {
+                    width: 140px;
+                    cursor: pointer;
+                    height: 43px;
+                    &:active {
+                        box-shadow: 0 0 0 4px #cbd6ee;
+                    }
+                }
+                .view-btn {
+                    color: #1d1f22;
+                    background: #ffffff;
+                    border: 1px solid #1d1f22;
+                }
+                .checkout-btn {
+                    background: #5ece7b;
+                    color: #ffffff;
+                    border: none;
+                }
+            }
+        }
     }
     .header-cart {
-       position:relative;
+        cursor: pointer;
+        position: relative;
         & img {
             margin-top: 5px;
-            
         }
         .cart-counter {
             position: absolute;
             top: 0;
             left: 60%;
-            color:white;
-            background: #1D1F22;
+            color: white;
+            background: #1d1f22;
             border-radius: 60px;
             min-width: 20px;
             min-height: 20px;
             text-align: center;
-                        font-family: Roboto;
+            font-family: Roboto;
             font-size: 14px;
             font-weight: 700;
             line-height: 20px;
             letter-spacing: 0em;
             text-align: center;
-
-           
-            
         }
-        
     }
 }

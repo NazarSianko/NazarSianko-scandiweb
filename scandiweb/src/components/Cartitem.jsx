@@ -32,18 +32,17 @@ class Cartitem extends Component {
     this.props.deleteItem(this.props.state);
   };
   render() {
-    const { brand, name, id, price, image, itemsCount, attributes, state, setActiveClass } =
-      this.props;
-    console.log(state);
+    const { brand, name, price, image, itemsCount, attributes, state, setActiveClass } = this.props;
+
     return (
       <div className="cart-item">
         <div className="cart-item_left">
           <div className="item-title">{name}</div>
           <div className="item-description">{brand}</div>
           <div className="item-price">
-            {price[sessionStorage.getItem('currencyIndex') || 0].currency.symbol +
+            {price[this.props.currIndex].currency.symbol +
               ' ' +
-              (price[sessionStorage.getItem('currencyIndex') || 0].amount * itemsCount).toFixed(2)}
+              (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
           {attributes.map((el) => (
             <div className="item-size">
@@ -54,9 +53,7 @@ class Cartitem extends Component {
               <div className="sizes">
                 {el.items.map((item, index) => (
                   <div
-                    className={
-                      'size' + ' ' + `${setActiveClass(el.id, index, state.activeAttributes)}`
-                    }
+                    className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
                     style={{
                       background: `${el.name === 'Color' ? item.value : ''}`,
                       width: `${el.name === 'Color' ? '39px' : ''}`,
@@ -105,6 +102,6 @@ class Cartitem extends Component {
   }
 }
 const mapStateToProps = (state) => ({
-  items: state.cart.items,
+  currIndex: state.currency.index,
 });
 export default connect(mapStateToProps)(Cartitem);

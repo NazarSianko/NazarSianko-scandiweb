@@ -4,6 +4,9 @@ body {
     margin: 0 auto;
     background-color: #ffffff;
 }
+.active {
+    overflow: hidden;
+}
 .wrapper {
     max-width: 1440px;
     height: 100%;

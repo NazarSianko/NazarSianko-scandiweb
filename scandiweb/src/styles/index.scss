@@ -16,6 +16,18 @@
         color: #5ece7b;
     }
 }
+.overlay {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 80px;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .5);
+    z-index: 10;
+    overflow: hidden;
+}
 a {
     list-style:none;
     text-decoration: none;
@@ -61,6 +73,7 @@ a {
                 padding-right: 10px;
                 display: none;
                 z-index:10;
+                cursor:pointer;
             }
             .main-item-img {
                 & img {

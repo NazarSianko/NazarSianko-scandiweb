@@ -5,23 +5,27 @@ import { NavLink } from 'react-router-dom';
 import { graphql } from '@apollo/client/react/hoc';
 import { persistor, store } from '../redux/store';
 import { addItem } from '../redux/actions/cart';
+import { connect } from 'react-redux';
+import HomeOverlay from './HomeOverlay';
 
 class ProductDescription extends Component {
   constructor(props) {
     super(props);
     this.state = {
       imgIndex: 0,
-      id: this.props.id,
     };
   }
   static getDerivedStateFromProps(props, state) {
     if (!state.activeAttributes) {
       return {
         activeAttributes: props.data.product
-          ? props.data.product.attributes.reduce((obj, el) => {
-              obj[el.name] = 0;
-              return obj;
-            }, {})
+          ? props.data.product.attributes.length == 0
+            ? { id: props.id }
+            : props.data.product.attributes.reduce((obj, el) => {
+                obj[el.name] = 0;
+                obj.id = props.id;
+                return obj;
+              }, {})
           : '',
       };
     }
@@ -36,8 +40,8 @@ class ProductDescription extends Component {
       name: this.props.data.product.name,
       image: this.props.data.product.gallery,
       attributes: this.props.data.product.attributes,
-      objState: this.state,
-      setActiveClass: this.setActiveClass,
+      objState: this.state.activeAttributes,
+      setActiveClass: this.props.setActiveClass,
     };
     store.dispatch(addItem(obj));
   };
@@ -49,23 +53,13 @@ class ProductDescription extends Component {
   createMarkUp = () => ({
     __html: this.props.data.product ? this.props.data.product.description : '',
   });
-  /*setActiveClass = (id, index ,obj) => {
-    return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
-      obj[id] == index &&
-      id == 'Color'
-      ? 'active-color'
-      : Object.keys(obj).find((keysItem) => keysItem == id) == id &&
-        obj[id] == index &&
-        id !== 'Color'
-      ? 'active'
-      : '';
-  };
-*/
+ 
 
   render() {
     console.log(this.state);
     return (
       <div className="pdp-main">
+          {this.props.overlayFlag ? <HomeOverlay /> : ''}
         {!this.props.data.loading && !this.props.data.error ? (
           <div className="pdp-cart">
             <NavLink to="/">
@@ -121,6 +115,7 @@ class ProductDescription extends Component {
                               activeAttributes: {
                                 ...state.activeAttributes,
                                 [el.id]: index,
+                                id: this.props.id,
                               },
                             }))
                           }>
@@ -134,11 +129,9 @@ class ProductDescription extends Component {
                   <span className="price-text">PRICE:</span>
                   <br></br>
                   <span>
-                    {this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0]
-                      .currency.symbol +
+                    {this.props.data.product.prices[this.props.currIndex].currency.symbol +
                       ' ' +
-                      this.props.data.product.prices[sessionStorage.getItem('currencyIndex') || 0]
-                        .amount}
+                      this.props.data.product.prices[this.props.currIndex].amount}
                   </span>
                 </div>
                 <button className="pdp-button" onClick={() => this.setCartItem()}>
@@ -150,12 +143,15 @@ class ProductDescription extends Component {
               </div>
             </div>
           </div>
+          
         ) : (
           ''
         )}
       </div>
+      
     );
   }
+
 }
 const CATEGORIES = gql`
   query CategoryQuery($id: String!) {
@@ -187,13 +183,19 @@ const CATEGORIES = gql`
     }
   }
 `;
+const mapStateToProps = (state) => ({
+  currIndex: state.currency.index,
+  overlayFlag: state.overlay.flag,
+});
 
-export default graphql(CATEGORIES, {
-  options: (props) => {
-    return {
-      variables: {
-        id: props.id,
-      },
-    };
-  },
-})(ProductDescription);
+export default connect(mapStateToProps)(
+  graphql(CATEGORIES, {
+    options: (props) => {
+      return {
+        variables: {
+          id: props.id,
+        },
+      };
+    },
+  })(ProductDescription),
+);

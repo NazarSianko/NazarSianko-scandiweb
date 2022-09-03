@@ -6,4 +6,4 @@ import Categories from './Categories';
 import ChangeCurrency from './ChangeCurrency';
 import ProductDescription from './ProductDescription';
 import Cartitem from './Cartitem';
-export { Cart, Header, Home, HomeItem, Categories, ChangeCurrency, ProductDescription,Cartitem };
+export { Cart, Header, Home, HomeItem, Categories, ChangeCurrency, ProductDescription, Cartitem };

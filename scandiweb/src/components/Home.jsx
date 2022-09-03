@@ -2,14 +2,16 @@ import React, { Component } from 'react';
 import '../styles/index.scss';
 import '../styles/pdp.scss';
 import HomeItem from './HomeItem';
-import { WithApollo } from 'react-apollo';
+
 import { gql } from '@apollo/client';
 
 import { graphql } from '@apollo/client/react/hoc';
 
 import { Categories } from '../components';
-import { ProductDescription } from '../components';
-import { Routes, Route, NavLink } from 'react-router-dom';
+
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import HomeOverlay from './HomeOverlay';
 
 export class Home extends Component {
   constructor(props) {
@@ -27,14 +29,10 @@ export class Home extends Component {
   setCurrentId = (id) => {
     this.props.setCurrentId(id);
   };
-  clearCurrentId = () => {
-    this.setState({
-      currentId: '',
-    });
-  };
+
   render() {
     const { category } = this.props.data;
-
+    console.log(this.props);
     return (
       <main className="showcase-main">
         <Categories
@@ -47,44 +45,25 @@ export class Home extends Component {
           {!this.props.data.loading && !this.props.data.error
             ? //? !this.state.currentId
               category.products.map((el) => (
-                // <NavLink to={`/pdp/${el.id}`}>
-                <HomeItem
-                  key={el.id}
-                  id={el.id}
-                  name={el.name}
-                  inStock={el.inStock}
-                  brand={el.brand}
-                  description={el.description}
-                  gallery={el.gallery}
-                  price={el.prices}
-                  attributes={el.attributes}
-                  currencyIndex={this.props.currencyIndex}
-                  setCurrentId={this.setCurrentId}
-                  setActiveClass={this.props.setActiveClass}
-                />
-                //</NavLink>
+                <NavLink to={`/pdp/${el.id}`}>
+                  <HomeItem
+                    key={el.id}
+                    id={el.id}
+                    name={el.name}
+                    inStock={el.inStock}
+                    brand={el.brand}
+                    description={el.description}
+                    gallery={el.gallery}
+                    price={el.prices}
+                    attributes={el.attributes}
+                    setCurrentId={this.setCurrentId}
+                    setActiveClass={this.props.setActiveClass}
+                  />
+                </NavLink>
               ))
-            : /* : category.products.map((el) =>
-                  el.id === this.state.currentId ? (
-                                   <ProductDescription
-                      id={el.id}
-                      name={el.name}
-                      clearId={this.clearCurrentId}
-                      inStock={el.inStock}
-                      brand={el.brand}
-                      currencyIndex={this.props.currencyIndex}
-                      description={el.description}
-                      attributes={el.attributes}
-                      loading={this.props.data.loading}
-                      gallery={el.gallery}
-                      price={el.prices}
-                    />
-                  )  : (
-                    ''
-                  ),
-                )*/
-              ''}
+            : ''}
         </div>
+        {this.props.overlayFlag ? <HomeOverlay /> : ''}
       </main>
     );
   }
@@ -138,5 +117,7 @@ const CATEGORIES = graphql(
   },
 );
 const homeWithData = CATEGORIES(Home);
-
-export default homeWithData;
+const mapStateToProps = (state) => ({
+  overlayFlag: state.overlay.flag,
+});
+export default connect(mapStateToProps)(homeWithData);

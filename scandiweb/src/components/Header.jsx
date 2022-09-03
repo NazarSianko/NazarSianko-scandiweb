@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component, createRef } from 'react';
 import '../styles/header.scss';
 import ChangeCurrency from './ChangeCurrency';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
+import CartOverlay from './CartOverlay';
+import { changeOverlayFlag } from '../redux/actions/overlay';
+import { store } from '../redux/store';
 
 class Header extends Component {
   constructor(props) {
@@ -16,9 +19,7 @@ class Header extends Component {
       activeIndex: index,
     });
   };
-  setCurrencyIndex = (index) => {
-    this.props.setCurrencyIndex(index);
-  };
+
   render() {
     const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
@@ -41,18 +42,9 @@ class Header extends Component {
           </div>
         </NavLink>
         <div className="header-right">
-          <ChangeCurrency setCurrencyIndex={this.setCurrencyIndex} />
+          <ChangeCurrency />
 
-          <NavLink to="/cart">
-            <div className="header-cart">
-              <img src="./Empty Cart.png"></img>
-              {this.props.totalCount ? (
-                <div className="cart-counter">{this.props.totalCount}</div>
-              ) : (
-                ''
-              )}
-            </div>
-          </NavLink>
+          <CartOverlay />
         </div>
       </header>
     );

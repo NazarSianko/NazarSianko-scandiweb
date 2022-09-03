@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 import { persistor, store } from '../redux/store';
 import { addItem } from '../redux/actions/cart';
-import { NavLink } from 'react-router-dom';
 
-export default class HomeItem extends Component {
+import { connect } from 'react-redux';
+
+class HomeItem extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -12,16 +13,23 @@ export default class HomeItem extends Component {
   static getDerivedStateFromProps(props, state) {
     if (!state.activeAttributes) {
       return {
-        activeAttributes: props.attributes.reduce((obj, el) => {
-          obj[el.name] = 0;
-          return obj;
-        }, {}),
+        activeAttributes:
+          props.attributes.length == 0
+            ? { id: props.id }
+            : props.attributes.reduce((obj, el) => {
+                obj[el.name] = 0;
+                obj.id = props.id;
+                return obj;
+              }, {}),
       };
     }
     return state;
   }
 
-  setCartItem = () => {
+  setCartItem = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
     const obj = {
       id: this.props.id,
       price: this.props.price,
@@ -30,26 +38,23 @@ export default class HomeItem extends Component {
       image: this.props.gallery,
       attributes: this.props.attributes,
       setActiveClass: this.props.setActiveClass,
-      objState: this.state,
+      objState: this.state.activeAttributes,
     };
     store.dispatch(addItem(obj));
   };
   render() {
     const { name, gallery, price, id, brand } = this.props;
-  
+
     return (
-       <div className="showcase-main-item" onClick={() => this.props.setCurrentId(this.props.id)}>
-       <NavLink to={`/pdp/${this.props.id}`}>
+      <div className="showcase-main-item" onClick={() => this.props.setCurrentId(this.props.id)}>
         <div className="main-item-img">
           <img src={gallery[0]} alt="product"></img>
         </div>
         <div className="main-item-description">{`${brand} ${name}`}</div>
         <div className="main-item-price">
-          {price[sessionStorage.getItem('currencyIndex') || 0].currency.symbol +
-            ' ' +
-            price[sessionStorage.getItem('currencyIndex') || 0].amount}
+          {price[this.props.currIndex].currency.symbol + ' ' + price[this.props.currIndex].amount}
         </div>
-        </NavLink>
+
         <button className="main-item-btn" onClick={this.setCartItem}>
           <img src="./Empty-white-Cart.png" alt=""></img>
         </button>
@@ -57,3 +62,7 @@ export default class HomeItem extends Component {
     );
   }
 }
+const mapStateToProps = (state) => ({
+  currIndex: state.currency.index,
+});
+export default connect(mapStateToProps)(HomeItem);

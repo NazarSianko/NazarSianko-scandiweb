@@ -2,17 +2,31 @@ import React, { Children, Component, createRef } from 'react';
 import '../styles/header.scss';
 import { graphql } from '@apollo/client/react/hoc';
 import { gql } from '@apollo/client';
+import { persistor, store } from '../redux/store';
+import { connect } from 'react-redux';
+import { changeCurrency } from '../redux/actions/currency';
 
 class ChangeCurrency extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: sessionStorage.getItem('currencyIndex') || 0,
+      activeIndex: 0,
       currencyFlag: false,
     };
     this.currencyRef = createRef();
   }
-handleOutsideClick = (e) => {
+
+  setActiveItem = (index) => {
+    this.setState({
+      activeIndex: index,
+    });
+    store.dispatch(changeCurrency(index));
+  };
+  openCurrencyList = () => {
+    this.setState({
+      currencyFlag: !this.state.currencyFlag,
+    });
+  };handleOutsideClick = (e) => {
     const pathInAllBrowsers = e.path || (e.composedPath && e.composedPath());
     if (!pathInAllBrowsers.includes(this.currencyRef.current)) {
       this.setState({currencyFlag:false})
@@ -20,22 +34,9 @@ handleOutsideClick = (e) => {
     }
     console.log(1)
   };
-  setActiveItem = (index) => {
-    /*this.setState({
-      activeIndex: index,
-    });*/
-    sessionStorage.setItem('currencyIndex', index);
-    this.props.setCurrencyIndex(index);
-  };
-  openCurrencyList = () => {
-    this.setState({
-      currencyFlag: !this.state.currencyFlag,
-    });
-  };
   componentDidMount = () => {
     document.body.addEventListener('click', this.handleOutsideClick);
-   
-  }
+  };
   /*componentWillUnmount = () =>  {
     document.body.removeEventListener('click', this.handleOutsideClick);
     console.log('unmount')
@@ -46,9 +47,8 @@ handleOutsideClick = (e) => {
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
         <div className="currency-symbol">
           {!this.props.data.loading && !this.props.data.error
-            ? this.props.data.categories[0].products[0].prices[
-                sessionStorage.getItem('currencyIndex') || 0
-              ].currency.symbol
+            ? this.props.data.categories[0].products[0].prices[this.state.activeIndex].currency
+                .symbol
             : ''}
         </div>
         {this.state.currencyFlag ? (
@@ -57,9 +57,7 @@ handleOutsideClick = (e) => {
               ? this.props.data.categories[0].products[0].prices.map((el, index) => (
                   <div
                     className={
-                      'currency-item' +
-                      ' ' +
-                      `${+sessionStorage.getItem('currencyIndex') === index ? 'active' : ''}`
+                      'currency-item' + ' ' + `${this.props.currIndex === index ? 'active' : ''}`
                     }
                     onClick={() => this.setActiveItem(index)}>
                     {el.currency.symbol} {el.currency.label}
@@ -92,4 +90,7 @@ const CURRENCY = graphql(
 );
 const ChangeCurrencyWithData = CURRENCY(ChangeCurrency);
 
-export default ChangeCurrencyWithData;
+const mapStateToProps = (state) => ({
+  currIndex: state.currency.index,
+});
+export default connect(mapStateToProps)(ChangeCurrencyWithData);
