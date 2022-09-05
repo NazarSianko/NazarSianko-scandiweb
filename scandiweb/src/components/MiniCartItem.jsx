@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class OverlayItem extends Component {
+class MiniCartItem extends Component {
   plusItem = () => {
     this.props.plusItem(this.props.state);
   };
@@ -62,4 +62,4 @@ class OverlayItem extends Component {
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
 });
-export default connect(mapStateToProps)(OverlayItem);
+export default connect(mapStateToProps)(MiniCartItem);

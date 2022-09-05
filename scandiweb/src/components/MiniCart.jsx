@@ -1,13 +1,13 @@
 import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
-import OverlayItem from './OverlayItem';
+import MiniCartItem from './MiniCartItem';
 import { store } from '../redux/store';
 import { plusCartItem, minusCartItem } from '../redux/actions/cart';
 
 import { NavLink } from 'react-router-dom';
 import { changeOverlayFlag } from '../redux/actions/overlay';
 
-class CartOverlay extends Component {
+class MiniCart extends Component {
   constructor(props) {
     super(props);
 
@@ -40,8 +40,9 @@ class CartOverlay extends Component {
     }
   };
   componentDidMount = () => {
-    document.addEventListener('click', this.handleOutsideClick);
+    document.addEventListener('click', this.handleOutsideClick); 
   };
+  //знаю, что слушатели надо удалять, но не получилось, не срабатывает
 
   render() {
     console.log(this.props.flag);
@@ -63,7 +64,7 @@ class CartOverlay extends Component {
             </div>
             {products
               ? products.map((el) => (
-                  <OverlayItem
+                  <MiniCartItem
                     id={el.id}
                     price={el.price}
                     brand={el.brand}
@@ -109,4 +110,4 @@ const mapStateToProps = (state) => ({
   totalCount: state.cart.totalCount,
   flag: state.overlay.flag,
 });
-export default connect(mapStateToProps)(CartOverlay);
+export default connect(mapStateToProps)(MiniCart);

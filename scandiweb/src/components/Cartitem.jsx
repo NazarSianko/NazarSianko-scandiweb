@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-class Cartitem extends Component {
+class CartItem extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -104,4 +104,4 @@ class Cartitem extends Component {
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
 });
-export default connect(mapStateToProps)(Cartitem);
+export default connect(mapStateToProps)(CartItem);

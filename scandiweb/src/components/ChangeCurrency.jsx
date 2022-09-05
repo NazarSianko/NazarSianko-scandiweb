@@ -33,7 +33,7 @@ class ChangeCurrency extends Component {
     document.body.addEventListener('click', this.handleOutsideClick);
   };
   /*componentWillUnmount = () =>  {
-    document.body.removeEventListener('click', this.handleOutsideClick);
+    document.body.removeEventListener('click', this.handleOutsideClick); -- знаю, что слушатели надо удалять, но не получилось, не срабатывает
     console.log('unmount')
   }*/
 

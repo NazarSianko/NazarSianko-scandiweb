@@ -14,6 +14,11 @@ class Categories extends Component {
       activeIndex: 0,
     };
   }
+  //Тут вопрос по поводу двойного проклика, про который писал в тг. четвертая строка - это сохранение имени выбранной в данный момент категории в стор,
+  // так как в Home при обновлении страницы для сохранения контента нужно это имя.
+  // 2 запроса один за одним,  чтоб на основе первого получать массив с названиями категорий 
+  //и  запрашивать сразу во втором по categoryIndex нужную категорию сделать не получилось
+  //
   setActiveCategory = (index) => {
     store.dispatch(changeCategory(index));
     this.props.setCategory(this.props.data.categories[this.props.categoryIndex].name);

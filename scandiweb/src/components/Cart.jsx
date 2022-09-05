@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../styles/cart.scss';
-import Cartitem from './Cartitem';
+import CartItem from './CartItem';
 import { store } from '../redux/store';
 import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from '../redux/actions/cart';
-import HomeOverlay from './HomeOverlay';
+import Overlay from './Overlay';
 
 class Cart extends Component {
   plusItem = (objState) => {
@@ -34,7 +34,7 @@ class Cart extends Component {
     console.log(products);
     return (
       <main className="cart-main">
-        {this.props.overlayFlag ? <HomeOverlay /> : ''}
+        {this.props.overlayFlag ? <Overlay /> : ''}
         <h1 className="cart-title">CART</h1>
         <div className="cart-clear" onClick={this.onClearCart}>
           <img src="./trash.svg"></img>
@@ -43,7 +43,7 @@ class Cart extends Component {
         <div className="cart-items">
           {products
             ? products.map((el) => (
-                <Cartitem
+                <CartItem
                   id={el.id}
                   price={el.price}
                   brand={el.brand}

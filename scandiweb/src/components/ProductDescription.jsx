@@ -6,7 +6,7 @@ import { graphql } from '@apollo/client/react/hoc';
 import { persistor, store } from '../redux/store';
 import { addItem } from '../redux/actions/cart';
 import { connect } from 'react-redux';
-import HomeOverlay from './HomeOverlay';
+import Overlay from './Overlay';
 
 class ProductDescription extends Component {
   constructor(props) {
@@ -57,7 +57,7 @@ class ProductDescription extends Component {
     console.log(this.state);
     return (
       <div className="pdp-main">
-        {this.props.overlayFlag ? <HomeOverlay /> : ''}
+        {this.props.overlayFlag ? <Overlay /> : ''}
         {!this.props.data.loading && !this.props.data.error ? (
           <div className="pdp-cart">
             <NavLink to="/">

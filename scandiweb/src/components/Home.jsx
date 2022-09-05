@@ -11,8 +11,8 @@ import { Categories } from '../components';
 
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
-import HomeOverlay from './HomeOverlay';
-import { flowRight as compose } from 'lodash';
+import Overlay from './Overlay';
+
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -66,7 +66,7 @@ export class Home extends Component {
               ))
             : ''}
         </div>
-        {this.props.overlayFlag ? <HomeOverlay /> : ''}
+        {this.props.overlayFlag ? <Overlay /> : ''}
       </main>
     );
   }

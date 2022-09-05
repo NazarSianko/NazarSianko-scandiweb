@@ -1,11 +1,10 @@
 import React, { Component, createRef } from 'react';
 import '../styles/header.scss';
 import ChangeCurrency from './ChangeCurrency';
-import { NavLink } from 'react-router-dom';
+
 import { connect } from 'react-redux';
-import CartOverlay from './CartOverlay';
-import { changeOverlayFlag } from '../redux/actions/overlay';
-import { store } from '../redux/store';
+import MiniCart from './MiniCart';
+
 
 class Header extends Component {
   constructor(props) {
@@ -44,7 +43,7 @@ class Header extends Component {
         <div className="header-right">
           <ChangeCurrency />
 
-          <CartOverlay setActiveClass={this.props.setActiveClass} />
+          <MiniCart setActiveClass={this.props.setActiveClass} />
         </div>
       </header>
     );
