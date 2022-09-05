@@ -10,29 +10,24 @@ class ChangeCurrency extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      activeIndex: 0,
       currencyFlag: false,
     };
     this.currencyRef = createRef();
   }
 
   setActiveItem = (index) => {
-    this.setState({
-      activeIndex: index,
-    });
     store.dispatch(changeCurrency(index));
   };
   openCurrencyList = () => {
     this.setState({
       currencyFlag: !this.state.currencyFlag,
     });
-  };handleOutsideClick = (e) => {
+  };
+  handleOutsideClick = (e) => {
     const pathInAllBrowsers = e.path || (e.composedPath && e.composedPath());
     if (!pathInAllBrowsers.includes(this.currencyRef.current)) {
-      this.setState({currencyFlag:false})
-      ;
+      this.setState({ currencyFlag: false });
     }
-    console.log(1)
   };
   componentDidMount = () => {
     document.body.addEventListener('click', this.handleOutsideClick);
@@ -47,8 +42,7 @@ class ChangeCurrency extends Component {
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
         <div className="currency-symbol">
           {!this.props.data.loading && !this.props.data.error
-            ? this.props.data.categories[0].products[0].prices[this.state.activeIndex].currency
-                .symbol
+            ? this.props.data.categories[0].products[0].prices[this.props.currIndex].currency.symbol
             : ''}
         </div>
         {this.state.currencyFlag ? (

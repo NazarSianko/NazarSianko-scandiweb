@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
- class OverlayItem extends Component {
-    plusItem = () => {
-        this.props.plusItem(this.props.state);
-      };
-      minusItem = () => {
-        this.props.minusItem(this.props.state);
-      };
+class OverlayItem extends Component {
+  plusItem = () => {
+    this.props.plusItem(this.props.state);
+  };
+  minusItem = () => {
+    this.props.minusItem(this.props.state);
+  };
   render() {
     const { brand, name, price, image, itemsCount, attributes, state, setActiveClass } = this.props;
+    console.log(setActiveClass);
     return (
-      <div className='overlay-item'>
-        <div className='overlay-item_left'>
-            <div className='item-name'>{name}</div>
-            <div className='item-brand'> {brand}</div>
-            <div className='item-price'>{price[this.props.currIndex].currency.symbol +
+      <div className="overlay-item">
+        <div className="overlay-item_left">
+          <div className="item-name">{name}</div>
+          <div className="item-brand"> {brand}</div>
+          <div className="item-price">
+            {price[this.props.currIndex].currency.symbol +
               ' ' +
-              (price[this.props.currIndex].amount * itemsCount).toFixed(2)}</div>
-             {attributes.map((el) => (
+              (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
+          </div>
+          {attributes.map((el) => (
             <div className="item-size">
               <span className="size-text">
                 {el.name.toUpperCase() + ':'}
@@ -30,7 +33,6 @@ import {connect} from 'react-redux';
                     className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
                     style={{
                       background: `${el.name === 'Color' ? item.value : ''}`,
-                      
                     }}>
                     {el.name === 'Color' ? '' : item.value}
                   </div>
@@ -39,23 +41,25 @@ import {connect} from 'react-redux';
             </div>
           ))}
         </div>
-        <div className='overlay-item_right'>
-            <div className='item-count'>
-                <div className='plus' onClick={this.plusItem}>+</div>
-                <div className='count'>{itemsCount}</div>
-                <div className='minus'onClick={this.minusItem}><span className='minus-content'></span></div>
+        <div className="overlay-item_right">
+          <div className="item-count">
+            <div className="plus" onClick={this.plusItem}>
+              +
             </div>
-            <div className='item-img'>
-                <img src={image[0]} alt='overlay-img'></img>
+            <div className="count">{itemsCount}</div>
+            <div className="minus" onClick={this.minusItem}>
+              <span className="minus-content"></span>
             </div>
+          </div>
+          <div className="item-img">
+            <img src={image[0]} alt="overlay-img"></img>
+          </div>
         </div>
       </div>
-    )
+    );
   }
 }
 const mapStateToProps = (state) => ({
-   
-    currIndex: state.currency.index,
-  });
-  export default connect(mapStateToProps)(OverlayItem)
-
+  currIndex: state.currency.index,
+});
+export default connect(mapStateToProps)(OverlayItem);

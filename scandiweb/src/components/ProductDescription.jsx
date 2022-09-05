@@ -41,7 +41,6 @@ class ProductDescription extends Component {
       image: this.props.data.product.gallery,
       attributes: this.props.data.product.attributes,
       objState: this.state.activeAttributes,
-      setActiveClass: this.props.setActiveClass,
     };
     store.dispatch(addItem(obj));
   };
@@ -53,13 +52,12 @@ class ProductDescription extends Component {
   createMarkUp = () => ({
     __html: this.props.data.product ? this.props.data.product.description : '',
   });
- 
 
   render() {
     console.log(this.state);
     return (
       <div className="pdp-main">
-          {this.props.overlayFlag ? <HomeOverlay /> : ''}
+        {this.props.overlayFlag ? <HomeOverlay /> : ''}
         {!this.props.data.loading && !this.props.data.error ? (
           <div className="pdp-cart">
             <NavLink to="/">
@@ -143,17 +141,14 @@ class ProductDescription extends Component {
               </div>
             </div>
           </div>
-          
         ) : (
           ''
         )}
       </div>
-      
     );
   }
-
 }
-const CATEGORIES = gql`
+const CATEGORY = gql`
   query CategoryQuery($id: String!) {
     product(id: $id) {
       id
@@ -189,7 +184,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps)(
-  graphql(CATEGORIES, {
+  graphql(CATEGORY, {
     options: (props) => {
       return {
         variables: {

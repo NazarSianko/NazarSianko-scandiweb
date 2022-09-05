@@ -41,7 +41,7 @@ export class App extends Component {
     return (
       <div className="wrapper">
         <div className="container">
-          <Header setCurrencyIndex={this.setCurrencyIndex} />
+          <Header setCurrencyIndex={this.setCurrencyIndex} setActiveClass={this.setActiveClass}/>
           <Routes>
             <Route
               path="/"
@@ -55,7 +55,7 @@ export class App extends Component {
               }
             />
 
-            <Route path="/cart" element={<Cart currencyIndex={this.state.currencyIndex} />} />
+            <Route path="/cart" element={<Cart currencyIndex={this.state.currencyIndex} setActiveClass={this.setActiveClass}/>} />
             <Route
               path={'/pdp/:id'}
               element={

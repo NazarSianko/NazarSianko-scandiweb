@@ -12,40 +12,43 @@ import { Categories } from '../components';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import HomeOverlay from './HomeOverlay';
-
+import { flowRight as compose } from 'lodash';
 export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currencyIndex: 0,
+      categoryNames: '',
     };
   }
   setCurrencyIndex = (index) => {
     this.setCurrencyIndex(index);
   };
   setCategory = (index) => {
-    this.props.data.refetch({ input: { title: this.props.data.categories[index].name } });
+    this.props.data.refetch({ input: { title: index } });
   };
   setCurrentId = (id) => {
     this.props.setCurrentId(id);
   };
-
+  setCategoryNames = (name) => {
+    this.setState({
+      categoryNames: name,
+    });
+  };
   render() {
     const { category } = this.props.data;
-    console.log(this.props);
+    console.log(this.props.name);
     return (
       <main className="showcase-main">
-        <Categories
-          setCategory={this.setCategory}
-          categoryNames={this.props.data.categories}
-          setCategories={this.setCategories}
-        />
+        <Categories setCategory={this.setCategory} setCategoryNames={this.setCategoryNames} />
 
         <div className="showcase-main-content">
           {!this.props.data.loading && !this.props.data.error
             ? //? !this.state.currentId
               category.products.map((el) => (
-                <NavLink to={`/pdp/${el.id}`}>
+                <NavLink
+                  to={`/pdp/${el.id}`}
+                  style={{ pointerEvents: el.inStock ? 'auto' : 'none' }}>
                   <HomeItem
                     key={el.id}
                     id={el.id}
@@ -69,55 +72,62 @@ export class Home extends Component {
   }
 }
 
-const CATEGORIES = graphql(
-  gql`
-    query CategoryQuery($input: CategoryInput) {
-      categories {
-        name
-      }
+const CATEGORIES = gql`
+  query CategoryQuery($input: CategoryInput) {
+    categories {
+      name
+    }
 
-      category(input: $input) {
+    category(input: $input) {
+      name
+      products {
+        id
         name
-        products {
+        inStock
+        gallery
+        description
+        category
+        attributes {
           id
           name
-          inStock
-          gallery
-          description
-          category
-          attributes {
+          type
+          items {
             id
-            name
-            type
-            items {
-              id
-              displayValue
-              value
-            }
+            displayValue
+            value
           }
-          prices {
-            currency {
-              label
-              symbol
-            }
-            amount
-          }
-
-          brand
         }
+        prices {
+          currency {
+            label
+            symbol
+          }
+          amount
+        }
+
+        brand
       }
     }
-  `,
-  {
-    options: {
-      variables: {
-        input: { title: 'all' },
-      },
-    },
-  },
-);
-const homeWithData = CATEGORIES(Home);
+  }
+`;
+
 const mapStateToProps = (state) => ({
   overlayFlag: state.overlay.flag,
+  categoryIndex: state.category.index,
+  items: state.cart.items,
+  name: state.category.name,
 });
-export default connect(mapStateToProps)(homeWithData);
+
+export default connect(mapStateToProps)(
+  graphql(CATEGORIES, {
+    options: (props, state) => {
+      return {
+        variables: {
+          input: {
+            title: props.name,
+          },
+        },
+      };
+    },
+  })(Home),
+);

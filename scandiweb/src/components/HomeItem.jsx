@@ -37,16 +37,18 @@ class HomeItem extends Component {
       name: this.props.name,
       image: this.props.gallery,
       attributes: this.props.attributes,
-      setActiveClass: this.props.setActiveClass,
+
       objState: this.state.activeAttributes,
     };
     store.dispatch(addItem(obj));
   };
   render() {
-    const { name, gallery, price, id, brand } = this.props;
+    const { name, gallery, price, id, brand, inStock } = this.props;
 
     return (
-      <div className="showcase-main-item" onClick={() => this.props.setCurrentId(this.props.id)}>
+      <div
+        className={'showcase-main-item' + ' ' + `${!inStock ? 'out' : ''}`}
+        onClick={() => this.props.setCurrentId(this.props.id)}>
         <div className="main-item-img">
           <img src={gallery[0]} alt="product"></img>
         </div>

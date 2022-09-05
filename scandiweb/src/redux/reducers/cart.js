@@ -2,6 +2,17 @@ const initialState = {
   items: {},
 
   totalCount: 0,
+  setActiveClass(id, index, obj) {
+    return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
+      obj[id] == index &&
+      id == 'Color'
+      ? 'active-color'
+      : Object.keys(obj).find((keysItem) => keysItem == id) == id &&
+        obj[id] == index &&
+        id !== 'Color'
+      ? 'active'
+      : '';
+  },
 };
 const getTotalPrice = (newItems) =>
   Object.values(newItems)

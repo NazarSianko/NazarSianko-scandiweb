@@ -55,7 +55,7 @@ class Cart extends Component {
                   deleteItem={this.deleteItem}
                   attributes={el.attributes}
                   state={el.objState}
-                  setActiveClass={el.setActiveClass}
+                  setActiveClass={this.props.setActiveClass}
                   items={this.products}
                 />
               ))

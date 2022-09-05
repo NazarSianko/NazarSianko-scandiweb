@@ -38,14 +38,13 @@ class CartOverlay extends Component {
     } else {
       document.body.classList.remove('active');
     }
-
   };
   componentDidMount = () => {
     document.addEventListener('click', this.handleOutsideClick);
   };
- 
+
   render() {
-    console.log(this.props.flag)
+    console.log(this.props.flag);
     const { items, currIndex } = this.props;
     const products = Object.keys(items).map((key) => {
       return items[key].items[0];
@@ -76,7 +75,7 @@ class CartOverlay extends Component {
                     deleteItem={this.deleteItem}
                     attributes={el.attributes}
                     state={el.objState}
-                    setActiveClass={el.setActiveClass}
+                    setActiveClass={this.props.setActiveClass}
                   />
                 ))
               : ''}

@@ -36,15 +36,15 @@ class Header extends Component {
             </div>
           ))}
         </div>
-        <NavLink to="/">
-          <div className="header-logo">
-            <img src="./a-logo.png" alt="logo"></img>
-          </div>
-        </NavLink>
+
+        <div className="header-logo">
+          <img src="./a-logo.png" alt="logo"></img>
+        </div>
+
         <div className="header-right">
           <ChangeCurrency />
 
-          <CartOverlay />
+          <CartOverlay setActiveClass={this.props.setActiveClass} />
         </div>
       </header>
     );
