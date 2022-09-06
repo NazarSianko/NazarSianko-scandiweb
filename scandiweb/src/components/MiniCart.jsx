@@ -45,7 +45,7 @@ class MiniCart extends Component {
   //знаю, что слушатели надо удалять, но не получилось, не срабатывает
 
   render() {
-    console.log(this.props.flag);
+ 
     const { items, currIndex } = this.props;
     const products = Object.keys(items).map((key) => {
       return items[key].items[0];
@@ -53,7 +53,7 @@ class MiniCart extends Component {
 
     return (
       <div className="header-cart" ref={this.overlayRef}>
-        <div class="cart" onClick={() => this.setActiveOverlay()}>
+        <div className="cart" onClick={() => this.setActiveOverlay()}>
           <img src="./Empty Cart.png"></img>
           {this.props.totalCount ? <div className="cart-counter">{this.props.totalCount}</div> : ''}
         </div>
@@ -65,6 +65,7 @@ class MiniCart extends Component {
             {products
               ? products.map((el) => (
                   <MiniCartItem
+                  key = {el.id}
                     id={el.id}
                     price={el.price}
                     brand={el.brand}

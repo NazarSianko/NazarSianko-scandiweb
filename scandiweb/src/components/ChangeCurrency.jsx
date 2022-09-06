@@ -50,6 +50,7 @@ class ChangeCurrency extends Component {
             {!this.props.data.loading && !this.props.data.error
               ? this.props.data.categories[0].products[0].prices.map((el, index) => (
                   <div
+                  key = {el.currency.symbol}
                     className={
                       'currency-item' + ' ' + `${this.props.currIndex === index ? 'active' : ''}`
                     }

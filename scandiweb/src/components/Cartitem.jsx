@@ -45,14 +45,14 @@ class CartItem extends Component {
               (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
           {attributes.map((el) => (
-            <div className="item-size">
+            <div className="item-size" key = {el.id}>
               <span className="size-text">
                 {el.name.toUpperCase() + ':'}
                 <br></br>
               </span>
               <div className="sizes">
                 {el.items.map((item, index) => (
-                  <div
+                  <div key = {item.value}
                     className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
                     style={{
                       background: `${el.name === 'Color' ? item.value : ''}`,
@@ -66,7 +66,7 @@ class CartItem extends Component {
             </div>
           ))}
         </div>
-        <div className="cart-item-right">
+        <div className="cart-item_right">
           <div className="item-count">
             <div className="plus" onClick={this.plusItem}>
               +

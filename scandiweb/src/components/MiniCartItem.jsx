@@ -22,14 +22,14 @@ class MiniCartItem extends Component {
               (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
           {attributes.map((el) => (
-            <div className="item-size">
+            <div className="item-size" key ={el.id}>
               <span className="size-text">
                 {el.name.toUpperCase() + ':'}
                 <br></br>
               </span>
               <div className="sizes">
                 {el.items.map((item, index) => (
-                  <div
+                  <div key = {item.value}
                     className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
                     style={{
                       background: `${el.name === 'Color' ? item.value : ''}`,

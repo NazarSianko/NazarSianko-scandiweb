@@ -27,9 +27,7 @@ export class Home extends Component {
   setCategory = (index) => {
     this.props.data.refetch({ input: { title: index } });
   };
-  setCurrentId = (id) => {
-    this.props.setCurrentId(id);
-  };
+  
   setCategoryNames = (name) => {
     this.setState({
       categoryNames: name,
@@ -37,7 +35,7 @@ export class Home extends Component {
   };
   render() {
     const { category } = this.props.data;
-    console.log(this.props.name);
+
     return (
       <main className="showcase-main">
         <Categories setCategory={this.setCategory} setCategoryNames={this.setCategoryNames} />
@@ -59,7 +57,7 @@ export class Home extends Component {
                     gallery={el.gallery}
                     price={el.prices}
                     attributes={el.attributes}
-                    setCurrentId={this.setCurrentId}
+                  
                     setActiveClass={this.props.setActiveClass}
                   />
                 </NavLink>

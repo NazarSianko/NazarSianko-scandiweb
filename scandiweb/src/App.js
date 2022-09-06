@@ -4,28 +4,24 @@ import { Home, Header, Cart, ProductDescription } from './components';
 import client from './apollo/client';
 import { Route, Routes } from 'react-router-dom';
 import './styles/index.scss';
+import { connect } from 'react-redux';
 
 export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currencyIndex: 0,
-      currentId: sessionStorage.getItem('id') || '',
+
       objState: {},
     };
   }
-  setCurrentId = (id) => {
-    this.setState({
-      currentId: id,
-    });
-    sessionStorage.setItem('id', id);
-  };
+
   setCurrencyIndex = (index) => {
     this.setState({
       currencyIndex: index,
     });
   };
-  setActiveClass = (id, index ,obj) => {
+  setActiveClass = (id, index, obj) => {
     return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
       obj[id] == index &&
       id == 'Color'
@@ -37,11 +33,10 @@ export class App extends Component {
       : '';
   };
   render() {
- 
     return (
       <div className="wrapper">
         <div className="container">
-          <Header setCurrencyIndex={this.setCurrencyIndex} setActiveClass={this.setActiveClass}/>
+          <Header setCurrencyIndex={this.setCurrencyIndex} setActiveClass={this.setActiveClass} />
           <Routes>
             <Route
               path="/"
@@ -49,21 +44,26 @@ export class App extends Component {
                 <Home
                   client={client}
                   currencyIndex={this.state.currencyIndex}
-                  setCurrentId={this.setCurrentId}
-                  setActiveClass = {this.setActiveClass}
+                  setActiveClass={this.setActiveClass}
                 />
               }
             />
 
-            <Route path="/cart" element={<Cart currencyIndex={this.state.currencyIndex} setActiveClass={this.setActiveClass}/>} />
+            <Route
+              path="/cart"
+              element={
+                <Cart
+                  currencyIndex={this.state.currencyIndex}
+                  setActiveClass={this.setActiveClass}
+                />
+              }
+            />
             <Route
               path={'/pdp/:id'}
               element={
                 <ProductDescription
                   currencyIndex={this.state.currencyIndex}
-                  id={this.state.currentId}
-                  setActiveClass = {this.setActiveClass}
-                 
+                  setActiveClass={this.setActiveClass}
                 />
               }
             />

@@ -15,6 +15,7 @@ class ProductDescription extends Component {
       imgIndex: 0,
     };
   }
+  // эти атрибуты , которые динамически создаются в стейте, тоже нужно бы сохранять при перезагрузке страницы, но хз, как это сделать 
   static getDerivedStateFromProps(props, state) {
     if (!state.activeAttributes) {
       return {
@@ -54,7 +55,7 @@ class ProductDescription extends Component {
   });
 
   render() {
-    console.log(this.state);
+    console.log(this.props);
     return (
       <div className="pdp-main">
         {this.props.overlayFlag ? <Overlay /> : ''}
@@ -65,9 +66,10 @@ class ProductDescription extends Component {
                 <img src="./back.png"></img>
               </div>
             </NavLink>
+            <div className="pdp-cart-main">
             <div className="pdp-left-imgs">
               {this.props.data.product.gallery.map((el, index) => (
-                <div
+                <div key ={el}
                   className={
                     'pdp-left-img' + ' ' + `${this.state.imgIndex == index ? 'active-color' : ' '}`
                   }
@@ -76,24 +78,24 @@ class ProductDescription extends Component {
                 </div>
               ))}
             </div>
-            <div className="pdp-cart-main">
+            
               <div className="cart-img">
                 <img src={this.props.data.product.gallery[this.state.imgIndex]} alt="pdp img"></img>
               </div>
-
+                  </div>
               <div className="cart-item_left">
                 <div className="item-title">{this.props.data.product.name}</div>
                 <div className="item-description">{this.props.data.product.brand}</div>
 
                 {this.props.data.product.attributes.map((el) => (
-                  <div className="item-size">
+                  <div className="item-size" key = {el.name}>
                     <span className="size-text">
                       {el.name.toUpperCase() + ':'}
                       <br></br>
                     </span>
                     <div className="sizes">
                       {el.items.map((item, index) => (
-                        <div
+                        <div key = {el.id}
                           className={
                             'size' +
                             ' ' +
@@ -140,7 +142,7 @@ class ProductDescription extends Component {
                 </div>
               </div>
             </div>
-          </div>
+        
         ) : (
           ''
         )}
@@ -181,6 +183,8 @@ const CATEGORY = gql`
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
   overlayFlag: state.overlay.flag,
+  currentId: state.currentId.id, //Это айди, который кидается в стор при нажатии на конкретный HomeItem, при нажатии на кнопку "назад " в браузере не возвращает на тот айтем,
+  // на котором юзер был в предыдущий раз, а на тот, чей айди в сторе был последним, хз как это пофиксить
 });
 
 export default connect(mapStateToProps)(
@@ -188,7 +192,7 @@ export default connect(mapStateToProps)(
     options: (props) => {
       return {
         variables: {
-          id: props.id,
+          id: props.currentId,
         },
       };
     },

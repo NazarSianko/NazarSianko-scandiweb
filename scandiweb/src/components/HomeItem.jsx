@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { persistor, store } from '../redux/store';
 import { addItem } from '../redux/actions/cart';
-
+import { setId } from '../redux/actions/currentId';
 import { connect } from 'react-redux';
 
 class HomeItem extends Component {
@@ -25,6 +25,9 @@ class HomeItem extends Component {
     }
     return state;
   }
+  setCurrId = (id) => {
+    store.dispatch(setId(id))
+  }
 
   setCartItem = (e) => {
     e.preventDefault();
@@ -44,11 +47,11 @@ class HomeItem extends Component {
   };
   render() {
     const { name, gallery, price, id, brand, inStock } = this.props;
-
+ 
     return (
       <div
         className={'showcase-main-item' + ' ' + `${!inStock ? 'out' : ''}`}
-        onClick={() => this.props.setCurrentId(this.props.id)}>
+        onClick={() => this.setCurrId(id)}>
         <div className="main-item-img">
           <img src={gallery[0]} alt="product"></img>
         </div>

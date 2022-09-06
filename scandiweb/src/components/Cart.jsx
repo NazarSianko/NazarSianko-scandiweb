@@ -44,6 +44,7 @@ class Cart extends Component {
           {products
             ? products.map((el) => (
                 <CartItem
+                  key = {el.id}
                   id={el.id}
                   price={el.price}
                   brand={el.brand}
