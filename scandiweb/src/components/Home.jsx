@@ -17,13 +17,11 @@ export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currencyIndex: 0,
+     
       categoryNames: '',
     };
   }
-  setCurrencyIndex = (index) => {
-    this.setCurrencyIndex(index);
-  };
+
   setCategory = (index) => {
     this.props.data.refetch({ input: { title: index } });
   };

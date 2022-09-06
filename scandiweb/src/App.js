@@ -10,17 +10,13 @@ export class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currencyIndex: 0,
+     
 
       objState: {},
     };
   }
 
-  setCurrencyIndex = (index) => {
-    this.setState({
-      currencyIndex: index,
-    });
-  };
+ 
   setActiveClass = (id, index, obj) => {
     return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
       obj[id] == index &&
@@ -36,14 +32,14 @@ export class App extends Component {
     return (
       <div className="wrapper">
         <div className="container">
-          <Header setCurrencyIndex={this.setCurrencyIndex} setActiveClass={this.setActiveClass} />
+          <Header  setActiveClass={this.setActiveClass} />
           <Routes>
             <Route
               path="/"
               element={
                 <Home
                   client={client}
-                  currencyIndex={this.state.currencyIndex}
+                  
                   setActiveClass={this.setActiveClass}
                 />
               }

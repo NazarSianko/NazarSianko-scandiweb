@@ -35,7 +35,7 @@ class ProductDescription extends Component {
 
   setCartItem = () => {
     const obj = {
-      id: this.props.data.product.id,
+      id: this.props.currentId,
       price: this.props.data.product.prices,
       brand: this.props.data.product.brand,
       name: this.props.data.product.name,
