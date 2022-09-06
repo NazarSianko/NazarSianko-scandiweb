@@ -49,7 +49,7 @@ export class App extends Component {
               path="/cart"
               element={
                 <Cart
-                  currencyIndex={this.state.currencyIndex}
+                  
                   setActiveClass={this.setActiveClass}
                 />
               }
@@ -58,7 +58,7 @@ export class App extends Component {
               path={'/pdp/:id'}
               element={
                 <ProductDescription
-                  currencyIndex={this.state.currencyIndex}
+                 
                   setActiveClass={this.setActiveClass}
                 />
               }
