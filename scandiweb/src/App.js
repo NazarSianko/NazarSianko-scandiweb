@@ -4,17 +4,10 @@ import { Home, Header, Cart, ProductDescription } from './components';
 import client from './apollo/client';
 import { Route, Routes } from 'react-router-dom';
 import './styles/index.scss';
-import { connect } from 'react-redux';
+
 
 export class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-     
-
-      objState: {},
-    };
-  }
+  
 
  
   setActiveClass = (id, index, obj) => {
