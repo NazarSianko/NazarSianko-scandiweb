@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import Overlay from './Overlay';
 import Loading from './Loading';
 import classNames from 'classnames';
+import { setAttributes } from '../redux/actions/productAttributes';
 
 class ProductDescription extends Component {
   constructor(props) {
@@ -34,7 +35,34 @@ class ProductDescription extends Component {
     }
     return state;
   }
+componentMount = (prevProps) => {
+    if (prevProps !== this.props) {
+    if (!this.props.productAttributes[this.props.currentId]) {
+      this.props.setActiveAttributes({
+        [this.props.currentId]: this.props.data.product
+          ? this.props.data.product.attributes.length == 0
+            ? { id: this.props.id }
+            : this.props.data.product.attributes.reduce((obj, el) => {
+                obj[el.name] = 0;
+                obj.id = this.props.currentId;
+                return obj;
+              }, {})
+          : '',
+      })
+    }
+  }
+}
+/*setAtt = () => {
+  this.setState((state) => ({
+    activeAttributes: {
+      ...state.activeAttributes,
+      [el.id]: index,
+      id: this.props.id,
+    },
+    
+}))
 
+}*/
   setCartItem = () => {
     const obj = {
       id: this.props.currentId,
@@ -43,7 +71,7 @@ class ProductDescription extends Component {
       name: this.props.data.product.name,
       image: this.props.data.product.gallery,
       attributes: this.props.data.product.attributes,
-      objState: this.state.activeAttributes,
+      objState: this.props.productAttributes[this.props.currentId],
     };
     this.props.setItem(obj)
   };
@@ -62,7 +90,7 @@ class ProductDescription extends Component {
     if (this.props.data.loading || this.props.data.error) {
       return <Loading />
     }
-    
+    console.log(this.props.productAttributes)
     return (
       <div className="pdp-main">
        
@@ -76,7 +104,7 @@ class ProductDescription extends Component {
             <div className="pdp-cart-main">
             <div className="pdp-left-imgs">
               {this.props.data.product.gallery.map((el, index) => (
-                <div key ={el}
+                <div 
                   className={classNames("pdp-left-img",{'active-color':this.state.imgIndex == index})
                     //'pdp-left-img' + ' ' + `${this.state.imgIndex == index ? 'active-color' : ' '}`
                   }
@@ -102,30 +130,34 @@ class ProductDescription extends Component {
                     </span>
                     <div className="sizes">
                       {el.items.map((item, index) => (
-                        <div key = {el.id}
+                        <div 
                           className={
                             'size' +
-                            ' ' +
+                             ' ' +
                             `${this.props.setActiveClass(
                               el.id,
                               index,
-                              this.state.activeAttributes,
+                              this.props.productAttributes[this.props.currentId]
                             )}`
-                          }
+                            }
                           style={{
                             background: `${el.name === 'Color' ? item.value : ''}`,
                             width: `${el.name === 'Color' ? '39px' : ''}`,
                             height: `${el.name === 'Color' ? '39px' : ''}`,
                           }}
                           onClick={() =>
-                            this.setState((state) => ({
-                              activeAttributes: {
-                                ...state.activeAttributes,
-                                [el.id]: index,
-                                id: this.props.id,
-                              },
-                            }))
-                          }>
+                            this.props.setActiveAttributes(({
+                              ...this.props.productAttributes,
+                              [this.props.currentId]:{
+                                ...this.props.productAttributes[this.props.currentId],
+                              [el.id]: index,
+                              id:this.props.currentId,
+                              }
+                              
+                           
+                            
+                          }))
+                         }>
                           {el.name === 'Color' ? '' : item.value}
                         </div>
                       ))}
@@ -189,11 +221,13 @@ const CATEGORY = gql`
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
   overlayFlag: state.overlay.flag,
+  productAttributes: state.productAttributes.obj,
   currentId: state.currentId.id, //Это айди, который кидается в стор при нажатии на конкретный HomeItem, при нажатии на кнопку "назад " в браузере не возвращает на тот айтем,
   // на котором юзер был в предыдущий раз, а на тот, чей айди в сторе был последним, хз как это пофиксить
 });
 const mapDispatchToProps = (dispatch) => ({
-  setItem: (obj) => dispatch(addItem(obj))
+  setItem: (obj) => dispatch(addItem(obj)),
+  setActiveAttributes: (obj) => dispatch(setAttributes(obj))
 })
 
 export default connect(mapStateToProps,mapDispatchToProps)(

@@ -5,6 +5,7 @@ import currency from './currency';
 import overlay from './overlay';
 import category from './category';
 import currentId from './currentId';
+import productAttributes from './productAttributes';
 
 const rootReducer = combineReducers({
   cart,
@@ -12,5 +13,6 @@ const rootReducer = combineReducers({
   overlay,
   category,
   currentId,
+  productAttributes
 });
 export default rootReducer;

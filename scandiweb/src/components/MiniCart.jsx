@@ -45,7 +45,7 @@ class MiniCart extends Component {
     const products = Object.keys(items).map((key) => {
       return items[key].items[0];
     });
-
+    console.log(products)
     return (
       <div className="header-cart" ref={this.overlayRef}>
         <div className="cart" onClick={() => this.setActiveOverlay()}>

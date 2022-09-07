@@ -10,7 +10,7 @@ class MiniCartItem extends Component {
   };
   render() {
     const { brand, name, price, image, itemsCount, attributes, state, setActiveClass } = this.props;
-    console.log(setActiveClass);
+   
     return (
       <div className="overlay-item">
         <div className="overlay-item_left">
@@ -30,7 +30,7 @@ class MiniCartItem extends Component {
               <div className="sizes">
                 {el.items.map((item, index) => (
                   <div key = {item.value}
-                    className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
+                    className={'size'  + ' ' + `${setActiveClass(el.id, index, state)}`}
                     style={{
                       background: `${el.name === 'Color' ? item.value : ''}`,
                     }}>
@@ -39,7 +39,7 @@ class MiniCartItem extends Component {
                 ))}
               </div>
             </div>
-          ))}
+                  ))}
         </div>
         <div className="overlay-item_right">
           <div className="item-count">
@@ -61,5 +61,7 @@ class MiniCartItem extends Component {
 }
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
+  productAttributes: state.productAttributes.obj,
+  currentId: state.currentId.id,
 });
 export default connect(mapStateToProps)(MiniCartItem);

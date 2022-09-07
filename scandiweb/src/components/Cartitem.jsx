@@ -63,7 +63,7 @@ class CartItem extends Component {
                 ))}
               </div>
             </div>
-          ))}
+                  ))}
         </div>
         <div className="cart-item_right">
           <div className="item-count">
@@ -102,5 +102,7 @@ class CartItem extends Component {
 }
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
+  productAttributes: state.productAttributes.obj,
+  currentId: state.currentId.id,
 });
 export default connect(mapStateToProps)(CartItem);
