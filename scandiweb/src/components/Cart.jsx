@@ -7,18 +7,10 @@ import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from '../redux
 import Overlay from './Overlay';
 
 class Cart extends Component {
-  plusItem = (objState) => {
-    store.dispatch(plusCartItem(objState));
-  };
-  minusItem = (objState) => {
-    store.dispatch(minusCartItem(objState));
-  };
-  deleteItem = (objState) => {
-    store.dispatch(deleteCartItem(objState));
-  };
+ 
   onClearCart = () => {
     if (window.confirm('Do you really want to clear Cart ?')) {
-      store.dispatch(clearCart());
+      this.props.clearCart();
     }
   };
   getTotalPrice = (items, index) =>
@@ -31,7 +23,7 @@ class Cart extends Component {
     const products = Object.keys(items).map((key) => {
       return items[key].items[0];
     });
-    console.log(products);
+   
     return (
       <main className="cart-main">
         {this.props.overlayFlag ? <Overlay /> : ''}
@@ -51,9 +43,9 @@ class Cart extends Component {
                   name={el.name}
                   image={el.image}
                   itemsCount={items[JSON.stringify(el.objState)].items.length}
-                  plusItem={this.plusItem}
-                  minusItem={this.minusItem}
-                  deleteItem={this.deleteItem}
+                  plusItem={this.props.plusItem}
+                  minusItem={this.props.minusItem}
+                  deleteItem={this.props.deleteItem}
                   attributes={el.attributes}
                   state={el.objState}
                   setActiveClass={this.props.setActiveClass}
@@ -64,7 +56,9 @@ class Cart extends Component {
         </div>
         <div className="total-check">
           <div className="tax">
-            Tax 21%:<span>{((this.getTotalPrice(items, currIndex) / 100) * 21).toFixed(2)}</span>
+            Tax 21%:<span>{` ${
+              products.length > 0 ? products[0].price[currIndex].currency.symbol : ''
+            } ${((this.getTotalPrice(items, currIndex)/100)*21).toFixed(2)} `}</span> 
           </div>
           <div className="Quantity">
             Quantity:<span className="quantity-span"> {this.props.totalCount}</span>
@@ -72,7 +66,7 @@ class Cart extends Component {
           <div className="total">
             Total:
             <span>{` ${
-              products.length > 0 ? products[0].price[this.props.currIndex].currency.symbol : ''
+              products.length > 0 ? products[0].price[currIndex].currency.symbol : ''
             } ${this.getTotalPrice(items, currIndex).toFixed(2)} `}</span>
           </div>
           <button className="order">
@@ -89,4 +83,13 @@ const mapStateToProps = (state) => ({
   overlayFlag: state.overlay.flag,
   currIndex: state.currency.index,
 });
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = (dispatch) =>  ({
+
+
+  
+  plusItem: (objState) => dispatch(plusCartItem(objState)),
+  minusItem: (objState) => dispatch(minusCartItem(objState)),
+  deleteItem: (objState) => dispatch(deleteCartItem(objState)),
+  clearCart: () => dispatch(clearCart())
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Cart);

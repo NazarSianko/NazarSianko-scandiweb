@@ -108,6 +108,10 @@
                             &.active-color {
                                 border:3px solid #5ECE7B;
                             }
+                            &.color {
+                                width: 39px;
+                                height: 39px;
+                            }
                         }
                     }
                 }
@@ -155,6 +159,12 @@
                         height: 24px;
                         position:absolute;
                         cursor: pointer;
+                        margin:0px;
+                        padding:0px;
+                        border:none;
+                        &:active {
+                            box-shadow: 0 0 0 2px #cbd6ee;
+                        }
                         
                         & img {
                             width:24px;
@@ -163,10 +173,10 @@
                         bottom:15px;
                     }
                     .arrow-right {
-                        left:60%;
+                        left:80%;
                     }
                     .arrow-left {
-                        left:25%
+                        left:60%
                     }
                 }
                 

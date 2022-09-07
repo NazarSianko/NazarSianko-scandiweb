@@ -53,11 +53,10 @@ class CartItem extends Component {
               <div className="sizes">
                 {el.items.map((item, index) => (
                   <div key = {item.value}
-                    className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
+                    className={'size' + ' ' + `${el.name === 'Color' ? 'color' : ''}`+ ' ' + `${setActiveClass(el.id, index, state)}`}
                     style={{
                       background: `${el.name === 'Color' ? item.value : ''}`,
-                      width: `${el.name === 'Color' ? '39px' : ''}`,
-                      height: `${el.name === 'Color' ? '39px' : ''}`,
+                      
                     }}>
                     {el.name === 'Color' ? '' : item.value}
                   </div>
@@ -81,13 +80,13 @@ class CartItem extends Component {
 
             {image.length > 1 ? (
               <div>
-                {' '}
-                <div className="arrow-left" onClick={this.prevImg}>
+                
+                <button className="arrow-left" onClick={this.prevImg}>
                   <img src="./left.png"></img>
-                </div>
-                <div className="arrow-right" onClick={this.nextImg}>
+                </button>
+                <button className="arrow-right" onClick={this.nextImg}>
                   <img src="./right.png"></img>
-                </div>{' '}
+                </button>
               </div>
             ) : (
               ''

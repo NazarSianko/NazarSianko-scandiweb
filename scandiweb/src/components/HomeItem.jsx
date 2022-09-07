@@ -25,9 +25,7 @@ class HomeItem extends Component {
     }
     return state;
   }
-  setCurrId = (id) => {
-    store.dispatch(setId(id))
-  }
+ 
 
   setCartItem = (e) => {
     e.preventDefault();
@@ -43,7 +41,7 @@ class HomeItem extends Component {
 
       objState: this.state.activeAttributes,
     };
-    store.dispatch(addItem(obj));
+    this.props.setItem(obj);
   };
   render() {
     const { name, gallery, price, id, brand, inStock } = this.props;
@@ -51,7 +49,7 @@ class HomeItem extends Component {
     return (
       <div
         className={'showcase-main-item' + ' ' + `${!inStock ? 'out' : ''}`}
-        onClick={() => this.setCurrId(id)}>
+        onClick={() => this.props.setCurrentId(id)}>
         <div className="main-item-img">
           <img src={gallery[0]} alt="product"></img>
         </div>
@@ -70,4 +68,8 @@ class HomeItem extends Component {
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
 });
-export default connect(mapStateToProps)(HomeItem);
+const mapDispatchToProps=(dispatch) => ({
+  setCurrentId: (id) => dispatch(setId(id)),
+  addItem: (obj) => dispatch(addItem(obj)),
+});
+export default connect(mapStateToProps,mapDispatchToProps)(HomeItem);

@@ -48,7 +48,7 @@ export class App extends Component {
               }
             />
             <Route
-              path={'/pdp/:id'}
+              path={'/product/:id'}
               element={
                 <ProductDescription
                  

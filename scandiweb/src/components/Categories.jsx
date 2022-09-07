@@ -21,8 +21,9 @@ class Categories extends Component {
   //
   setActiveCategory = (index) => {
     store.dispatch(changeCategory(index));
-    this.props.setCategory(this.props.data.categories[this.props.categoryIndex].name);
+   
     store.dispatch(saveActiveCategory(this.props.data.categories[this.props.categoryIndex].name));
+    this.props.setCategory(this.props.name);
   };
 
   render() {
@@ -55,5 +56,6 @@ const ALLCATEGORIES = gql`
 `;
 const mapStateToProps = (state) => ({
   categoryIndex: state.category.index,
+  name: state.category.name,
 });
 export default connect(mapStateToProps)(graphql(ALLCATEGORIES)(Categories));

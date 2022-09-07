@@ -22,8 +22,8 @@ export class Home extends Component {
     };
   }
 
-  setCategory = (index) => {
-    this.props.data.refetch({ input: { title: index } });
+  setCategory = (name) => {
+    this.props.data.refetch({ input: { title: name } });
   };
   
   setCategoryNames = (name) => {
@@ -43,7 +43,7 @@ export class Home extends Component {
             ? //? !this.state.currentId
               category.products.map((el) => (
                 <NavLink
-                  to={`/pdp/${el.id}`}
+                  to={`/product/${el.id}`}
                   style={{ pointerEvents: el.inStock ? 'auto' : 'none' }}>
                   <HomeItem
                     key={el.id}
@@ -112,6 +112,7 @@ const mapStateToProps = (state) => ({
   categoryIndex: state.category.index,
   items: state.cart.items,
   name: state.category.name,
+  currentId: state.currentId.id
 });
 
 export default connect(mapStateToProps)(

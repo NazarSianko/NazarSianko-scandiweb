@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../styles/pdp.scss';
 import { gql } from '@apollo/client';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import { graphql } from '@apollo/client/react/hoc';
 import { persistor, store } from '../redux/store';
 import { addItem } from '../redux/actions/cart';
@@ -43,7 +43,7 @@ class ProductDescription extends Component {
       attributes: this.props.data.product.attributes,
       objState: this.state.activeAttributes,
     };
-    store.dispatch(addItem(obj));
+    this.props.setItem(obj)
   };
   setImageId = (index) => {
     this.setState({
@@ -186,8 +186,11 @@ const mapStateToProps = (state) => ({
   currentId: state.currentId.id, //Это айди, который кидается в стор при нажатии на конкретный HomeItem, при нажатии на кнопку "назад " в браузере не возвращает на тот айтем,
   // на котором юзер был в предыдущий раз, а на тот, чей айди в сторе был последним, хз как это пофиксить
 });
+const mapDispatchToProps = (dispatch) => ({
+  setItem: (obj) => dispatch(addItem(obj))
+})
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps,mapDispatchToProps)(
   graphql(CATEGORY, {
     options: (props) => {
       return {

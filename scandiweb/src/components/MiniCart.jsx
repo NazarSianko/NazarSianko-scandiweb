@@ -17,15 +17,10 @@ class MiniCart extends Component {
     const pathInAllBrowsers = e.path || (e.composedPath && e.composedPath());
     if (!pathInAllBrowsers.includes(this.overlayRef.current)) {
       document.body.classList.remove('active');
-      store.dispatch(changeOverlayFlag(false));
+     this.props.setOverlayFlag(false);
     }
   };
-  plusItem = (objState) => {
-    store.dispatch(plusCartItem(objState));
-  };
-  minusItem = (objState) => {
-    store.dispatch(minusCartItem(objState));
-  };
+ 
   getTotalPrice = (items, index) =>
     Object.values(items)
       .map((obj) => obj.items)
@@ -72,8 +67,8 @@ class MiniCart extends Component {
                     name={el.name}
                     image={el.image}
                     itemsCount={items[JSON.stringify(el.objState)].items.length}
-                    plusItem={this.plusItem}
-                    minusItem={this.minusItem}
+                    plusItem={this.props.plusItem}
+                    minusItem={this.props.minusItem}
                     deleteItem={this.deleteItem}
                     attributes={el.attributes}
                     state={el.objState}
@@ -111,4 +106,13 @@ const mapStateToProps = (state) => ({
   totalCount: state.cart.totalCount,
   flag: state.overlay.flag,
 });
-export default connect(mapStateToProps)(MiniCart);
+const mapDispatchToProps = (dispatch) =>  ({
+
+
+  
+  plusItem: (objState) => dispatch(plusCartItem(objState)),
+  minusItem: (objState) => dispatch(minusCartItem(objState)),
+  setOverlayFlag: (flag) => dispatch(changeOverlayFlag(flag)),
+  
+})
+export default connect(mapStateToProps,mapDispatchToProps)(MiniCart);

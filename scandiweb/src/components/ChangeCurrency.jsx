@@ -15,9 +15,7 @@ class ChangeCurrency extends Component {
     this.currencyRef = createRef();
   }
 
-  setActiveItem = (index) => {
-    store.dispatch(changeCurrency(index));
-  };
+  
   openCurrencyList = () => {
     this.setState({
       currencyFlag: !this.state.currencyFlag,
@@ -54,7 +52,7 @@ class ChangeCurrency extends Component {
                     className={
                       'currency-item' + ' ' + `${this.props.currIndex === index ? 'active' : ''}`
                     }
-                    onClick={() => this.setActiveItem(index)}>
+                    onClick={() => this.props.setActiveCurrency(index)}>
                     {el.currency.symbol} {el.currency.label}
                   </div>
                 ))
@@ -88,4 +86,7 @@ const ChangeCurrencyWithData = CURRENCY(ChangeCurrency);
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
 });
-export default connect(mapStateToProps)(ChangeCurrencyWithData);
+const mapDispatchToProps = (dispatch) => ({
+  setActiveCurrency: (index) => dispatch(changeCurrency(index)),
+})
+export default connect(mapStateToProps,mapDispatchToProps)(ChangeCurrencyWithData);
