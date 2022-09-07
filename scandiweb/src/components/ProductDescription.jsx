@@ -8,6 +8,7 @@ import { addItem } from '../redux/actions/cart';
 import { connect } from 'react-redux';
 import Overlay from './Overlay';
 import Loading from './Loading';
+import classNames from 'classnames';
 
 class ProductDescription extends Component {
   constructor(props) {
@@ -76,8 +77,8 @@ class ProductDescription extends Component {
             <div className="pdp-left-imgs">
               {this.props.data.product.gallery.map((el, index) => (
                 <div key ={el}
-                  className={
-                    'pdp-left-img' + ' ' + `${this.state.imgIndex == index ? 'active-color' : ' '}`
+                  className={classNames("pdp-left-img",{'active-color':this.state.imgIndex == index})
+                    //'pdp-left-img' + ' ' + `${this.state.imgIndex == index ? 'active-color' : ' '}`
                   }
                   onClick={()=>this.setImageId(index)}>
                   <img src={el} alt="small img"></img>

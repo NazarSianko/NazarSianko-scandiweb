@@ -7,6 +7,7 @@ import { changeCategory, saveActiveCategory } from '../redux/actions/category';
 import { gql } from '@apollo/client';
 
 import { graphql } from '@apollo/client/react/hoc';
+import classNames from 'classnames';
 class Categories extends Component {
   constructor(props) {
     super(props);
@@ -32,10 +33,8 @@ class Categories extends Component {
         {this.props.data.categories
           ? this.props.data.categories.map((el, index) => (
               <h1
-                className={
-                  'category-title' +
-                  ' ' +
-                  `${this.props.categoryIndex === index ? 'category-active' : ''}`
+                className={classNames('category-title',{"category-active":this.props.categoryIndex === index})
+                  
                 }
                 key={el.name}
                 onClick={() => this.setActiveCategory(index)}>

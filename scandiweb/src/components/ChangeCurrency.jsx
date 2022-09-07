@@ -5,6 +5,7 @@ import { gql } from '@apollo/client';
 import { persistor, store } from '../redux/store';
 import { connect } from 'react-redux';
 import { changeCurrency } from '../redux/actions/currency';
+import classNames from 'classnames';
 
 class ChangeCurrency extends Component {
   constructor(props) {
@@ -15,7 +16,6 @@ class ChangeCurrency extends Component {
     this.currencyRef = createRef();
   }
 
-  
   openCurrencyList = () => {
     this.setState({
       currencyFlag: !this.state.currencyFlag,
@@ -48,10 +48,10 @@ class ChangeCurrency extends Component {
             {!this.props.data.loading && !this.props.data.error
               ? this.props.data.categories[0].products[0].prices.map((el, index) => (
                   <div
-                  key = {el.currency.symbol}
-                    className={
-                      'currency-item' + ' ' + `${this.props.currIndex === index ? 'active' : ''}`
-                    }
+                    key={el.currency.symbol}
+                    className={classNames('currency-item', {
+                      active: this.props.currIndex === index,
+                    })}
                     onClick={() => this.props.setActiveCurrency(index)}>
                     {el.currency.symbol} {el.currency.label}
                   </div>
@@ -88,5 +88,5 @@ const mapStateToProps = (state) => ({
 });
 const mapDispatchToProps = (dispatch) => ({
   setActiveCurrency: (index) => dispatch(changeCurrency(index)),
-})
-export default connect(mapStateToProps,mapDispatchToProps)(ChangeCurrencyWithData);
+});
+export default connect(mapStateToProps, mapDispatchToProps)(ChangeCurrencyWithData);

@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "apollo": "^2.34.0",
     "apollo-client": "^2.6.10",
+    "classnames": "^2.3.1",
     "graphql": "^16.6.0",
     "lodash": "^4.17.21",
     "lodash.flowright": "^3.5.0",
