@@ -7,7 +7,7 @@ import { gql } from '@apollo/client';
 
 import { graphql } from '@apollo/client/react/hoc';
 
-import { Categories } from '../components';
+import { Categories, Loading } from '../components';
 
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -32,15 +32,21 @@ export class Home extends Component {
     });
   };
   render() {
-    const { category } = this.props.data;
+    const { category} = this.props.data;
+    if (this.props.data.loading || this.props.data.error) {
+      return <Loading/>
+    }
+   
+else {
 
+
+    
     return (
       <main className="showcase-main">
         <Categories setCategory={this.setCategory} setCategoryNames={this.setCategoryNames} />
 
         <div className="showcase-main-content">
-          {!this.props.data.loading && !this.props.data.error
-            ? //? !this.state.currentId
+          {
               category.products.map((el) => (
                 <NavLink
                   to={`/product/${el.id}`}
@@ -60,13 +66,15 @@ export class Home extends Component {
                   />
                 </NavLink>
               ))
-            : ''}
+            }
         </div>
         {this.props.overlayFlag ? <Overlay /> : ''}
       </main>
     );
   }
 }
+}
+
 
 const CATEGORIES = gql`
   query CategoryQuery($input: CategoryInput) {

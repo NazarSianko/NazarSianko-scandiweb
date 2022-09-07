@@ -9,4 +9,5 @@ import CartItem from './CartItem';
 import MiniCart from './MiniCart';
 import MiniCartItem from './MiniCartItem';
 import Overlay from './Overlay';
-export { Cart, Header, Home, HomeItem, Categories, ChangeCurrency, ProductDescription, CartItem,MiniCart,MiniCartItem,Overlay };
+import Loading from './Loading';
+export { Cart, Header, Home, HomeItem, Categories, ChangeCurrency, ProductDescription, CartItem,MiniCart,MiniCartItem,Overlay,Loading };

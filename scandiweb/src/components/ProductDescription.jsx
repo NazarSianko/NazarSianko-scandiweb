@@ -7,6 +7,7 @@ import { persistor, store } from '../redux/store';
 import { addItem } from '../redux/actions/cart';
 import { connect } from 'react-redux';
 import Overlay from './Overlay';
+import Loading from './Loading';
 
 class ProductDescription extends Component {
   constructor(props) {
@@ -55,11 +56,16 @@ class ProductDescription extends Component {
   });
 
   render() {
-    console.log(this.props);
+    const {overlayFlag,data} = this.props
+   
+    if (this.props.data.loading || this.props.data.error) {
+      return <Loading />
+    }
+    
     return (
       <div className="pdp-main">
-        {this.props.overlayFlag ? <Overlay /> : ''}
-        {!this.props.data.loading && !this.props.data.error ? (
+       
+        {overlayFlag ? <Overlay/> : ''}
           <div className="pdp-cart">
             <NavLink to="/">
               <div className="back-arrow">
@@ -73,7 +79,7 @@ class ProductDescription extends Component {
                   className={
                     'pdp-left-img' + ' ' + `${this.state.imgIndex == index ? 'active-color' : ' '}`
                   }
-                  onClick={() => this.setImageId(index)}>
+                  onClick={()=>this.setImageId(index)}>
                   <img src={el} alt="small img"></img>
                 </div>
               ))}
@@ -134,7 +140,7 @@ class ProductDescription extends Component {
                       this.props.data.product.prices[this.props.currIndex].amount}
                   </span>
                 </div>
-                <button className="pdp-button" onClick={() => this.setCartItem()}>
+                <button className="pdp-button" onClick={this.setCartItem}>
                   <span>ADD TO CART</span>
                 </button>
                 <div className="item-about">
@@ -143,9 +149,8 @@ class ProductDescription extends Component {
               </div>
             </div>
         
-        ) : (
-          ''
-        )}
+       
+        
       </div>
     );
   }

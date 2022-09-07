@@ -132,6 +132,16 @@ a {
         }
     }
 }
+.loading-block {
+    display:flex;
+   
+    justify-content: center;
+    align-items: center;
+    
+    
+  
+ 
+}
 @media (max-width:1270px) {
     .showcase-main  {
         .showcase-main-content {
