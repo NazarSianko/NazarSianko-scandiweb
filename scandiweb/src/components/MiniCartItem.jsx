@@ -8,9 +8,12 @@ class MiniCartItem extends Component {
   minusItem = () => {
     this.props.minusItem(this.props.state);
   };
+  deleteItem = () => {
+    this.props.deleteItem(this.props.state);
+  };
   render() {
     const { brand, name, price, image, itemsCount, attributes, state, setActiveClass } = this.props;
-   
+
     return (
       <div className="overlay-item">
         <div className="overlay-item_left">
@@ -53,6 +56,9 @@ class MiniCartItem extends Component {
           </div>
           <div className="item-img">
             <img src={image[0]} alt="overlay-img"></img>
+          </div>
+          <div className="delete" onClick={this.deleteItem}>
+            x
           </div>
         </div>
       </div>

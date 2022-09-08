@@ -1,16 +1,37 @@
 import React, { Component } from 'react';
 import '../styles/pdp.scss';
-import { gql } from '@apollo/client';
-import { NavLink, withRouter } from 'react-router-dom';
+import { PRODUCT } from '../apollo/queries';
+import { NavLink } from 'react-router-dom';
 import { graphql } from '@apollo/client/react/hoc';
-import { persistor, store } from '../redux/store';
+
 import { addItem } from '../redux/actions/cart';
 import { connect } from 'react-redux';
 import Overlay from './Overlay';
 import Loading from './Loading';
 import classNames from 'classnames';
 import { setAttributes } from '../redux/actions/productAttributes';
+import {compose } from 'redux'
+import {
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return (
+      <Component
+      {...props}
+        router={{ location, navigate, params }}
+      />
+    );
+  }
+
+  return ComponentWithRouterProp;
+}
 class ProductDescription extends Component {
   constructor(props) {
     super(props);
@@ -18,25 +39,25 @@ class ProductDescription extends Component {
       imgIndex: 0,
     };
   }
-  // эти атрибуты , которые динамически создаются в стейте, тоже нужно бы сохранять при перезагрузке страницы, но хз, как это сделать 
+ 
   static getDerivedStateFromProps(props, state) {
     if (!state.activeAttributes) {
       return {
         activeAttributes: props.data.product
           ? props.data.product.attributes.length == 0
-            ? { id: props.id }
+            ? { id: props.router.params.id }
             : props.data.product.attributes.reduce((obj, el) => {
                 obj[el.name] = 0;
-                obj.id = props.id;
+                obj.id = props.router.params.id;
                 return obj;
               }, {})
           : '',
       };
     }
     return state;
-  }
-componentMount = (prevProps) => {
-    if (prevProps !== this.props) {
+  }/*
+componentDidMount = () => {
+    
     if (!this.props.productAttributes[this.props.currentId]) {
       this.props.setActiveAttributes({
         [this.props.currentId]: this.props.data.product
@@ -50,7 +71,7 @@ componentMount = (prevProps) => {
           : '',
       })
     }
-  }
+  
 }
 /*setAtt = () => {
   this.setState((state) => ({
@@ -71,7 +92,7 @@ componentMount = (prevProps) => {
       name: this.props.data.product.name,
       image: this.props.data.product.gallery,
       attributes: this.props.data.product.attributes,
-      objState: this.props.productAttributes[this.props.currentId],
+      objState: this.state.activeAttributes,
     };
     this.props.setItem(obj)
   };
@@ -86,11 +107,11 @@ componentMount = (prevProps) => {
 
   render() {
     const {overlayFlag,data} = this.props
-   
+   console.log()
     if (this.props.data.loading || this.props.data.error) {
       return <Loading />
     }
-    console.log(this.props.productAttributes)
+    console.log(this.state)
     return (
       <div className="pdp-main">
        
@@ -104,7 +125,7 @@ componentMount = (prevProps) => {
             <div className="pdp-cart-main">
             <div className="pdp-left-imgs">
               {this.props.data.product.gallery.map((el, index) => (
-                <div 
+                <div key={el}
                   className={classNames("pdp-left-img",{'active-color':this.state.imgIndex == index})
                     //'pdp-left-img' + ' ' + `${this.state.imgIndex == index ? 'active-color' : ' '}`
                   }
@@ -130,14 +151,14 @@ componentMount = (prevProps) => {
                     </span>
                     <div className="sizes">
                       {el.items.map((item, index) => (
-                        <div 
+                        <div key={item.id}
                           className={
-                            'size' +
+                            'size'  +
                              ' ' +
                             `${this.props.setActiveClass(
                               el.id,
                               index,
-                              this.props.productAttributes[this.props.currentId]
+                              this.state.activeAttributes
                             )}`
                             }
                           style={{
@@ -146,16 +167,13 @@ componentMount = (prevProps) => {
                             height: `${el.name === 'Color' ? '39px' : ''}`,
                           }}
                           onClick={() =>
-                            this.props.setActiveAttributes(({
-                              ...this.props.productAttributes,
-                              [this.props.currentId]:{
-                                ...this.props.productAttributes[this.props.currentId],
-                              [el.id]: index,
-                              id:this.props.currentId,
-                              }
+                            this.setState((state) => ({
+                              activeAttributes: {
+                                ...state.activeAttributes,
+                                [el.id]: index,
+                                id: this.props.router.params.id,
+                              },
                               
-                           
-                            
                           }))
                          }>
                           {el.name === 'Color' ? '' : item.value}
@@ -188,7 +206,7 @@ componentMount = (prevProps) => {
     );
   }
 }
-const CATEGORY = gql`
+/*const PRODUCT = gql`
   query CategoryQuery($id: String!) {
     product(id: $id) {
       id
@@ -217,7 +235,7 @@ const CATEGORY = gql`
       brand
     }
   }
-`;
+`;*/
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
   overlayFlag: state.overlay.flag,
@@ -230,14 +248,14 @@ const mapDispatchToProps = (dispatch) => ({
   setActiveAttributes: (obj) => dispatch(setAttributes(obj))
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(
-  graphql(CATEGORY, {
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(
+  graphql(PRODUCT, {
     options: (props) => {
       return {
         variables: {
-          id: props.currentId,
+          id: props.router.params.id,
         },
       };
     },
-  })(ProductDescription),
+  })(ProductDescription)),
 );

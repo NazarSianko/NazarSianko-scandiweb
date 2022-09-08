@@ -54,9 +54,34 @@
                 line-height: 45px;
                 letter-spacing: 0em;
                 text-align: center;
+                position:relative;
 
                 width: 50px;
+                .arrow {
+                    position:absolute;
+                    bottom:1px;
+                    right:0px;
+                    & i {
+                        border: solid black;
+                        border-width: 0 3px 3px 0;
+                        display: inline-block;
+                        padding: 3px;
+                                            
+                        &.arrow-down {
+                            transform: rotate(45deg);
+                            -webkit-transform: rotate(45deg);
+                            transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+                        }
+                        &.arrow-up {
+                            transform: rotate(225deg);
+                            transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
+                        }
+                    }
+                }
             }
+           
+            
+            
             .currency-list {
                 width: 100px;
                 padding: 10px 0px;
@@ -107,6 +132,32 @@
             box-sizing: border-box;
             z-index: 12;
             background-color: #ffffff;
+            .overlay-header{
+                display:flex;
+                justify-content: space-between;
+                .cart-clear {
+                    display: flex;
+                    cursor:pointer;
+                
+                align-items: center;
+                & img {
+                    display:inline-block;
+                    margin-top:2px;
+                                }
+                .clear-cart {
+                    color: #b6b6b6;
+                    font-family: Raleway;
+                    font-size: 18px;
+                    font-weight: 300;
+                    line-height: 29px;
+                    letter-spacing: 0px;
+                    text-align: left;
+                    margin-left:5px;
+                    display:block;
+                    
+                
+                }
+            }
             .overlay-tittle {
                 font-family: Raleway;
                 font-size: 16px;
@@ -122,6 +173,7 @@
                     text-align: right;
                 }
             }
+        }
             .overlay-item {
                 display: flex;
                 justify-content: space-between;
@@ -262,6 +314,24 @@
                             height: 190px;
                         }
                     }
+                    .delete {
+                        &:active {
+                            box-shadow: 0 0 0 4px #cbd6ee;
+                        }
+                        width: 24px;
+                            height: 24px;
+                            border: 1px solid #1d1f22;
+                            text-align: center;
+                            line-height: 45px;
+                            font-size: 20px;
+                            cursor:pointer;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-family: Raleway;
+                            margin-left:24px;
+                        
+                    }
                 }
             }
             .overlay-total {
@@ -310,7 +380,7 @@
     .header-cart {
         cursor: pointer;
         position: relative;
-        & img {
+        .header-cart-img {
             margin-top: 3px;
         }
         .cart-counter {

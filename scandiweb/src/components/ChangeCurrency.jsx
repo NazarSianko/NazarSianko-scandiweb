@@ -1,8 +1,7 @@
 import React, { Children, Component, createRef } from 'react';
 import '../styles/header.scss';
 import { graphql } from '@apollo/client/react/hoc';
-import { gql } from '@apollo/client';
-import { persistor, store } from '../redux/store';
+import { CURRENCY } from '../apollo/queries';
 import { connect } from 'react-redux';
 import { changeCurrency } from '../redux/actions/currency';
 import classNames from 'classnames';
@@ -36,24 +35,30 @@ class ChangeCurrency extends Component {
   }*/
 
   render() {
+    console.log(this.props)
     return (
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
         <div className="currency-symbol">
           {!this.props.data.loading && !this.props.data.error
-            ? this.props.data.categories[0].products[0].prices[this.props.currIndex].currency.symbol
-            : ''}
+            ? this.props.data.currencies[this.props.currIndex].symbol
+    : ''}
+       <div className="arrow">
+        <i className={"arrow-down" + ' ' + `${this.state.currencyFlag ? 'arrow-up' : ''}`}></i>
+   
+</div>
         </div>
+     
         {this.state.currencyFlag ? (
           <div className="currency-list">
             {!this.props.data.loading && !this.props.data.error
-              ? this.props.data.categories[0].products[0].prices.map((el, index) => (
+              ? this.props.data.currencies.map((el, index) => (
                   <div
-                    key={el.currency.symbol}
+                    key={el.symbol}
                     className={classNames('currency-item', {
                       active: this.props.currIndex === index,
                     })}
                     onClick={() => this.props.setActiveCurrency(index)}>
-                    {el.currency.symbol} {el.currency.label}
+                    {el.symbol} {el.label}
                   </div>
                 ))
               : ''}
@@ -65,23 +70,20 @@ class ChangeCurrency extends Component {
     );
   }
 }
-const CURRENCY = graphql(
+/*
+const CURRENCY = 
   gql`
     query CategoryQuery {
-      categories {
-        products {
-          prices {
-            currency {
+      
+            currencies {
               label
               symbol
             }
           }
-        }
-      }
-    }
-  `,
-);
-const ChangeCurrencyWithData = CURRENCY(ChangeCurrency);
+        
+  `
+;
+*/
 
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
@@ -89,4 +91,4 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setActiveCurrency: (index) => dispatch(changeCurrency(index)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(ChangeCurrencyWithData);
+export default connect(mapStateToProps, mapDispatchToProps)(graphql(CURRENCY)(ChangeCurrency));

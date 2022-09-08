@@ -41,7 +41,7 @@ class HomeItem extends Component {
 
       objState: this.state.activeAttributes,
     };
-    this.props.setItem(obj);
+    this.props.addItem(obj);
   };
   render() {
     const { name, gallery, price, id, brand, inStock } = this.props;

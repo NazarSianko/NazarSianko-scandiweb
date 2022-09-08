@@ -3,7 +3,7 @@ import '../styles/index.scss';
 import '../styles/pdp.scss';
 import HomeItem from './HomeItem';
 
-import { gql } from '@apollo/client';
+import { CATEGORIES } from '../apollo/queries';
 
 import { graphql } from '@apollo/client/react/hoc';
 
@@ -48,7 +48,7 @@ else {
         <div className="showcase-main-content">
           {
               category.products.map((el) => (
-                <NavLink
+                <NavLink key = {el.id}
                   to={`/product/${el.id}`}
                   style={{ pointerEvents: el.inStock ? 'auto' : 'none' }}>
                   <HomeItem
@@ -76,7 +76,7 @@ else {
 }
 
 
-const CATEGORIES = gql`
+/*const CATEGORIES = gql`
   query CategoryQuery($input: CategoryInput) {
     categories {
       name
@@ -114,7 +114,7 @@ const CATEGORIES = gql`
     }
   }
 `;
-
+*/
 const mapStateToProps = (state) => ({
   overlayFlag: state.overlay.flag,
   categoryIndex: state.category.index,

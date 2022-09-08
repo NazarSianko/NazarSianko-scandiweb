@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import { connect } from 'react-redux';
 import MiniCartItem from './MiniCartItem';
 import { store } from '../redux/store';
-import { plusCartItem, minusCartItem } from '../redux/actions/cart';
+import { plusCartItem, minusCartItem,deleteCartItem,clearCart } from '../redux/actions/cart';
 
 import { NavLink } from 'react-router-dom';
 import { changeOverlayFlag } from '../redux/actions/overlay';
@@ -20,7 +20,11 @@ class MiniCart extends Component {
      this.props.setOverlayFlag(false);
     }
   };
- 
+  onClearCart = () => {
+    if (window.confirm('Do you really want to clear Cart ?')) {
+      this.props.clearCart();
+    }
+  };
   getTotalPrice = (items, index) =>
     Object.values(items)
       .map((obj) => obj.items)
@@ -49,14 +53,22 @@ class MiniCart extends Component {
     return (
       <div className="header-cart" ref={this.overlayRef}>
         <div className="cart" onClick={() => this.setActiveOverlay()}>
-          <img src="./Empty Cart.png"></img>
+          <img className='header-cart-img' src="./Empty Cart.png"></img>
           {this.props.totalCount ? <div className="cart-counter">{this.props.totalCount}</div> : ''}
         </div>
         {this.props.flag ? (
           <div className="cart-overlay">
+            <div className='overlay-header'>
             <div className="overlay-tittle">
               My Bag. <span className="overlay-quantity">{this.props.totalCount} items</span>
             </div>
+            <div className="cart-clear" onClick={this.onClearCart}>
+              <div className='trash-img'>
+          <img src="./trash.svg"></img>
+          </div>
+          <span className='clear-cart'>Clear cart</span>
+        </div>
+        </div>
             {products
               ? products.map((el) => (
                   <MiniCartItem
@@ -69,7 +81,8 @@ class MiniCart extends Component {
                     itemsCount={items[JSON.stringify(el.objState)].items.length}
                     plusItem={this.props.plusItem}
                     minusItem={this.props.minusItem}
-                    deleteItem={this.deleteItem}
+                    deleteItem = {this.props.deleteItem}
+                    
                     attributes={el.attributes}
                     state={el.objState}
                     setActiveClass={this.props.setActiveClass}
@@ -113,6 +126,7 @@ const mapDispatchToProps = (dispatch) =>  ({
   plusItem: (objState) => dispatch(plusCartItem(objState)),
   minusItem: (objState) => dispatch(minusCartItem(objState)),
   setOverlayFlag: (flag) => dispatch(changeOverlayFlag(flag)),
-  
+  deleteItem: (objState) => dispatch(deleteCartItem(objState)),
+  clearCart: () => dispatch(clearCart())
 })
 export default connect(mapStateToProps,mapDispatchToProps)(MiniCart);
