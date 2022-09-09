@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import "../styles/index.scss";
-import "../styles/pdp.scss";
+import "../../styles/index.scss";
+import "../../styles/pdp.scss";
 import HomeItem from "./HomeItem";
-
-import { CATEGORIES } from "../apollo/queries";
-
+import Categories from "./Categories";
+import { CATEGORIES } from "../../apollo/queries";
+import Loading from "../Loading";
 import { graphql } from "@apollo/client/react/hoc";
 
-import { Categories, Loading } from "../components";
+
 
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import Overlay from "./Overlay";
+import Overlay from "../Overlay";
 
 export class Home extends Component {
   constructor(props) {

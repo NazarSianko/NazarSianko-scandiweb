@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
-import { Home, Header, Cart, ProductDescription } from './components';
+
+import Home from './components/Home/Home';
+import Header from './components/Header/Header';
+import Cart from './components/Cart/Cart';
+import ProductDescription from './components/PDP/ProductDescription';
 import client from './apollo/client';
 import { Route, Routes } from 'react-router-dom';
 import './styles/index.scss';

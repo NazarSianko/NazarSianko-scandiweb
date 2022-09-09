@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 
 
-import { addItem } from "../redux/actions/cart";
-import { setId } from "../redux/actions/currentId";
+import { addItem } from "../../redux/actions/cart";
+import { setId } from "../../redux/actions/currentId";
 import { connect } from "react-redux";
 
 class HomeItem extends Component {

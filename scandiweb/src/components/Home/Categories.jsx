@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import "../styles/index.scss";
+import "../../styles/index.scss";
 import { connect } from "react-redux";
-import { store } from "../redux/store";
-import { changeCategory, saveActiveCategory } from "../redux/actions/category";
+import { store } from "../../redux/store";
+import { changeCategory, saveActiveCategory } from "../../redux/actions/category";
 
 import { gql } from "@apollo/client";
 

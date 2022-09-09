@@ -1,11 +1,11 @@
 import React, { Component, createRef } from "react";
-import "../styles/header.scss";
+import "../../styles/header.scss";
 import ChangeCurrency from "./ChangeCurrency";
 
 import { connect } from "react-redux";
-import MiniCart from "./MiniCart";
+import  MiniCart from "../MiniCart/MiniCart"
 import classNames from "classnames";
-import { setFilterName, setFilterIndex } from "../redux/actions/filter";
+import { setFilterName, setFilterIndex } from "../../redux/actions/filter";
 
 class Header extends Component {
   constructor(props) {

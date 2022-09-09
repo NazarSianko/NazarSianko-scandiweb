@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-import "../styles/pdp.scss";
-import { PRODUCT } from "../apollo/queries";
+import "../../styles/pdp.scss";
+import { PRODUCT } from "../../apollo/queries";
 import { NavLink } from "react-router-dom";
 import { graphql } from "@apollo/client/react/hoc";
 
-import { addItem } from "../redux/actions/cart";
+import { addItem } from "../../redux/actions/cart";
 import { connect } from "react-redux";
-import Overlay from "./Overlay";
-import Loading from "./Loading";
+import Overlay from "../Overlay";
+import Loading from "../Loading";
 import classNames from "classnames";
-import { setAttributes } from "../redux/actions/productAttributes";
+import { setAttributes } from "../../redux/actions/productAttributes";
 
 import {
   useLocation,

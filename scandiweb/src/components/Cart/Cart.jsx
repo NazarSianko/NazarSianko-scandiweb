@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import "../styles/cart.scss";
+import "../../styles/cart.scss";
 import CartItem from "./CartItem";
 
-import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from "../redux/actions/cart";
-import Overlay from "./Overlay";
+import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from "../../redux/actions/cart";
+import Overlay from "../Overlay";
 
 class Cart extends Component {
  

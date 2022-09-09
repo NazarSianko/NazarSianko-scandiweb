@@ -1,11 +1,11 @@
 import React, { Component, createRef } from "react";
 import { connect } from "react-redux";
 import MiniCartItem from "./MiniCartItem";
-import { store } from "../redux/store";
-import { plusCartItem, minusCartItem,deleteCartItem,clearCart } from "../redux/actions/cart";
+import { store } from "../../redux/store";
+import { plusCartItem, minusCartItem,deleteCartItem,clearCart } from "../../redux/actions/cart";
 
 import { NavLink } from "react-router-dom";
-import { changeOverlayFlag } from "../redux/actions/overlay";
+import { changeOverlayFlag } from "../../redux/actions/overlay";
 
 class MiniCart extends Component {
   constructor(props) {

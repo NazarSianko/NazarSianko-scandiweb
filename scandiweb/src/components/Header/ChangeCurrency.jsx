@@ -1,9 +1,9 @@
 import React, { Children, Component, createRef } from "react";
-import "../styles/header.scss";
+
 import { graphql } from "@apollo/client/react/hoc";
-import { CURRENCY } from "../apollo/queries";
+import { CURRENCY } from "../../apollo/queries";
 import { connect } from "react-redux";
-import { changeCurrency } from "../redux/actions/currency";
+import { changeCurrency } from "../../redux/actions/currency";
 import classNames from "classnames";
 
 class ChangeCurrency extends Component {
