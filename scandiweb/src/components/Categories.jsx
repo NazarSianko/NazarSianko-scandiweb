@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import '../styles/index.scss';
-import { connect } from 'react-redux';
-import { persistor, store } from '../redux/store';
-import { changeCategory, saveActiveCategory } from '../redux/actions/category';
+import React, { Component } from "react";
+import "../styles/index.scss";
+import { connect } from "react-redux";
+import { store } from "../redux/store";
+import { changeCategory, saveActiveCategory } from "../redux/actions/category";
 
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-import { graphql } from '@apollo/client/react/hoc';
-import classNames from 'classnames';
+import { graphql } from "@apollo/client/react/hoc";
+import classNames from "classnames";
 class Categories extends Component {
   constructor(props) {
     super(props);
@@ -22,9 +22,10 @@ class Categories extends Component {
   //
   setActiveCategory = (index) => {
     store.dispatch(changeCategory(index));
+    
+    store.dispatch(saveActiveCategory(this.props.data.categories[index].name));
+    this.props.setCategory()
    
-    store.dispatch(saveActiveCategory(this.props.data.categories[this.props.categoryIndex].name));
-    this.props.setCategory(this.props.name);
   };
 
   render() {
@@ -33,7 +34,7 @@ class Categories extends Component {
         {this.props.data.categories
           ? this.props.data.categories.map((el, index) => (
               <h1
-                className={classNames('category-title',{"category-active":this.props.categoryIndex === index})
+                className={classNames("category-title",{"category-active":this.props.categoryIndex === index})
                   
                 }
                 key={el.name}
@@ -41,7 +42,7 @@ class Categories extends Component {
                 {el.name}
               </h1>
             ))
-          : ''}
+          : ""}
       </div>
     );
   }

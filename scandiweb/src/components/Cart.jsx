@@ -1,15 +1,15 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import '../styles/cart.scss';
-import CartItem from './CartItem';
-import { store } from '../redux/store';
-import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from '../redux/actions/cart';
-import Overlay from './Overlay';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import "../styles/cart.scss";
+import CartItem from "./CartItem";
+
+import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from "../redux/actions/cart";
+import Overlay from "./Overlay";
 
 class Cart extends Component {
  
   onClearCart = () => {
-    if (window.confirm('Do you really want to clear Cart ?')) {
+    if (window.confirm("Do you really want to clear Cart ?")) {
       this.props.clearCart();
     }
   };
@@ -26,7 +26,7 @@ class Cart extends Component {
    
     return (
       <main className="cart-main">
-        {this.props.overlayFlag ? <Overlay /> : ''}
+        {this.props.overlayFlag ? <Overlay /> : ""}
         <h1 className="cart-title">CART</h1>
         <div className="cart-clear" onClick={this.onClearCart}>
           <img src="./trash.svg"></img>
@@ -52,12 +52,12 @@ class Cart extends Component {
                   items={this.products}
                 />
               ))
-            : ''}
+            : ""}
         </div>
         <div className="total-check">
           <div className="tax">
             Tax 21%:<span>{` ${
-              products.length > 0 ? products[0].price[currIndex].currency.symbol : ''
+              products.length > 0 ? products[0].price[currIndex].currency.symbol : ""
             } ${((this.getTotalPrice(items, currIndex)/100)*21).toFixed(2)} `}</span> 
           </div>
           <div className="Quantity">
@@ -66,7 +66,7 @@ class Cart extends Component {
           <div className="total">
             Total:
             <span>{` ${
-              products.length > 0 ? products[0].price[currIndex].currency.symbol : ''
+              products.length > 0 ? products[0].price[currIndex].currency.symbol : ""
             } ${this.getTotalPrice(items, currIndex).toFixed(2)} `}</span>
           </div>
           <button className="order">

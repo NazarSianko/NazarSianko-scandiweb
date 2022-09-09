@@ -63,7 +63,7 @@
                     right:0px;
                     & i {
                         border: solid black;
-                        border-width: 0 3px 3px 0;
+                        border-width: 0 2px 2px 0;
                         display: inline-block;
                         padding: 3px;
                                             
@@ -74,6 +74,7 @@
                         }
                         &.arrow-up {
                             transform: rotate(225deg);
+                            -webkit-transform: rotate(225deg);
                             transition: all 0.5s cubic-bezier(0.25, 1.7, 0.35, 0.8);
                         }
                     }

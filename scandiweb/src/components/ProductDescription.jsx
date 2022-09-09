@@ -1,16 +1,16 @@
-import React, { Component } from 'react';
-import '../styles/pdp.scss';
-import { PRODUCT } from '../apollo/queries';
-import { NavLink } from 'react-router-dom';
-import { graphql } from '@apollo/client/react/hoc';
+import React, { Component } from "react";
+import "../styles/pdp.scss";
+import { PRODUCT } from "../apollo/queries";
+import { NavLink } from "react-router-dom";
+import { graphql } from "@apollo/client/react/hoc";
 
-import { addItem } from '../redux/actions/cart';
-import { connect } from 'react-redux';
-import Overlay from './Overlay';
-import Loading from './Loading';
-import classNames from 'classnames';
-import { setAttributes } from '../redux/actions/productAttributes';
-import {compose } from 'redux'
+import { addItem } from "../redux/actions/cart";
+import { connect } from "react-redux";
+import Overlay from "./Overlay";
+import Loading from "./Loading";
+import classNames from "classnames";
+import { setAttributes } from "../redux/actions/productAttributes";
+
 import {
   useLocation,
   useNavigate,
@@ -51,7 +51,7 @@ class ProductDescription extends Component {
                 obj.id = props.router.params.id;
                 return obj;
               }, {})
-          : '',
+          : "",
       };
     }
     return state;
@@ -68,7 +68,7 @@ componentDidMount = () => {
                 obj.id = this.props.currentId;
                 return obj;
               }, {})
-          : '',
+          : "",
       })
     }
   
@@ -102,7 +102,7 @@ componentDidMount = () => {
     });
   };
   createMarkUp = () => ({
-    __html: this.props.data.product ? this.props.data.product.description : '',
+    __html: this.props.data.product ? this.props.data.product.description : "",
   });
 
   render() {
@@ -115,7 +115,7 @@ componentDidMount = () => {
     return (
       <div className="pdp-main">
        
-        {overlayFlag ? <Overlay/> : ''}
+        {overlayFlag ? <Overlay/> : ""}
           <div className="pdp-cart">
             <NavLink to="/">
               <div className="back-arrow">
@@ -126,8 +126,8 @@ componentDidMount = () => {
             <div className="pdp-left-imgs">
               {this.props.data.product.gallery.map((el, index) => (
                 <div key={el}
-                  className={classNames("pdp-left-img",{'active-color':this.state.imgIndex == index})
-                    //'pdp-left-img' + ' ' + `${this.state.imgIndex == index ? 'active-color' : ' '}`
+                  className={classNames("pdp-left-img",{"active-color":this.state.imgIndex == index})
+                    //"pdp-left-img" + " " + `${this.state.imgIndex == index ? "active-color" : " "}`
                   }
                   onClick={()=>this.setImageId(index)}>
                   <img src={el} alt="small img"></img>
@@ -146,15 +146,15 @@ componentDidMount = () => {
                 {this.props.data.product.attributes.map((el) => (
                   <div className="item-size" key = {el.name}>
                     <span className="size-text">
-                      {el.name.toUpperCase() + ':'}
+                      {el.name.toUpperCase() + ":"}
                       <br></br>
                     </span>
                     <div className="sizes">
                       {el.items.map((item, index) => (
                         <div key={item.id}
                           className={
-                            'size'  +
-                             ' ' +
+                            "size"  +
+                             " " +
                             `${this.props.setActiveClass(
                               el.id,
                               index,
@@ -162,9 +162,9 @@ componentDidMount = () => {
                             )}`
                             }
                           style={{
-                            background: `${el.name === 'Color' ? item.value : ''}`,
-                            width: `${el.name === 'Color' ? '39px' : ''}`,
-                            height: `${el.name === 'Color' ? '39px' : ''}`,
+                            background: `${el.name === "Color" ? item.value : ""}`,
+                            width: `${el.name === "Color" ? "39px" : ""}`,
+                            height: `${el.name === "Color" ? "39px" : ""}`,
                           }}
                           onClick={() =>
                             this.setState((state) => ({
@@ -176,7 +176,7 @@ componentDidMount = () => {
                               
                           }))
                          }>
-                          {el.name === 'Color' ? '' : item.value}
+                          {el.name === "Color" ? "" : item.value}
                         </div>
                       ))}
                     </div>
@@ -187,7 +187,7 @@ componentDidMount = () => {
                   <br></br>
                   <span>
                     {this.props.data.product.prices[this.props.currIndex].currency.symbol +
-                      ' ' +
+                      " " +
                       this.props.data.product.prices[this.props.currIndex].amount}
                   </span>
                 </div>

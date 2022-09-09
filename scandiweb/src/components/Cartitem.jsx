@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
 
 class CartItem extends Component {
   constructor(props) {
@@ -41,24 +41,24 @@ class CartItem extends Component {
           <div className="item-description">{brand}</div>
           <div className="item-price">
             {price[this.props.currIndex].currency.symbol +
-              ' ' +
+              " " +
               (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
           {attributes.map((el) => (
             <div className="item-size" key = {el.id}>
               <span className="size-text">
-                {el.name.toUpperCase() + ':'}
+                {el.name.toUpperCase() + ":"}
                 <br></br>
               </span>
               <div className="sizes">
                 {el.items.map((item, index) => (
                   <div key = {item.value}
-                    className={'size' + ' ' + `${el.name === 'Color' ? 'color' : ''}`+ ' ' + `${setActiveClass(el.id, index, state)}`}
+                    className={"size" + " " + `${el.name === "Color" ? "color" : ""}`+ " " + `${setActiveClass(el.id, index, state)}`}
                     style={{
-                      background: `${el.name === 'Color' ? item.value : ''}`,
+                      background: `${el.name === "Color" ? item.value : ""}`,
                       
                     }}>
-                    {el.name === 'Color' ? '' : item.value}
+                    {el.name === "Color" ? "" : item.value}
                   </div>
                 ))}
               </div>
@@ -89,7 +89,7 @@ class CartItem extends Component {
                 </button>
               </div>
             ) : (
-              ''
+              ""
             )}
           </div>
           <div className="delete" onClick={this.deleteItem}>

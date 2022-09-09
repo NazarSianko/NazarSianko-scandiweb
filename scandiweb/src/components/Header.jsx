@@ -1,10 +1,11 @@
-import React, { Component, createRef } from 'react';
-import '../styles/header.scss';
-import ChangeCurrency from './ChangeCurrency';
+import React, { Component, createRef } from "react";
+import "../styles/header.scss";
+import ChangeCurrency from "./ChangeCurrency";
 
-import { connect } from 'react-redux';
-import MiniCart from './MiniCart';
-
+import { connect } from "react-redux";
+import MiniCart from "./MiniCart";
+import classNames from "classnames";
+import { setFilterName, setFilterIndex } from "../redux/actions/filter";
 
 class Header extends Component {
   constructor(props) {
@@ -13,24 +14,23 @@ class Header extends Component {
       activeIndex: 0,
     };
   }
-  setActive = (index) => {
-    this.setState({
-      activeIndex: index,
-    });
+  setActive = (index,name) => {
+    this.props.setFilterIndex(index)
+    this.props.setFIlterName(name)
   };
 
   render() {
-    const sortItems = ['WOMEN', 'MEN', 'KIDS'];
+    const sortItems = ["WOMEN", "MEN", "KIDS"];
     return (
       <header className="showcase-header">
         <div className="header-sort">
           {sortItems.map((el, index) => (
             <div
-              onClick={() => this.setActive(index)}
+              onClick={() => this.setActive(index,el)}
               key={el}
               className={
-                'sort-item' + ' ' + `${this.state.activeIndex == index ? 'sort-item-active' : ''}`
-              }>
+                classNames("sort-item",{"sort-item-active":this.props.filterIndex == index})}
+              >
               {el}
             </div>
           ))}
@@ -51,5 +51,10 @@ class Header extends Component {
 }
 const mapStateToProps = (state) => ({
   totalCount: state.cart.totalCount,
+  filterIndex: state.filter.index,
 });
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => ({
+  setFIlterName : (name) => dispatch(setFilterName(name)),
+  setFilterIndex: (index) => dispatch(setFilterIndex(index)),
+})
+export default connect(mapStateToProps,mapDispatchToProps)(Header);

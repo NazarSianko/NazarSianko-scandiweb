@@ -1,11 +1,11 @@
-import React, { Component, createRef } from 'react';
-import { connect } from 'react-redux';
-import MiniCartItem from './MiniCartItem';
-import { store } from '../redux/store';
-import { plusCartItem, minusCartItem,deleteCartItem,clearCart } from '../redux/actions/cart';
+import React, { Component, createRef } from "react";
+import { connect } from "react-redux";
+import MiniCartItem from "./MiniCartItem";
+import { store } from "../redux/store";
+import { plusCartItem, minusCartItem,deleteCartItem,clearCart } from "../redux/actions/cart";
 
-import { NavLink } from 'react-router-dom';
-import { changeOverlayFlag } from '../redux/actions/overlay';
+import { NavLink } from "react-router-dom";
+import { changeOverlayFlag } from "../redux/actions/overlay";
 
 class MiniCart extends Component {
   constructor(props) {
@@ -16,12 +16,12 @@ class MiniCart extends Component {
   handleOutsideClick = (e) => {
     const pathInAllBrowsers = e.path || (e.composedPath && e.composedPath());
     if (!pathInAllBrowsers.includes(this.overlayRef.current)) {
-      document.body.classList.remove('active');
+      document.body.classList.remove("active");
      this.props.setOverlayFlag(false);
     }
   };
   onClearCart = () => {
-    if (window.confirm('Do you really want to clear Cart ?')) {
+    if (window.confirm("Do you really want to clear Cart ?")) {
       this.props.clearCart();
     }
   };
@@ -33,13 +33,13 @@ class MiniCart extends Component {
   setActiveOverlay = () => {
     store.dispatch(changeOverlayFlag(!this.props.flag));
     if (!this.props.flag) {
-      document.body.classList.add('active');
+      document.body.classList.add("active");
     } else {
-      document.body.classList.remove('active');
+      document.body.classList.remove("active");
     }
   };
   componentDidMount = () => {
-    document.addEventListener('click', this.handleOutsideClick); 
+    document.addEventListener("click", this.handleOutsideClick); 
   };
   //знаю, что слушатели надо удалять, но не получилось, не срабатывает
 
@@ -49,24 +49,24 @@ class MiniCart extends Component {
     const products = Object.keys(items).map((key) => {
       return items[key].items[0];
     });
-    console.log(products)
+   
     return (
       <div className="header-cart" ref={this.overlayRef}>
         <div className="cart" onClick={() => this.setActiveOverlay()}>
-          <img className='header-cart-img' src="./Empty Cart.png"></img>
-          {this.props.totalCount ? <div className="cart-counter">{this.props.totalCount}</div> : ''}
+          <img className="header-cart-img" src="./Empty Cart.png"></img>
+          {this.props.totalCount ? <div className="cart-counter">{this.props.totalCount}</div> : ""}
         </div>
         {this.props.flag ? (
           <div className="cart-overlay">
-            <div className='overlay-header'>
+            <div className="overlay-header">
             <div className="overlay-tittle">
               My Bag. <span className="overlay-quantity">{this.props.totalCount} items</span>
             </div>
             <div className="cart-clear" onClick={this.onClearCart}>
-              <div className='trash-img'>
+              <div className="trash-img">
           <img src="./trash.svg"></img>
           </div>
-          <span className='clear-cart'>Clear cart</span>
+          <span className="clear-cart">Clear cart</span>
         </div>
         </div>
             {products
@@ -88,11 +88,11 @@ class MiniCart extends Component {
                     setActiveClass={this.props.setActiveClass}
                   />
                 ))
-              : ''}
+              : ""}
             <div className="overlay-total">
               <div className="total">Total</div>
               <div className="price">{` ${
-                products.length > 0 ? products[0].price[this.props.currIndex].currency.symbol : ''
+                products.length > 0 ? products[0].price[this.props.currIndex].currency.symbol : ""
               } ${this.getTotalPrice(items, currIndex).toFixed(2)} `}</div>
             </div>
             <div className="overlay-btns">
@@ -105,7 +105,7 @@ class MiniCart extends Component {
             </div>
           </div>
         ) : (
-          ''
+          ""
         )}
       </div>
     );
