@@ -54,25 +54,35 @@ class Cart extends Component {
               ))
             : ""}
         </div>
+        <div className="cart-check">
         <div className="total-check">
+          <div className="check-description">
           <div className="tax">
-            Tax 21%:<span>{` ${
-              products.length > 0 ? products[0].price[currIndex].currency.symbol : ""
-            } ${((this.getTotalPrice(items, currIndex)/100)*21).toFixed(2)} `}</span> 
+            Tax 21%:
           </div>
           <div className="Quantity">
-            Quantity:<span className="quantity-span"> {this.props.totalCount}</span>
+            Quantity:
           </div>
           <div className="total">
             Total:
-            <span>{` ${
+           
+          </div>
+          </div>
+          <div className="check-value">
+          <span>{` ${
+              products.length > 0 ? products[0].price[currIndex].currency.symbol : ""
+            } ${((this.getTotalPrice(items, currIndex)/100)*21).toFixed(2)} `}</span> 
+            <span>{this.props.totalCount}</span>
+             <span>{` ${
               products.length > 0 ? products[0].price[currIndex].currency.symbol : ""
             } ${this.getTotalPrice(items, currIndex).toFixed(2)} `}</span>
           </div>
-          <button className="order">
+         
+        </div>
+        <button className="order">
             <span>ORDER</span>
           </button>
-        </div>
+          </div>
       </main>
     );
   }

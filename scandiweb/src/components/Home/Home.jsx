@@ -13,6 +13,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import Overlay from "../Overlay";
 
+
 export class Home extends Component {
   constructor(props) {
     super(props);
@@ -26,15 +27,11 @@ export class Home extends Component {
     this.props.data.refetch({ input: { title: this.props.name } });
   };
 
-  /* setCategoryNames = (name) => {
-    this.setState({
-      categoryNames: name,
-    });
-  };*/
+
 
   render() {
     const { category } = this.props.data;
-    console.log(this.props.filterName);
+   
     let products = [];
     if (!this.props.data.loading && !this.props.data.error) {
       products = category.products.map((el) => (
@@ -62,6 +59,7 @@ export class Home extends Component {
     } else {
       return (
         <main className="showcase-main">
+   
           <Categories setCategory={this.setCategory} setCategoryNames={this.setCategoryNames} />
 
           <div className="showcase-main-content">
@@ -78,45 +76,7 @@ export class Home extends Component {
   }
 }
 
-/*const CATEGORIES = gql`
-  query CategoryQuery($input: CategoryInput) {
-    categories {
-      name
-    }
 
-    category(input: $input) {
-      name
-      products {
-        id
-        name
-        inStock
-        gallery
-        description
-        category
-        attributes {
-          id
-          name
-          type
-          items {
-            id
-            displayValue
-            value
-          }
-        }
-        prices {
-          currency {
-            label
-            symbol
-          }
-          amount
-        }
-
-        brand
-      }
-    }
-  }
-`;
-*/
 const mapStateToProps = (state) => ({
   overlayFlag: state.overlay.flag,
   categoryIndex: state.category.index,
@@ -128,7 +88,7 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(
   graphql(CATEGORIES, {
-    options: (props, state) => {
+    options: (props) => {
       return {
         variables: {
           input: {

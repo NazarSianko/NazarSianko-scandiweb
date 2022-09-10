@@ -38,15 +38,16 @@ class ChangeCurrency extends Component {
 
     return (
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
-        <div className="currency-symbol">
+       
           {!this.props.data.loading && !this.props.data.error
-            ? this.props.data.currencies[this.props.currIndex].symbol
-    : ""}
-       <div className="arrow">
+            ?  <div className="currency-symbol">{this.props.data.currencies[this.props.currIndex].symbol}
+               <div className="arrow">
         <i className={classNames("arrow-down",{"arrow-up":this.state.currencyFlag})}></i>
    
 </div>
         </div>
+    : ""}
+      
      
         {this.state.currencyFlag ? (
           <div className="currency-list">
@@ -70,20 +71,7 @@ class ChangeCurrency extends Component {
     );
   }
 }
-/*
-const CURRENCY = 
-  gql`
-    query CategoryQuery {
-      
-            currencies {
-              label
-              symbol
-            }
-          }
-        
-  `
-;
-*/
+
 
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,

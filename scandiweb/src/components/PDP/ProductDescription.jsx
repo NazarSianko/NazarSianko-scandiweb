@@ -3,7 +3,7 @@ import "../../styles/pdp.scss";
 import { PRODUCT } from "../../apollo/queries";
 import { NavLink } from "react-router-dom";
 import { graphql } from "@apollo/client/react/hoc";
-
+import NullProduct from "./NullProduct";
 import { addItem } from "../../redux/actions/cart";
 import { connect } from "react-redux";
 import Overlay from "../Overlay";
@@ -16,6 +16,7 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import BackArrow from "../BackArrow";
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -55,35 +56,8 @@ class ProductDescription extends Component {
       };
     }
     return state;
-  }/*
-componentDidMount = () => {
-    
-    if (!this.props.productAttributes[this.props.currentId]) {
-      this.props.setActiveAttributes({
-        [this.props.currentId]: this.props.data.product
-          ? this.props.data.product.attributes.length == 0
-            ? { id: this.props.id }
-            : this.props.data.product.attributes.reduce((obj, el) => {
-                obj[el.name] = 0;
-                obj.id = this.props.currentId;
-                return obj;
-              }, {})
-          : "",
-      })
-    }
-  
-}
-/*setAtt = () => {
-  this.setState((state) => ({
-    activeAttributes: {
-      ...state.activeAttributes,
-      [el.id]: index,
-      id: this.props.id,
-    },
-    
-}))
+  }
 
-}*/
   setCartItem = () => {
     const obj = {
       id: this.props.currentId,
@@ -106,22 +80,20 @@ componentDidMount = () => {
   });
 
   render() {
-    const {overlayFlag,data} = this.props
-   console.log()
+    const {overlayFlag} = this.props
+  console.log(this.props)
     if (this.props.data.loading || this.props.data.error) {
       return <Loading />
     }
-    console.log(this.state)
+    if (!this.props.data.product) {
+      return <NullProduct/>
+    }
     return (
       <div className="pdp-main">
        
         {overlayFlag ? <Overlay/> : ""}
           <div className="pdp-cart">
-            <NavLink to="/">
-              <div className="back-arrow">
-                <img src="./back.png"></img>
-              </div>
-            </NavLink>
+          <BackArrow className={'back-arrow'}/>
             <div className="pdp-cart-main">
             <div className="pdp-left-imgs">
               {this.props.data.product.gallery.map((el, index) => (
@@ -206,36 +178,7 @@ componentDidMount = () => {
     );
   }
 }
-/*const PRODUCT = gql`
-  query CategoryQuery($id: String!) {
-    product(id: $id) {
-      id
-      name
-      inStock
-      gallery
-      description
-      category
-      attributes {
-        id
-        name
-        type
-        items {
-          id
-          displayValue
-          value
-        }
-      }
-      prices {
-        currency {
-          label
-          symbol
-        }
-        amount
-      }
-      brand
-    }
-  }
-`;*/
+
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
   overlayFlag: state.overlay.flag,

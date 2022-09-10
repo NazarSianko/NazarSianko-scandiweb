@@ -6,6 +6,7 @@ import { connect } from "react-redux";
 import  MiniCart from "../MiniCart/MiniCart"
 import classNames from "classnames";
 import { setFilterName, setFilterIndex } from "../../redux/actions/filter";
+import { NavLink } from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -35,11 +36,11 @@ class Header extends Component {
             </div>
           ))}
         </div>
-
+<NavLink to ='/'>
         <div className="header-logo">
           <img src="./a-logo.png" alt="logo"></img>
         </div>
-
+        </NavLink>
         <div className="header-right">
           <ChangeCurrency />
 

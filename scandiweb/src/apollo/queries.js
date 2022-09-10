@@ -80,5 +80,43 @@ gql`
       
 `
 ;
+export const A = 
+gql`
+query aa {
+  
+     
+  categories {
+   
+   products {
+     category
+     name
+     inStock
+     gallery
+     description
+     attributes {
+       id
+       name
+       type
+       items {
+   displayValue
+       value
+       id
+       }
+       
+     }
+     prices {
+       currency {
+         label
+         symbol
+       }
+       amount 
+     }
+     brand
+     
+     }
+   }
+      
+}
+`
  
 

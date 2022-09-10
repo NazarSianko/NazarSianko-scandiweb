@@ -33,9 +33,9 @@ class MiniCart extends Component {
   setActiveOverlay = () => {
     store.dispatch(changeOverlayFlag(!this.props.flag));
     if (!this.props.flag) {
-      document.body.classList.add("active");
+      document.body.classList.add("body-active");
     } else {
-      document.body.classList.remove("active");
+      document.body.classList.remove("body-active");
     }
   };
   componentDidMount = () => {

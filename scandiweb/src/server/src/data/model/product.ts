@@ -14,7 +14,7 @@ class Product {
     protected inStock: boolean = true;
     protected brand: string;
     protected id: string;
-
+    protected gender: string;
     constructor(
         protected name: string
     ) {}

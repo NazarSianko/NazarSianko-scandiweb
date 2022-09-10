@@ -239,9 +239,37 @@
             }
         }
     }
+    .cart-check {
+        .order {
+
+        
+            background-color: #5ece7b;
+                width: 279px;
+                height: 43px;
+                border: none;
+                margin-bottom: 20px;
+                cursor:pointer;
+                
+                &:active {
+                    box-shadow: 0 0 0 4px #cbd6ee;
+                }
+    
+                & span {
+                    font-family: Raleway;
+                    font-size: 14px;
+                    font-weight: 600;
+                    line-height: 17px;
+                    letter-spacing: 0em;
+                    text-align: center;
+                    color: #FFFFFF;                
+                }
+    
+    
+            }
+
     .total-check {
         display:flex;
-        flex-direction: column;
+        
         row-gap: 8px;
         font-family: Raleway;
         font-size: 24px;
@@ -250,6 +278,12 @@
         letter-spacing: 0em;
         text-align: left;
         max-width:280px;
+        margin-bottom: 16px;
+        .check-description {
+            display:flex;
+            flex-direction: column;
+            row-gap: 8px;
+        }
        
         & span {
             font-family: Raleway;
@@ -274,33 +308,19 @@
             
 
         }
-        .order {
-
-        
-        background-color: #5ece7b;
-            max-width: 279px;
-            height: 43px;
-            border: none;
-            margin-bottom: 20px;
-            cursor:pointer;
-            
-            &:active {
-                box-shadow: 0 0 0 4px #cbd6ee;
-            }
-
+        .check-value {
+            display:flex;
+            flex-direction: column;
+            row-gap: 8px;
             & span {
-                font-family: Raleway;
-                font-size: 14px;
-                font-weight: 600;
-                line-height: 17px;
-                letter-spacing: 0em;
-                text-align: center;
-                color: #FFFFFF;                
+                line-height: 28px;
+                text-align: left;
             }
-
-
+      
         }
+       
     }
+}
 }
 @media (max-width:700px) {
     .cart-main {

@@ -8,6 +8,7 @@ import ProductDescription from './components/PDP/ProductDescription';
 import client from './apollo/client';
 import { Route, Routes } from 'react-router-dom';
 import './styles/index.scss';
+import NullPage from './components/NullPage';
 
 
 export class App extends Component {
@@ -60,6 +61,10 @@ export class App extends Component {
                 />
               }
             />
+            <Route 
+            path="*" element={<NullPage/>}>
+
+            </Route>
           </Routes>
         </div>
       </div>

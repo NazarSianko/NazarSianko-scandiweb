@@ -4,7 +4,7 @@ body {
     margin: 0 auto;
     background-color: #ffffff;
 }
-.active {
+.body-active {
     overflow: hidden;
 }
 .wrapper {
@@ -16,6 +16,7 @@ body {
         margin: 0 auto;
     }
 }
+
 @media (max-width:1270px) {
     .container {
         padding: 0px 20px;

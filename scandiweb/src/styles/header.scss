@@ -133,6 +133,19 @@
             box-sizing: border-box;
             z-index: 12;
             background-color: #ffffff;
+            &::-webkit-scrollbar {
+                width: 12px;
+              }
+              
+              &::-webkit-scrollbar-track {
+                background: #ffffff;
+              }
+              
+             &::-webkit-scrollbar-thumb {
+                background-color: #1d1f22;
+                
+                border: 3px solid white;
+              }
             .overlay-header{
                 display:flex;
                 justify-content: space-between;
