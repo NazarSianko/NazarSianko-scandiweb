@@ -16,12 +16,12 @@ export class App extends Component {
 
  
   setActiveClass = (id, index, obj) => {
-    return Object.keys(obj).find((keysItem) => keysItem == id) == id &&
-      obj[id] == index &&
-      id == 'Color'
+    return Object.keys(obj).find((keysItem) => keysItem === id) === id &&
+      obj[id] === index &&
+      id === 'Color'
       ? 'active-color'
-      : Object.keys(obj).find((keysItem) => keysItem == id) == id &&
-        obj[id] == index &&
+      : Object.keys(obj).find((keysItem) => keysItem === id) === id &&
+        obj[id] === index &&
         id !== 'Color'
       ? 'active'
       : '';

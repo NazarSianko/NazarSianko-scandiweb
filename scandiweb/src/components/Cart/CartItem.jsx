@@ -82,10 +82,10 @@ class CartItem extends Component {
               <div>
                 
                 <button className="arrow-left" onClick={this.prevImg}>
-                  <img src="./left.png"></img>
+                  <img src="./left.png" alt="arrow-left"></img>
                 </button>
                 <button className="arrow-right" onClick={this.nextImg}>
-                  <img src="./right.png"></img>
+                  <img src="./right.png" alt="arrow-right"></img>
                 </button>
               </div>
             ) : (

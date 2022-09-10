@@ -6,7 +6,7 @@ export default class BackArrow extends Component {
     return (
         <NavLink to="/">
         <div className={this.props.className}>
-          <img src="./back.png"></img>
+          <img src="./back.png" alt='arrow-back'></img>
         </div>
       </NavLink>
     )

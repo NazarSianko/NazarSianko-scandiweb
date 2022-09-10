@@ -1,4 +1,4 @@
-import React, { Component, createRef } from "react";
+import React, { Component } from "react";
 import "../../styles/header.scss";
 import ChangeCurrency from "./ChangeCurrency";
 
@@ -30,7 +30,7 @@ class Header extends Component {
               onClick={() => this.setActive(index,el)}
               key={el}
               className={
-                classNames("sort-item",{"sort-item-active":this.props.filterIndex == index})}
+                classNames("sort-item",{"sort-item-active":this.props.filterIndex === index})}
               >
               {el}
             </div>

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "../../styles/pdp.scss";
 import { PRODUCT } from "../../apollo/queries";
-import { NavLink } from "react-router-dom";
+
 import { graphql } from "@apollo/client/react/hoc";
 import NullProduct from "./NullProduct";
 import { addItem } from "../../redux/actions/cart";
@@ -45,7 +45,7 @@ class ProductDescription extends Component {
     if (!state.activeAttributes) {
       return {
         activeAttributes: props.data.product
-          ? props.data.product.attributes.length == 0
+          ? props.data.product.attributes.length === 0
             ? { id: props.router.params.id }
             : props.data.product.attributes.reduce((obj, el) => {
                 obj[el.name] = 0;
@@ -98,7 +98,7 @@ class ProductDescription extends Component {
             <div className="pdp-left-imgs">
               {this.props.data.product.gallery.map((el, index) => (
                 <div key={el}
-                  className={classNames("pdp-left-img",{"active-color":this.state.imgIndex == index})
+                  className={classNames("pdp-left-img",{"active-color":this.state.imgIndex === index})
                     //"pdp-left-img" + " " + `${this.state.imgIndex == index ? "active-color" : " "}`
                   }
                   onClick={()=>this.setImageId(index)}>

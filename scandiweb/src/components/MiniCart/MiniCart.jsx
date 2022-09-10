@@ -53,7 +53,7 @@ class MiniCart extends Component {
     return (
       <div className="header-cart" ref={this.overlayRef}>
         <div className="cart" onClick={() => this.setActiveOverlay()}>
-          <img className="header-cart-img" src="./Empty Cart.png"></img>
+          <img className="header-cart-img" src="./Empty Cart.png" alt="empty-cart"></img>
           {this.props.totalCount ? <div className="cart-counter">{this.props.totalCount}</div> : ""}
         </div>
         {this.props.flag ? (
@@ -64,7 +64,7 @@ class MiniCart extends Component {
             </div>
             <div className="cart-clear" onClick={this.onClearCart}>
               <div className="trash-img">
-          <img src="./trash.svg"></img>
+          <img src="./trash.svg" alt="trash-img"></img>
           </div>
           <span className="clear-cart">Clear cart</span>
         </div>

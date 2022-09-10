@@ -63,10 +63,10 @@ export class Home extends Component {
           <Categories setCategory={this.setCategory} setCategoryNames={this.setCategoryNames} />
 
           <div className="showcase-main-content">
-            {this.props.filterName == "WOMEN"
-              ? (products.filter((item) => item.key.length > 15).length == 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length > 15)))
-              : this.props.filterName == "MEN"
-              ? (products.filter((item) => item.key.length < 15).length == 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length < 15)))
+            {this.props.filterName === "WOMEN"
+              ? (products.filter((item) => item.key.length > 15).length === 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length > 15)))
+              : this.props.filterName === "MEN"
+              ? (products.filter((item) => item.key.length < 15).length === 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length < 15)))
               : (products.length == 0 ? <div className="no-products">No products available</div> : products)}
           </div>
           {this.props.overlayFlag ? <Overlay /> : ""}

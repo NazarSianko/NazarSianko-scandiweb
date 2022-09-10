@@ -29,7 +29,7 @@ class Cart extends Component {
         {this.props.overlayFlag ? <Overlay /> : ""}
         <h1 className="cart-title">CART</h1>
         <div className="cart-clear" onClick={this.onClearCart}>
-          <img src="./trash.svg"></img>
+          <img src="./trash.svg" alt="trash-img"></img>
           <span>Clear cart</span>
         </div>
         <div className="cart-items">
