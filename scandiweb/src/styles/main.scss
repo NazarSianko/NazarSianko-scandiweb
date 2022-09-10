@@ -3,9 +3,12 @@ body {
     height: 100%;
     margin: 0 auto;
     background-color: #ffffff;
+    padding: 0 calc(20px - (100vw - 100%)) 0 0; 
 }
 .body-active {
     overflow: hidden;
+   
+   
 }
 .wrapper {
     max-width: 1440px;

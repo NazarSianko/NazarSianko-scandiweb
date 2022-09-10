@@ -64,15 +64,15 @@ export class Home extends Component {
 
           <div className="showcase-main-content">
             {this.props.filterName === "WOMEN"
-              ? (products.filter((item) => item.key.length > 15).length === 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length > 15)))
+              ? (products.length == 0 ? <div className="no-products">No products available</div> : products)
               : this.props.filterName === "MEN"
-              ? (products.filter((item) => item.key.length < 15).length === 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length < 15)))
-              : (products.length == 0 ? <div className="no-products">No products available</div> : products)}
+              ? (products.filter((item) => item.key.length > 15).length === 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length > 15)))
+              :  (products.filter((item) => item.key.length < 15).length === 0? <div className="no-products">No products available</div> : (products.filter((item) => item.key.length < 15)))}
           </div>
           {this.props.overlayFlag ? <Overlay /> : ""}
         </main>
       );
-    }
+    } 
   }
 }
 
