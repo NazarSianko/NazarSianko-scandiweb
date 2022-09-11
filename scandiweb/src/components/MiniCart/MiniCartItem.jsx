@@ -13,7 +13,6 @@ class MiniCartItem extends Component {
   };
   render() {
     const { brand, name, price, image, itemsCount, attributes, state, setActiveClass } = this.props;
-
     return (
       <div className="overlay-item">
         <div className="overlay-item_left">

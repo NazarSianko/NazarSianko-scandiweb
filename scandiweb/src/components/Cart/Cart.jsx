@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "../../styles/cart.scss";
 import CartItem from "./CartItem";
-
+import BackArrow from "../BackArrow";
 import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from "../../redux/actions/cart";
 import Overlay from "../Overlay";
 
@@ -27,6 +27,7 @@ class Cart extends Component {
     return (
       <main className="cart-main">
         {this.props.overlayFlag ? <Overlay /> : ""}
+        <BackArrow className={'back-arrow-cart'}/>
         <h1 className="cart-title">CART</h1>
         <div className="cart-clear" onClick={this.onClearCart}>
           <img src="./trash.svg" alt="trash-img"></img>
@@ -94,9 +95,6 @@ const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
 });
 const mapDispatchToProps = (dispatch) =>  ({
-
-
-  
   plusItem: (objState) => dispatch(plusCartItem(objState)),
   minusItem: (objState) => dispatch(minusCartItem(objState)),
   deleteItem: (objState) => dispatch(deleteCartItem(objState)),

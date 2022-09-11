@@ -18,13 +18,13 @@ export class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      categoryNames: "",
+      
       filterName: "",
     };
   }
 
-  setCategory = () => {
-    this.props.data.refetch({ input: { title: this.props.name } });
+  setCategory = (name) => {
+    this.props.data.refetch({ input: { title: name } });
   };
 
 

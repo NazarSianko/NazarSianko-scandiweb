@@ -1,5 +1,4 @@
 import React, { Children, Component, createRef } from "react";
-
 import { graphql } from "@apollo/client/react/hoc";
 import { CURRENCY } from "../../apollo/queries";
 import { connect } from "react-redux";
@@ -47,8 +46,7 @@ class ChangeCurrency extends Component {
 </div>
         </div>
     : ""}
-      
-     
+    
         {this.state.currencyFlag ? (
           <div className="currency-list">
             {!this.props.data.loading && !this.props.data.error

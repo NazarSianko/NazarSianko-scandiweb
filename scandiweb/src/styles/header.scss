@@ -35,8 +35,13 @@
         }
     }
     .header-logo {
-        margin-left: -110px;
+        margin-left: -70px;
         margin-top: 15px;
+        width:41px;
+        & img {
+            display:    block;
+            margin: 0 auto;
+        }
     }
     .header-right {
         display: flex;
@@ -119,11 +124,11 @@
         }
         .cart-overlay {
             position: absolute;
-            top: 49px;
+            top: 53px;
             left: -330px;
 
-            min-width: 325px;
-            max-height: 677px;
+            width: 400px;
+            max-height: 70vh;
             overflow: auto;
 
             padding: 32px 16px;
@@ -217,6 +222,7 @@
                         text-align: left;
                     }
                     .item-size {
+                      
                         .size-text {
                             font-family: Source Sans Pro;
                             font-size: 14px;
@@ -224,20 +230,24 @@
                             line-height: 22px;
                             letter-spacing: 0em;
                             text-align: center;
-
+                           
                             margin-bottom: 8px;
                         }
                         .sizes {
                             display: flex;
                             justify-content: flex-start;
+                           flex-wrap: wrap;
+                           row-gap:4px;
+                           
+                            
 
                             & * {
                                 margin-right: 10px;
                             }
 
                             .size {
-                                width: 24px;
-                                height: 24px;
+                                width: 27px;
+                                height: 27px;
                                 background-color: #ffffff;
                                 border: 1px solid #1d1f22;
                                 text-align: center;
@@ -417,9 +427,38 @@
     }
 }
 
-  
-@media (max-width:490px) {
+@media (max-width: 1340px) {
+    .showcase-header {
+        .header-right {
+            .cart-overlay {
+                left:-370px;
+            }
+        }
+    }
+
+}
+@media (max-width: 780px) {
+    .showcase-header {
+        .header-right {
+            .cart-overlay {
+                left:-340px;
+            }
+        }
+    }
+
+}
+@media (max-width:580px) {
     .header-logo {
         display:none;
     }
+}
+@media (max-width: 410px) {
+    .showcase-header {
+        .header-right {
+            .cart-overlay {
+                left:-335px;
+            }
+        }
+    }
+
 }

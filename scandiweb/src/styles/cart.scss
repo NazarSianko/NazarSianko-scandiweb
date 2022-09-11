@@ -3,6 +3,16 @@
 
 .cart-main {
     position:relative;
+    .back-arrow-cart {
+        & img {
+            width: 80px;
+            height: 50px;
+        }
+        position: absolute;
+        top: -90px;
+        left: -100px;
+        cursor: pointer;
+    }
     .cart-title {
         font-family: Raleway;
         font-size: 32px;
@@ -322,10 +332,22 @@
     }
 }
 }
+@media (max-width:1430px) {
+    .cart-main {
+
+        .back-arrow-cart {
+           
+            left: 0;
+         
+        }
+    }
+}
 @media (max-width:700px) {
     .cart-main {
-        .total-check {
-            margin: 0 auto;
+        .cart-check {
+            display:flex;
+            flex-direction: column;
+            align-items: center;
         }
         .cart-items {
             .cart-item {

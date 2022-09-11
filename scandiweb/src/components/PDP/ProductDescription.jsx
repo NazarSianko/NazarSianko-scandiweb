@@ -10,7 +10,6 @@ import Overlay from "../Overlay";
 import Loading from "../Loading";
 import classNames from "classnames";
 import { setAttributes } from "../../redux/actions/productAttributes";
-
 import {
   useLocation,
   useNavigate,
@@ -81,7 +80,7 @@ class ProductDescription extends Component {
 
   render() {
     const {overlayFlag} = this.props
-  console.log(this.props)
+ 
     if (this.props.data.loading || this.props.data.error) {
       return <Loading />
     }
@@ -99,7 +98,7 @@ class ProductDescription extends Component {
               {this.props.data.product.gallery.map((el, index) => (
                 <div key={el}
                   className={classNames("pdp-left-img",{"active-color":this.state.imgIndex === index})
-                    //"pdp-left-img" + " " + `${this.state.imgIndex == index ? "active-color" : " "}`
+                  
                   }
                   onClick={()=>this.setImageId(index)}>
                   <img src={el} alt="small img"></img>
@@ -171,9 +170,6 @@ class ProductDescription extends Component {
                 </div>
               </div>
             </div>
-        
-       
-        
       </div>
     );
   }
@@ -183,8 +179,7 @@ const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
   overlayFlag: state.overlay.flag,
   productAttributes: state.productAttributes.obj,
-  currentId: state.currentId.id, //Это айди, который кидается в стор при нажатии на конкретный HomeItem, при нажатии на кнопку "назад " в браузере не возвращает на тот айтем,
-  // на котором юзер был в предыдущий раз, а на тот, чей айди в сторе был последним, хз как это пофиксить
+  currentId: state.currentId.id, 
 });
 const mapDispatchToProps = (dispatch) => ({
   setItem: (obj) => dispatch(addItem(obj)),
