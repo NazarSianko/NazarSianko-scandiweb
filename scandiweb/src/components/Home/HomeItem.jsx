@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import { addItem } from "../../redux/actions/cart";
 import { setId } from "../../redux/actions/currentId";
 import { connect } from "react-redux";
+import classNames from "classnames";
 
 class HomeItem extends Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class HomeItem extends Component {
  
     return (
       <div
-        className={"showcase-main-item" + " " + `${!inStock ? "out" : ""}`}
+        className={classNames("showcase-main-item",{"out": !inStock})}
         onClick={() => this.props.setCurrentId(id)}>
         <div className="main-item-img">
           <img src={gallery[0]} alt="product"></img>

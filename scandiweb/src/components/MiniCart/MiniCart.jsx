@@ -37,6 +37,11 @@ class MiniCart extends Component {
   };
   componentDidMount = () => {
     document.addEventListener('click', this.handleOutsideClick);
+    if (this.props.flag) {
+      document.body.classList.add(this.props.bodyClass);
+    } else {
+      document.body.classList.remove(this.props.bodyClass);
+    }
   };
   //знаю, что слушатели надо удалять, но не получилось, не срабатывает
 

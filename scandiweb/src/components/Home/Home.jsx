@@ -17,13 +17,10 @@ import Overlay from "../Overlay";
 export class Home extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      
-      filterName: "",
-    };
+ 
   }
 
-  setCategory = (name) => {
+  onChangeCategory = (name) => {
     this.props.data.refetch({ input: { title: name } });
   };
 
@@ -31,7 +28,7 @@ export class Home extends Component {
 
   render() {
     const { category } = this.props.data;
-   
+
     let products = [];
     if (!this.props.data.loading && !this.props.data.error) {
       products = category.products.map((el) => (
@@ -60,7 +57,7 @@ export class Home extends Component {
       return (
         <main className="showcase-main">
    
-          <Categories setCategory={this.setCategory} setCategoryNames={this.setCategoryNames} />
+          <Categories onChangeCategory={this.onChangeCategory}  />
 
           <div className="showcase-main-content">
             {this.props.filterName === "WOMEN"

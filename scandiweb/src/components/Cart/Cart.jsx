@@ -5,12 +5,14 @@ import CartItem from "./CartItem";
 import BackArrow from "../BackArrow";
 import { plusCartItem, minusCartItem, deleteCartItem, clearCart } from "../../redux/actions/cart";
 import Overlay from "../Overlay";
+import { changeOverlayFlag } from "../../redux/actions/overlay";
 
 class Cart extends Component {
  
   onClearCart = () => {
     if (window.confirm("Do you really want to clear Cart ?")) {
       this.props.clearCart();
+      console.log(this.props.overlayFlag)
     }
   };
   getTotalPrice = (items, index) =>
@@ -18,6 +20,9 @@ class Cart extends Component {
       .map((obj) => obj.items)
       .flat()
       .reduce((sum, obj) => obj.price[index].amount + sum, 0);
+      componentDidMount = () => {
+       
+      }
   render() {
     const { items, currIndex } = this.props;
     const products = Object.keys(items).map((key) => {
@@ -98,6 +103,8 @@ const mapDispatchToProps = (dispatch) =>  ({
   plusItem: (objState) => dispatch(plusCartItem(objState)),
   minusItem: (objState) => dispatch(minusCartItem(objState)),
   deleteItem: (objState) => dispatch(deleteCartItem(objState)),
-  clearCart: () => dispatch(clearCart())
+  clearCart: () => dispatch(clearCart()),
+  setOverlayFlag: (flag) => dispatch(changeOverlayFlag(flag)),
+
 })
 export default connect(mapStateToProps,mapDispatchToProps)(Cart);

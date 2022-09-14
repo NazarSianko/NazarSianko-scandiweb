@@ -16,13 +16,13 @@ class Categories extends Component {
  
   setActiveCategory = (index) => {
     store.dispatch(changeCategory(index));
-    this.props.setCategory(this.props.data.categories[index].name)
+    this.props.onChangeCategory(this.props.data.categories[index].name)
     store.dispatch(saveActiveCategory(this.props.data.categories[index].name))
    
   };
 
   render() {
-    console.log(this.props.data.categories)
+  
     return (
       <div className="categories">
         {this.props.data.categories
