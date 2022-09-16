@@ -13,10 +13,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
 }
 .null-product {
-    position:relative;
+    position: relative;
     .back-arrow-null {
         & img {
             width: 80px;
@@ -28,13 +27,12 @@
         cursor: pointer;
     }
 }
- 
 
 .pdp-main {
-    margin:0 auto;
+    margin: 0 auto;
     .pdp-cart {
         display: flex;
-        
+
         position: relative;
         .back-arrow {
             & img {
@@ -53,16 +51,15 @@
             .pdp-left-img {
                 width: 80px;
                 height: 80px;
-                cursor:pointer;
+                cursor: pointer;
                 &.active-color {
-                    border:3px solid #5ECE7B;
+                    border: 3px solid #5ece7b;
                 }
             }
             & img {
                 height: 80px;
                 width: 80px;
             }
-            
         }
         .pdp-cart-main {
             display: flex;
@@ -70,7 +67,7 @@
             .cart-img {
                 padding: 0px 100px 100px 0px;
                 width: 610px;
-                    height: 511px;
+                height: 511px;
                 & img {
                     width: 610px;
                     height: 511px;
@@ -136,7 +133,7 @@
             .sizes {
                 display: flex;
                 justify-content: flex-start;
-                
+
                 & * {
                     margin-right: 10px;
                 }
@@ -148,15 +145,15 @@
                     border: 1px solid #1d1f22;
                     text-align: center;
                     line-height: 45px;
-                    cursor:pointer;
+                    cursor: pointer;
                     box-sizing: border-box;
-                    
+
                     &.active {
                         background-color: black;
-                        color:white;
+                        color: white;
                     }
                     &.active-color {
-                        border:3px solid #5ECE7B;
+                        border: 3px solid #5ece7b;
                     }
                 }
             }
@@ -191,8 +188,8 @@
             height: 48px;
             border: none;
             margin-bottom: 20px;
-            cursor:pointer;
-            
+            cursor: pointer;
+
             &:active {
                 box-shadow: 0 0 0 4px #cbd6ee;
             }
@@ -220,66 +217,58 @@
         }
     }
 }
-@media (max-width:1430px) {
+@media (max-width: 1430px) {
     .null-product {
-
         .back-arrow-null {
-           
             left: 0;
-         
         }
     }
-     
+
     .pdp-main {
         .pdp-cart {
             .back-arrow {
-                left:0; 
+                left: 0;
             }
         }
     }
 }
-@media (max-width:1210px) {
-    
+@media (max-width: 1210px) {
     .pdp-main {
         .pdp-cart {
             justify-content: center;
             flex-direction: column;
-        .cart-item_left {
-            margin:0 auto;
-        }
-    .pdp-cart-main {
-       
-        justify-content: center;
-        .cart-img {
-            padding:0px;
-            margin-bottom:60px;
+            .cart-item_left {
+                margin: 0 auto;
+            }
+            .pdp-cart-main {
+                justify-content: center;
+                .cart-img {
+                    padding: 0px;
+                    margin-bottom: 60px;
+                }
+            }
         }
     }
 }
-}
-}
-@media (max-width:790px) {
+@media (max-width: 790px) {
     .pdp-main .pdp-cart .pdp-cart-main .cart-img {
         & img {
-            width:400px;
-            height:400px;
+            width: 400px;
+            height: 400px;
         }
-        width:400px;
-        
+        width: 400px;
     }
-    
 }
 @media (max-width: 570px) {
     .pdp-main .pdp-cart .pdp-cart-main .cart-img {
         & img {
-            width:300px;
-            height:300px;
+            width: 300px;
+            height: 300px;
         }
-        width:300px;
-       
+        width: 300px;
     }
 }
-@media (max-width:490px) {
+@media (max-width: 490px) {
     .categories {
         justify-content: center;
     }

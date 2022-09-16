@@ -1,13 +1,12 @@
 const initialState = {
-    class: "body-active",
-}
+  class: 'body-active',
+};
 const bodyClass = (state = initialState, action) => {
-    if (action.type === "SET_BODY_CLASS") {
-      return {
-        ...state,
-       
-      };
-    }
-    return state;
+  if (action.type === 'SET_BODY_CLASS') {
+    return {
+      ...state,
+    };
   }
-  export default bodyClass;
+  return state;
+};
+export default bodyClass;

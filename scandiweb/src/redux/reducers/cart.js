@@ -2,7 +2,6 @@ const initialState = {
   items: {},
 
   totalCount: 0,
-
 };
 
 const getTotalCount = (obj) =>

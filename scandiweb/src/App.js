@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 
 
-import Home from './components/Home/Home';
-import Header from './components/Header/Header';
-import Cart from './components/Cart/Cart';
-import ProductDescription from './components/PDP/ProductDescription';
+import Home from './components/pages/Home/Home';
+import Header from './components/pages/Header/Header';
+import Cart from './components/pages/Cart/Cart';
+import ProductDescription from './components/pages/PDP/ProductDescription';
 import client from './apollo/client';
 import { Route, Routes } from 'react-router-dom';
 import './styles/index.scss';
-import NullPage from './components/NullPage';
+import NotFoundPage from './components/NotFoundPage';
 
 
 export class App extends Component {
   
 
  
-  setActiveClass = (id, index, obj) => {
+  /*setActiveClass = (id, index, obj) => {
     return Object.keys(obj).find((keysItem) => keysItem === id) === id &&
       obj[id] === index &&
       id === 'Color'
@@ -25,12 +25,12 @@ export class App extends Component {
         id !== 'Color'
       ? 'active'
       : '';
-  };
+  };*/
   render() {
     return (
       <div className="wrapper">
         <div className="container">
-          <Header  setActiveClass={this.setActiveClass} />
+          <Header   />
           <Routes>
             <Route
               path="/"
@@ -38,7 +38,7 @@ export class App extends Component {
                 <Home
                   client={client}
                   
-                  setActiveClass={this.setActiveClass}
+                 
                 />
               }
             />
@@ -48,7 +48,7 @@ export class App extends Component {
               element={
                 <Cart
                   
-                  setActiveClass={this.setActiveClass}
+                  
                 />
               }
             />
@@ -57,12 +57,12 @@ export class App extends Component {
               element={
                 <ProductDescription
                  
-                  setActiveClass={this.setActiveClass}
+                  
                 />
               }
             />
             <Route 
-            path="*" element={<NullPage/>}>
+            path="*" element={<NotFoundPage/>}>
 
             </Route>
           </Routes>

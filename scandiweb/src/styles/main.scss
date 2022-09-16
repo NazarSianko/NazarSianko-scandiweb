@@ -3,12 +3,10 @@ body {
     height: 100%;
     margin: 0 auto;
     background-color: #ffffff;
-    
 }
 .body-active {
     overflow: hidden;
-    padding: 0 calc(17px - (100vw - 100%)) 0 0; 
-   
+    padding: 0 calc(17px - (100vw - 100%)) 0 0;
 }
 .wrapper {
     max-width: 1440px;
@@ -20,7 +18,7 @@ body {
     }
 }
 
-@media (max-width:1270px) {
+@media (max-width: 1270px) {
     .container {
         padding: 0px 30px;
     }
