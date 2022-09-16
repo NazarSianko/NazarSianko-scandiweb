@@ -66,7 +66,6 @@ renderProducts = (filteredProducts) => {
     let items=[];
     if(!this.props.data.loading && !this.props.data.error){
     items = filterProducts(category.products,this.props.filterName);
-   console.log(items)
     }
 
     if (this.props.data.loading || this.props.data.error) {

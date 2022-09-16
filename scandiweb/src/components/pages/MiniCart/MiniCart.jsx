@@ -122,7 +122,6 @@ const mapStateToProps = (state) => ({
   totalCount: state.cart.totalCount,
   currIndex: state.currency.index,
   flag: state.overlay.flag,
-  bodyClass: state.bodyClass.class,
 });
 const mapDispatchToProps = (dispatch) => ({
   plusItem: (objState) => dispatch(plusCartItem(objState)),

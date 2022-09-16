@@ -1,4 +1,4 @@
-import  {  Component, createRef } from "react";
+import React, { Children, Component, createRef } from "react";
 import { graphql } from "@apollo/client/react/hoc";
 import { CURRENCY } from "../../../apollo/queries";
 import { connect } from "react-redux";
@@ -29,8 +29,9 @@ class ChangeCurrency extends Component {
     document.body.addEventListener("click", this.handleOutsideClick);
   };
   componentWillUnmount = () =>  {
-    document.body.removeEventListener("click", this.handleOutsideClick);
-  };
+    document.body.removeEventListener("click", this.handleOutsideClick); 
+    console.log("unmount")
+  }
 
   render() {
 
