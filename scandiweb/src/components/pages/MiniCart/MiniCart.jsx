@@ -9,6 +9,7 @@ import {
 } from '../../../redux/actions/cart';
 import { NavLink } from 'react-router-dom';
 import { changeOverlayFlag } from '../../../redux/actions/overlay';
+import { getTotalPrice } from '../../../util/getTotalPrice';
 
 class MiniCart extends Component {
   constructor(props) {
@@ -27,30 +28,26 @@ class MiniCart extends Component {
       this.props.clearCart();
     }
   };
-  getTotalPrice = (items, index) =>
-    Object.values(items)
-      .map((obj) => obj.items)
-      .flat()
-      .reduce((sum, obj) => obj.price[index].amount + sum, 0);
+
   setActiveOverlay = () => {
     this.props.setOverlayFlag(!this.props.flag);
     if (!this.props.flag) {
-      document.body.classList.add(this.props.bodyClass);
+      document.body.classList.add('body-active');
     } else {
-      document.body.classList.remove(this.props.bodyClass);
+      document.body.classList.remove('body-active');
     }
   };
   componentDidMount = () => {
     document.addEventListener('click', this.handleOutsideClick);
     if (this.props.flag) {
-      document.body.classList.add(this.props.bodyClass);
+      document.body.classList.add('body-active');
     } else {
-      document.body.classList.remove(this.props.bodyClass);
+      document.body.classList.remove('body-active');
     }
   };
- componentWillUnmount = () => {
-  document.removeEventListener('click', this.handleOutsideClick)
- }
+  componentWillUnmount = () => {
+    document.removeEventListener('click', this.handleOutsideClick);
+  };
 
   render() {
     const { items, currIndex } = this.props;
@@ -98,7 +95,7 @@ class MiniCart extends Component {
               <div className="total">Total</div>
               <div className="price">{` ${
                 products.length > 0 ? products[0].price[this.props.currIndex].currency.symbol : ''
-              } ${this.getTotalPrice(items, currIndex).toFixed(2)} `}</div>
+              } ${getTotalPrice(items, currIndex).toFixed(2)} `}</div>
             </div>
             <div className="overlay-btns">
               <NavLink to="/cart">

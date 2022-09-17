@@ -38,14 +38,13 @@ class Header extends Component {
 
         <NavLink to="/">
           <div className="header-logo">
-            
             <img src="./a-logo.png" alt="logo"></img>
           </div>
         </NavLink>
         <div className="header-right">
           <ChangeCurrency />
 
-          <MiniCart  />
+          <MiniCart />
         </div>
       </header>
     );

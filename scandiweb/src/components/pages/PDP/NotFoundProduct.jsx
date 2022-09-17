@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import BackArrow from '../../BackArrow';
 
 export default class NullProduct extends Component {

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import '../../../styles/cart.scss';
 import CartItem from './CartItem';
 import BackArrow from '../../BackArrow';
+import { getTotalPrice } from '../../../util/getTotalPrice';
 import {
   plusCartItem,
   minusCartItem,
@@ -16,15 +17,10 @@ class Cart extends Component {
   onClearCart = () => {
     if (window.confirm('Do you really want to clear Cart ?')) {
       this.props.clearCart();
-      console.log(this.props.overlayFlag);
+   
     }
   };
-  getTotalPrice = (items, index) =>
-    Object.values(items)
-      .map((obj) => obj.items)
-      .flat()
-      .reduce((sum, obj) => obj.price[index].amount + sum, 0);
-  componentDidMount = () => {};
+
   render() {
     const { items, currIndex } = this.props;
     const products = Object.keys(items).map((key) => {
@@ -71,11 +67,11 @@ class Cart extends Component {
             <div className="check-value">
               <span>{` ${
                 products.length > 0 ? products[0].price[currIndex].currency.symbol : ''
-              } ${((this.getTotalPrice(items, currIndex) / 100) * 21).toFixed(2)} `}</span>
+              } ${((getTotalPrice(items, currIndex) / 100) * 21).toFixed(2)} `}</span>
               <span>{this.props.totalCount}</span>
               <span>{` ${
                 products.length > 0 ? products[0].price[currIndex].currency.symbol : ''
-              } ${this.getTotalPrice(items, currIndex).toFixed(2)} `}</span>
+              } ${getTotalPrice(items, currIndex).toFixed(2)} `}</span>
             </div>
           </div>
           <button className="order">

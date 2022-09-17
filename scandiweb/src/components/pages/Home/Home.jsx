@@ -9,102 +9,60 @@ import { graphql } from '@apollo/client/react/hoc';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Overlay from '../../Overlay';
-import {filterProducts} from '../../../util/filterProducts';
+import { filterProducts } from '../../../util/filterProducts';
 
 export class Home extends Component {
- 
-
   onChangeCategory = (name) => {
     this.props.data.refetch({ input: { title: name } });
   };
-renderProducts = (filteredProducts) => {
-  return filteredProducts.map((el) => (
-    <NavLink
-      key={el.id}
-      to={`/product/${el.id}`}
-      style={{ pointerEvents: el.inStock ? 'auto' : 'none' }}>
-      <HomeItem
+  renderProducts = (filteredProducts) => {
+    return filteredProducts.map((el) => (
+      <NavLink
         key={el.id}
-        id={el.id}
-        name={el.name}
-        inStock={el.inStock}
-        brand={el.brand}
-        description={el.description}
-        gallery={el.gallery}
-        price={el.prices}
-        attributes={el.attributes}
-      />
-    </NavLink>
-  ));
-  
-}
+        to={`/product/${el.id}`}
+        style={{ pointerEvents: el.inStock ? 'auto' : 'none' }}>
+        <HomeItem
+          key={el.id}
+          id={el.id}
+          name={el.name}
+          inStock={el.inStock}
+          brand={el.brand}
+          description={el.description}
+          gallery={el.gallery}
+          price={el.prices}
+          attributes={el.attributes}
+        />
+      </NavLink>
+    ));
+  };
 
   render() {
     const { category } = this.props.data;
-     /* let products = [];
-   if (!this.props.data.loading && !this.props.data.error) {
-      products = category.products.map((el) => (
-        <NavLink
-          key={el.id}
-          to={`/product/${el.id}`}
-          style={{ pointerEvents: el.inStock ? 'auto' : 'none' }}>
-          <HomeItem
-            key={el.id}
-            id={el.id}
-            name={el.name}
-            inStock={el.inStock}
-            brand={el.brand}
-            description={el.description}
-            gallery={el.gallery}
-            price={el.prices}
-            attributes={el.attributes}
-          />
-        </NavLink>
-      ));
-      
-    }*/
-    /*let items=[];
-    if(!this.props.data.loading && !this.props.data.error){
-    items = filterProducts(category.products,this.props.filterName);
-    }*/
 
     if (this.props.data.loading || this.props.data.error) {
       return <Loading />;
-    } 
-
-      const items = filterProducts(category.products,this.props.filterName);
-      return (
-        <main className="showcase-main">
-          <Categories onChangeCategory={this.onChangeCategory} />
-
-          <div className="showcase-main-content">
-            {items.length ? this.renderProducts(items) : 
-             <div className="no-products">No products available</div>
-            
-            /*this.props.filterName === 'WOMEN' ? (
-              products.length == 0 ? (
-                <div className="no-products">No products available</div>
-              ) : (
-                products
-              )
-            ) : this.props.filterName === 'MEN' ? (
-              products.filter((item) => item.key.length > 15).length === 0 ? (
-                <div className="no-products">No products available</div>
-              ) : (
-                products.filter((item) => item.key.length > 15)
-              )
-            ) : products.filter((item) => item.key.length < 15).length === 0 ? (
-              <div className="no-products">No products available</div>
-            ) : (
-              products.filter((item) => item.key.length < 15)
-            )*/}
-          </div>
-          {this.props.overlayFlag ? <Overlay /> : ''}
-        </main>
-      );
     }
-  }
 
+    const items = filterProducts(category.products, this.props.filterName);
+    return (
+      <main className="showcase-main">
+        <Categories onChangeCategory={this.onChangeCategory} />
+
+        <div className="showcase-main-content">
+          {
+            items.length ? (
+              this.renderProducts(items)
+            ) : (
+              <div className="no-products">No products available</div>
+            )
+
+          }
+        </div>
+        {this.props.overlayFlag ? <Overlay /> : ''}
+      </main>
+    );
+  }
+}
 
 const mapStateToProps = (state) => ({
   overlayFlag: state.overlay.flag,

@@ -1,9 +1,9 @@
-import React, { Children, Component, createRef } from "react";
-import { graphql } from "@apollo/client/react/hoc";
-import { CURRENCY } from "../../../apollo/queries";
-import { connect } from "react-redux";
-import { changeCurrency } from "../../../redux/actions/currency";
-import classNames from "classnames";
+import React, { Component, createRef } from 'react';
+import { graphql } from '@apollo/client/react/hoc';
+import { CURRENCY } from '../../../apollo/queries';
+import { connect } from 'react-redux';
+import { changeCurrency } from '../../../redux/actions/currency';
+import classNames from 'classnames';
 
 class ChangeCurrency extends Component {
   constructor(props) {
@@ -26,50 +26,48 @@ class ChangeCurrency extends Component {
     }
   };
   componentDidMount = () => {
-    document.body.addEventListener("click", this.handleOutsideClick);
+    document.body.addEventListener('click', this.handleOutsideClick);
   };
-  componentWillUnmount = () =>  {
-    document.body.removeEventListener("click", this.handleOutsideClick); 
-    console.log("unmount")
-  }
+  componentWillUnmount = () => {
+    document.body.removeEventListener('click', this.handleOutsideClick);
+  };
 
   render() {
-
     return (
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
-       
-          {!this.props.data.loading && !this.props.data.error
-            ?  <div className="currency-symbol">{this.props.data.currencies[this.props.currIndex].symbol}
-               <div className="arrow">
-        <i className={classNames("arrow-down",{"arrow-up":this.state.currencyFlag})}></i>
-   
-</div>
-        </div>
-    : ""}
-    
+        {!this.props.data.loading && !this.props.data.error ? (
+          <div className="currency-symbol">
+            {this.props.data.currencies[this.props.currIndex].symbol}
+            <div className="arrow">
+              <i className={classNames('arrow-down', { 'arrow-up': this.state.currencyFlag })}></i>
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
+
         {this.state.currencyFlag ? (
           <div className="currency-list">
             {!this.props.data.loading && !this.props.data.error
               ? this.props.data.currencies.map((el, index) => (
                   <div
                     key={el.symbol}
-                    className={classNames("currency-item", {
+                    className={classNames('currency-item', {
                       active: this.props.currIndex === index,
                     })}
                     onClick={() => this.props.setActiveCurrency(index)}>
                     {el.symbol} {el.label}
                   </div>
                 ))
-              : ""}
+              : ''}
           </div>
         ) : (
-          ""
+          ''
         )}
       </div>
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   currIndex: state.currency.index,
