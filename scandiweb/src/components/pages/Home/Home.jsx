@@ -63,14 +63,16 @@ renderProducts = (filteredProducts) => {
       ));
       
     }*/
-    let items=[];
+    /*let items=[];
     if(!this.props.data.loading && !this.props.data.error){
     items = filterProducts(category.products,this.props.filterName);
-    }
+    }*/
 
     if (this.props.data.loading || this.props.data.error) {
       return <Loading />;
-    } else {
+    } 
+
+      const items = filterProducts(category.products,this.props.filterName);
       return (
         <main className="showcase-main">
           <Categories onChangeCategory={this.onChangeCategory} />
@@ -102,7 +104,7 @@ renderProducts = (filteredProducts) => {
       );
     }
   }
-}
+
 
 const mapStateToProps = (state) => ({
   overlayFlag: state.overlay.flag,
