@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent} from 'react';
 import { connect } from 'react-redux';
 import '../../../styles/cart.scss';
 import CartItem from './CartItem';
@@ -12,11 +12,10 @@ import {
 import Overlay from '../../Overlay';
 import { changeOverlayFlag } from '../../../redux/actions/overlay';
 
-class Cart extends Component {
+class Cart extends PureComponent {
   onClearCart = () => {
     if (window.confirm('Do you really want to clear Cart ?')) {
       this.props.clearCart();
-   
     }
   };
 

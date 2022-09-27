@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import { addItem } from '../../../redux/actions/cart';
 import { setId } from '../../../redux/actions/currentId';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 
-class HomeItem extends Component {
+class HomeItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {};

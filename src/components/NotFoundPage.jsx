@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
-export default class NullPage extends Component {
+export default class NullPage extends PureComponent {
   render() {
     return (
       <div className="null-page">

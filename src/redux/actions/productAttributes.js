@@ -1,4 +1,5 @@
+import actionTypes from './actionTypes';
 export const setAttributes = (obj) => ({
-    type: "SET_ATTRIBUTES",
-    payload: obj
-})
+  type: actionTypes.SET_ATTRIBUTES,
+  payload: obj,
+});

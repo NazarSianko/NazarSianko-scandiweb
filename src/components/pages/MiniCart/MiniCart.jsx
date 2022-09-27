@@ -1,4 +1,4 @@
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { connect } from 'react-redux';
 import MiniCartItem from './MiniCartItem';
 import {
@@ -11,7 +11,7 @@ import { NavLink } from 'react-router-dom';
 import { changeOverlayFlag } from '../../../redux/actions/overlay';
 import { getTotalPrice } from '../../../util/getTotalPrice';
 
-class MiniCart extends Component {
+class MiniCart extends PureComponent {
   constructor(props) {
     super(props);
     this.overlayRef = createRef();

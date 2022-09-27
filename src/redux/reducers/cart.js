@@ -1,3 +1,4 @@
+import actionTypes from '../actions/actionTypes';
 const initialState = {
   items: {},
 
@@ -10,7 +11,7 @@ const getTotalCount = (obj) =>
     .flat().length;
 const cart = (state = initialState, action) => {
   switch (action.type) {
-    case 'ADD_ITEM': {
+    case actionTypes.ADD_ITEM: {
       const objState = JSON.stringify(action.payload.objState);
       const currentItems = !state.items[objState]
         ? [action.payload]
@@ -31,7 +32,7 @@ const cart = (state = initialState, action) => {
         totalCount,
       };
     }
-    case 'PLUS_CART_ITEM': {
+    case actionTypes.PLUS_CART_ITEM: {
       const objState = JSON.stringify(action.payload);
       const newObjItems = [...state.items[objState].items, state.items[objState].items[0]];
       const newItems = {
@@ -49,7 +50,7 @@ const cart = (state = initialState, action) => {
         totalCount,
       };
     }
-    case 'MINUS_CART_ITEM': {
+    case actionTypes.MINUS_CART_ITEM: {
       const objState = JSON.stringify(action.payload);
       const oldItems = state.items[objState].items;
       const newObjItems = oldItems.length > 1 ? state.items[objState].items.slice(1) : oldItems;
@@ -67,7 +68,7 @@ const cart = (state = initialState, action) => {
         totalCount,
       };
     }
-    case 'REMOVE_CART_ITEM': {
+    case actionTypes.REMOVE_CART_ITEM: {
       const objState = JSON.stringify(action.payload);
       const newItems = {
         ...state.items,
@@ -83,7 +84,7 @@ const cart = (state = initialState, action) => {
         totalCount: state.totalCount - currentTotalCount,
       };
     }
-    case 'CLEAR_CART':
+    case actionTypes.CLEAR_CART:
       return {
         items: {},
 

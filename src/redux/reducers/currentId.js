@@ -1,8 +1,9 @@
+import actionTypes from '../actions/actionTypes';
 const initialState = {
   id: '',
 };
 const currentId = (state = initialState, action) => {
-  if (action.type === 'SET_CURRENT_ID') {
+  if (action.type === actionTypes.SET_CURRENT_ID) {
     return {
       ...state,
       id: action.payload,

@@ -1,4 +1,5 @@
+import actionTypes from './actionTypes';
 export const changeOverlayFlag = (flag) => ({
-  type: 'CHANGE_OVERLAY_FLAG',
+  type: actionTypes.CHANGE_OVERLAY_FlAG,
   payload: flag,
 });

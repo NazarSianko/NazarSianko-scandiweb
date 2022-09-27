@@ -1,4 +1,5 @@
+import actionTypes from './actionTypes';
 export const changeCurrency = (index) => ({
-  type: 'CHANGE_CURRENCY',
+  type: actionTypes.CHANGE_CURRENCY,
   payload: index,
 });

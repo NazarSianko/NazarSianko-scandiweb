@@ -14,7 +14,6 @@
         cursor: pointer;
     }
     .cart-title {
-        font-family: Raleway;
         font-size: 32px;
         font-weight: 700;
         line-height: 40px;
@@ -33,7 +32,7 @@
         align-items: center;
         & span {
             color: #b6b6b6;
-            font-family: Raleway;
+
             font-size: 18px;
             font-weight: 300;
             line-height: 29px;
@@ -58,7 +57,6 @@
                 flex-direction: column;
                 row-gap: 18px;
                 .item-title {
-                    font-family: Raleway;
                     font-size: 30px;
                     font-weight: 600;
                     line-height: 27px;
@@ -66,7 +64,6 @@
                     text-align: left;
                 }
                 .item-description {
-                    font-family: Raleway;
                     font-size: 30px;
                     font-weight: 400;
                     line-height: 27px;
@@ -74,7 +71,6 @@
                     text-align: left;
                 }
                 .item-price {
-                    font-family: Raleway;
                     font-size: 24px;
                     font-weight: 700;
                     line-height: 24px;
@@ -196,7 +192,6 @@
                     justify-content: space-between;
                     margin-right: 24px;
                     .count {
-                        font-family: Raleway;
                         font-size: 24px;
                         font-weight: 500;
                         line-height: 38px;
@@ -261,7 +256,6 @@
             }
 
             & span {
-                font-family: Raleway;
                 font-size: 14px;
                 font-weight: 600;
                 line-height: 17px;
@@ -275,7 +269,7 @@
             display: flex;
 
             row-gap: 8px;
-            font-family: Raleway;
+
             font-size: 24px;
             font-weight: 400;
             line-height: 28px;
@@ -290,7 +284,6 @@
             }
 
             & span {
-                font-family: Raleway;
                 font-size: 24px;
                 font-weight: 700;
                 line-height: 24px;
@@ -302,7 +295,6 @@
                 }
             }
             .total {
-                font-family: Raleway;
                 font-size: 24px;
                 font-weight: 500;
                 line-height: 28px;

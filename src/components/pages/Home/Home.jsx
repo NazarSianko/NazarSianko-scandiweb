@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import '../../../styles/index.scss';
 import '../../../styles/pdp.scss';
 import HomeItem from './HomeItem';
@@ -11,16 +11,13 @@ import { connect } from 'react-redux';
 import Overlay from '../../Overlay';
 import { filterProducts } from '../../../util/filterProducts';
 
-export class Home extends Component {
+export class Home extends PureComponent {
   onChangeCategory = (name) => {
     this.props.data.refetch({ input: { title: name } });
   };
   renderProducts = (filteredProducts) => {
     return filteredProducts.map((el) => (
-      <NavLink
-        key={el.id}
-        to={`/product/${el.id}`}
-     >
+      <NavLink key={el.id} to={`/product/${el.id}`}>
         <HomeItem
           key={el.id}
           id={el.id}
@@ -37,7 +34,7 @@ export class Home extends Component {
   };
 
   render() {
-    const {data } = this.props;
+    const { data } = this.props;
     const { category } = this.props.data;
 
     if (data.loading || data.error) {
@@ -50,14 +47,11 @@ export class Home extends Component {
         <Categories onChangeCategory={this.onChangeCategory} />
 
         <div className="showcase-main-content">
-          {
-            items.length ? (
-              this.renderProducts(items)
-            ) : (
-              <div className="no-products">No products available</div>
-            )
-
-          }
+          {items.length ? (
+            this.renderProducts(items)
+          ) : (
+            <div className="no-products">No products available</div>
+          )}
         </div>
         {this.props.overlayFlag ? <Overlay /> : ''}
       </main>

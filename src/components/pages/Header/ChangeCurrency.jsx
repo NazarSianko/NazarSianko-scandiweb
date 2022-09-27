@@ -1,11 +1,11 @@
-import React, { Component, createRef } from 'react';
+import React, { PureComponent, createRef } from 'react';
 import { graphql } from '@apollo/client/react/hoc';
 import { CURRENCY } from '../../../apollo/queries';
 import { connect } from 'react-redux';
 import { changeCurrency } from '../../../redux/actions/currency';
 import classNames from 'classnames';
 
-class ChangeCurrency extends Component {
+class ChangeCurrency extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ class ChangeCurrency extends Component {
   };
 
   render() {
-    const {data} = this.props
+    const { data } = this.props;
     return (
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
         {!data.loading && !data.error ? (

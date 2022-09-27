@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import '../../../styles/index.scss';
 import { connect } from 'react-redux';
 import { store } from '../../../redux/store';
@@ -7,7 +7,7 @@ import { graphql } from '@apollo/client/react/hoc';
 import classNames from 'classnames';
 import { ALLCATEGORIES } from '../../../apollo/queries';
 
-class Categories extends Component {
+class Categories extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,7 +22,7 @@ class Categories extends Component {
   };
 
   render() {
-    const {data} = this.props
+    const { data } = this.props;
     return (
       <div className="categories">
         {data.categories

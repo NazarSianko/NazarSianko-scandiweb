@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import '../../../styles/header.scss';
 import ChangeCurrency from './ChangeCurrency';
 import { connect } from 'react-redux';
 import MiniCart from '../MiniCart/MiniCart';
 import classNames from 'classnames';
 import { setFilterName, setFilterIndex } from '../../../redux/actions/filter';
-import { NavLink } from 'react-router-dom';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -17,7 +16,7 @@ function withRouter(Component) {
 
   return ComponentWithRouterProp;
 }
-class Header extends Component {
+class Header extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,11 +45,10 @@ class Header extends Component {
           ))}
         </div>
 
-       
-          <div className="header-logo" onClick={() => this.props.router.navigate(-1)}>
-            <img src="./a-logo.png" alt="logo"></img>
-          </div>
-      
+        <div className="header-logo" onClick={() => this.props.router.navigate(-1)}>
+          <img src="./a-logo.png" alt="logo"></img>
+        </div>
+
         <div className="header-right">
           <ChangeCurrency />
 

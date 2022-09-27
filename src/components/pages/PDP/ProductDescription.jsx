@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import '../../../styles/pdp.scss';
 import { PRODUCT } from '../../../apollo/queries';
 import { graphql } from '@apollo/client/react/hoc';
@@ -12,8 +12,6 @@ import { setAttributes } from '../../../redux/actions/productAttributes';
 import setActiveClass from '../../../util/setActiveClass';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-
-
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     let location = useLocation();
@@ -24,7 +22,7 @@ function withRouter(Component) {
 
   return ComponentWithRouterProp;
 }
-class ProductDescription extends Component {
+class ProductDescription extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -71,7 +69,7 @@ class ProductDescription extends Component {
   });
 
   render() {
-    const { overlayFlag,data } = this.props;
+    const { overlayFlag, data } = this.props;
 
     if (data.loading || data.error) {
       return <Loading />;
@@ -115,17 +113,23 @@ class ProductDescription extends Component {
                   {el.items.map((item, index) => (
                     <div
                       key={item.value}
-                      className={ 
+                      className={
                         'size' +
                         ' ' +
-                        `${data.product.inStock ? setActiveClass(el.id, index, this.state.activeAttributes) : ' '}` 
+                        `${
+                          data.product.inStock
+                            ? setActiveClass(el.id, index, this.state.activeAttributes)
+                            : ' '
+                        }`
                       }
                       style={{
-                        backgroundColor: `${ data.product.inStock ? el.name === 'Color' ?  item.value : '' : '#d4d4d4'}`,
-                        opacity:`${ !data.product.inStock ? '0.2' : '1'}`,
+                        backgroundColor: `${
+                          data.product.inStock ? (el.name === 'Color' ? item.value : '') : '#d4d4d4'
+                        }`,
+                        opacity: `${!data.product.inStock ? '0.2' : '1'}`,
                         width: `${el.name === 'Color' ? '39px' : ''}`,
                         height: `${el.name === 'Color' ? '39px' : ''}`,
-                        pointerEvents: data.product.inStock ? 'auto' : 'none' ,
+                        pointerEvents: data.product.inStock ? 'auto' : 'none',
                       }}
                       onClick={() =>
                         this.setState((state) => ({
@@ -151,10 +155,10 @@ class ProductDescription extends Component {
                   data.product.prices[this.props.currIndex].amount}
               </span>
             </div>
-            <button className={classNames("pdp-button",{ out: !data.product.inStock
-
-            })} onClick={this.setCartItem}
-            style={{ pointerEvents: data.product.inStock ? 'auto' : 'none' }}>
+            <button
+              className={classNames('pdp-button', { out: !data.product.inStock })}
+              onClick={this.setCartItem}
+              style={{ pointerEvents: data.product.inStock ? 'auto' : 'none' }}>
               <span>ADD TO CART</span>
             </button>
             <div className="item-about">

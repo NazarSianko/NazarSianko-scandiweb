@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import setActiveClass from '../../../util/setActiveClass';
 
-class CartItem extends Component {
+class CartItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {

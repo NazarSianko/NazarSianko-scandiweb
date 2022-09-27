@@ -2,7 +2,6 @@
 @import "header.scss";
 @import "main.scss";
 .null-page-title {
-    font-family: Raleway;
     font-size: 42px;
     font-weight: 400;
     line-height: 67px;
@@ -28,7 +27,6 @@
 }
 
 .category-title {
-    font-family: Raleway;
     font-size: 42px;
     font-weight: 400;
     line-height: 67px;
@@ -74,7 +72,6 @@ a {
         justify-content: flex-start;
         column-gap: 40px;
         .no-products {
-            font-family: Raleway;
             font-size: 42px;
             font-weight: 400;
             line-height: 67px;
@@ -96,7 +93,7 @@ a {
                     text-align: center;
                     line-height: 350px;
                     color: #8d8f9a;
-                    font-family: Raleway;
+
                     font-size: 24px;
                     font-weight: 400;
 
@@ -142,7 +139,6 @@ a {
                 margin-bottom: 24px;
             }
             .main-item-description {
-                font-family: Raleway;
                 font-size: 18px;
                 font-weight: 300;
                 line-height: 29px;
@@ -150,7 +146,6 @@ a {
                 text-align: left;
             }
             .main-item-price {
-                font-family: Raleway;
                 font-size: 18px;
                 font-weight: 500;
                 line-height: 29px;
