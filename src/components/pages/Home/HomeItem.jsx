@@ -14,7 +14,7 @@ class HomeItem extends Component {
     if (!state.activeAttributes) {
       return {
         activeAttributes:
-          props.attributes.length == 0
+          props.attributes.length === 0
             ? { id: props.id }
             : props.attributes.reduce((obj, el) => {
                 obj[el.name] = 0;
@@ -37,7 +37,7 @@ class HomeItem extends Component {
       name: this.props.name,
       image: this.props.gallery,
       attributes: this.props.attributes,
-
+      inStock: this.props.inStock,
       objState: this.state.activeAttributes,
     };
     this.props.addItem(obj);

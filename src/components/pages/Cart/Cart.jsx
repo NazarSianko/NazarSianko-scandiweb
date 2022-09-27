@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import '../../../styles/cart.scss';
 import CartItem from './CartItem';
-import BackArrow from '../../BackArrow';
 import { getTotalPrice } from '../../../util/getTotalPrice';
 import {
   plusCartItem,
@@ -30,7 +29,6 @@ class Cart extends Component {
     return (
       <main className="cart-main">
         {this.props.overlayFlag ? <Overlay /> : ''}
-        <BackArrow className={'back-arrow-cart'} />
         <h1 className="cart-title">CART</h1>
         <div className="cart-clear" onClick={this.onClearCart}>
           <img src="./trash.svg" alt="trash-img"></img>

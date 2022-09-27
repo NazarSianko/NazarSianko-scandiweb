@@ -6,7 +6,17 @@ import MiniCart from '../MiniCart/MiniCart';
 import classNames from 'classnames';
 import { setFilterName, setFilterIndex } from '../../../redux/actions/filter';
 import { NavLink } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
+function withRouter(Component) {
+  function ComponentWithRouterProp(props) {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  }
 
+  return ComponentWithRouterProp;
+}
 class Header extends Component {
   constructor(props) {
     super(props);
@@ -36,11 +46,11 @@ class Header extends Component {
           ))}
         </div>
 
-        <NavLink to="/">
-          <div className="header-logo">
+       
+          <div className="header-logo" onClick={() => this.props.router.navigate(-1)}>
             <img src="./a-logo.png" alt="logo"></img>
           </div>
-        </NavLink>
+      
         <div className="header-right">
           <ChangeCurrency />
 
@@ -58,4 +68,4 @@ const mapDispatchToProps = (dispatch) => ({
   setFIlterName: (name) => dispatch(setFilterName(name)),
   setFilterIndex: (index) => dispatch(setFilterIndex(index)),
 });
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

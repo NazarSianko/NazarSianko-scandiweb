@@ -15,7 +15,7 @@ export class App extends Component {
       <div className="wrapper">
         <div className="container">
           <Header />
-          <Routes>
+          <Routes >
             <Route path="/" element={<Home client={client} />} />
 
             <Route path="/cart" element={<Cart />} />

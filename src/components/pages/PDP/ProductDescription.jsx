@@ -11,7 +11,8 @@ import classNames from 'classnames';
 import { setAttributes } from '../../../redux/actions/productAttributes';
 import setActiveClass from '../../../util/setActiveClass';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import BackArrow from '../../BackArrow';
+
+
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -70,22 +71,21 @@ class ProductDescription extends Component {
   });
 
   render() {
-    const { overlayFlag } = this.props;
+    const { overlayFlag,data } = this.props;
 
-    if (this.props.data.loading || this.props.data.error) {
+    if (data.loading || data.error) {
       return <Loading />;
     }
-    if (!this.props.data.product) {
+    if (!data.product) {
       return <NotFoundProduct />;
     }
     return (
       <div className="pdp-main">
         {overlayFlag ? <Overlay /> : ''}
         <div className="pdp-cart">
-          <BackArrow className={'back-arrow'} />
           <div className="pdp-cart-main">
             <div className="pdp-left-imgs">
-              {this.props.data.product.gallery.map((el, index) => (
+              {data.product.gallery.map((el, index) => (
                 <div
                   key={el}
                   className={classNames('pdp-left-img', {
@@ -98,14 +98,14 @@ class ProductDescription extends Component {
             </div>
 
             <div className="cart-img">
-              <img src={this.props.data.product.gallery[this.state.imgIndex]} alt="pdp img"></img>
+              <img src={data.product.gallery[this.state.imgIndex]} alt="pdp img"></img>
             </div>
           </div>
           <div className="cart-item_left">
-            <div className="item-title">{this.props.data.product.name}</div>
-            <div className="item-description">{this.props.data.product.brand}</div>
+            <div className="item-title">{data.product.name}</div>
+            <div className="item-description">{data.product.brand}</div>
 
-            {this.props.data.product.attributes.map((el) => (
+            {data.product.attributes.map((el) => (
               <div className="item-size" key={el.name}>
                 <span className="size-text">
                   {el.name.toUpperCase() + ':'}
@@ -115,15 +115,17 @@ class ProductDescription extends Component {
                   {el.items.map((item, index) => (
                     <div
                       key={item.value}
-                      className={
+                      className={ 
                         'size' +
                         ' ' +
-                        `${setActiveClass(el.id, index, this.state.activeAttributes)}`
+                        `${data.product.inStock ? setActiveClass(el.id, index, this.state.activeAttributes) : ' '}` 
                       }
                       style={{
-                        background: `${el.name === 'Color' ? item.value : ''}`,
+                        backgroundColor: `${ data.product.inStock ? el.name === 'Color' ?  item.value : '' : '#d4d4d4'}`,
+                        opacity:`${ !data.product.inStock ? '0.2' : '1'}`,
                         width: `${el.name === 'Color' ? '39px' : ''}`,
                         height: `${el.name === 'Color' ? '39px' : ''}`,
+                        pointerEvents: data.product.inStock ? 'auto' : 'none' ,
                       }}
                       onClick={() =>
                         this.setState((state) => ({
@@ -144,12 +146,15 @@ class ProductDescription extends Component {
               <span className="price-text">PRICE:</span>
               <br></br>
               <span>
-                {this.props.data.product.prices[this.props.currIndex].currency.symbol +
+                {data.product.prices[this.props.currIndex].currency.symbol +
                   ' ' +
-                  this.props.data.product.prices[this.props.currIndex].amount}
+                  data.product.prices[this.props.currIndex].amount}
               </span>
             </div>
-            <button className="pdp-button" onClick={this.setCartItem}>
+            <button className={classNames("pdp-button",{ out: !data.product.inStock
+
+            })} onClick={this.setCartItem}
+            style={{ pointerEvents: data.product.inStock ? 'auto' : 'none' }}>
               <span>ADD TO CART</span>
             </button>
             <div className="item-about">

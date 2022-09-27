@@ -33,11 +33,12 @@ class ChangeCurrency extends Component {
   };
 
   render() {
+    const {data} = this.props
     return (
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
-        {!this.props.data.loading && !this.props.data.error ? (
+        {!data.loading && !data.error ? (
           <div className="currency-symbol">
-            {this.props.data.currencies[this.props.currIndex].symbol}
+            {data.currencies[this.props.currIndex].symbol}
             <div className="arrow">
               <i className={classNames('arrow-down', { 'arrow-up': this.state.currencyFlag })}></i>
             </div>
@@ -48,8 +49,8 @@ class ChangeCurrency extends Component {
 
         {this.state.currencyFlag ? (
           <div className="currency-list">
-            {!this.props.data.loading && !this.props.data.error
-              ? this.props.data.currencies.map((el, index) => (
+            {!data.loading && !data.error
+              ? data.currencies.map((el, index) => (
                   <div
                     key={el.symbol}
                     className={classNames('currency-item', {

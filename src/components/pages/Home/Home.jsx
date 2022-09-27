@@ -20,7 +20,7 @@ export class Home extends Component {
       <NavLink
         key={el.id}
         to={`/product/${el.id}`}
-        style={{ pointerEvents: el.inStock ? 'auto' : 'none' }}>
+     >
         <HomeItem
           key={el.id}
           id={el.id}
@@ -37,9 +37,10 @@ export class Home extends Component {
   };
 
   render() {
+    const {data } = this.props;
     const { category } = this.props.data;
 
-    if (this.props.data.loading || this.props.data.error) {
+    if (data.loading || data.error) {
       return <Loading />;
     }
 

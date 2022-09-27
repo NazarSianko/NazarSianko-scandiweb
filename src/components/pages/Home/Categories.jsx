@@ -22,10 +22,11 @@ class Categories extends Component {
   };
 
   render() {
+    const {data} = this.props
     return (
       <div className="categories">
-        {this.props.data.categories
-          ? this.props.data.categories.map((el, index) => (
+        {data.categories
+          ? data.categories.map((el, index) => (
               <h1
                 className={classNames('category-title', {
                   'category-active': this.props.categoryIndex === index,
