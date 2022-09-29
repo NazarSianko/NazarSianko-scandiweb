@@ -53,7 +53,7 @@ class ChangeCurrency extends PureComponent {
               ? data.currencies.map((el, index) => (
                   <div
                     key={el.symbol}
-                    className={classNames('currency-item', {
+                    className={classNames('currency-list-item', {
                       active: this.props.currIndex === index,
                     })}
                     onClick={() => this.props.setActiveCurrency(index)}>

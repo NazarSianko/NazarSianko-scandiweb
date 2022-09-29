@@ -82,7 +82,7 @@ class ProductDescription extends PureComponent {
         {overlayFlag ? <Overlay /> : ''}
         <div className="pdp-cart">
           <div className="pdp-cart-main">
-            <div className="pdp-left-imgs">
+            <div className="pdp-cart-left-imgs">
               {data.product.gallery.map((el, index) => (
                 <div
                   key={el}
@@ -95,16 +95,16 @@ class ProductDescription extends PureComponent {
               ))}
             </div>
 
-            <div className="cart-img">
+            <div className="pdp-cart-main-img">
               <img src={data.product.gallery[this.state.imgIndex]} alt="pdp img"></img>
             </div>
           </div>
-          <div className="cart-item_left">
-            <div className="item-title">{data.product.name}</div>
-            <div className="item-description">{data.product.brand}</div>
+          <div className="pdp-main-item_right">
+            <div className="pdp-main-item_right-title">{data.product.name}</div>
+            <div className="pdp-main-item_right-description">{data.product.brand}</div>
 
             {data.product.attributes.map((el) => (
-              <div className="item-size" key={el.name}>
+              <div className="pdp-main-item_right-size" key={el.name}>
                 <span className="size-text">
                   {el.name.toUpperCase() + ':'}
                   <br></br>
@@ -146,7 +146,7 @@ class ProductDescription extends PureComponent {
                 </div>
               </div>
             ))}
-            <div className="item-price">
+            <div className="pdp-main-item_right-price">
               <span className="price-text">PRICE:</span>
               <br></br>
               <span>
@@ -161,7 +161,7 @@ class ProductDescription extends PureComponent {
               style={{ pointerEvents: data.product.inStock ? 'auto' : 'none' }}>
               <span>ADD TO CART</span>
             </button>
-            <div className="item-about">
+            <div className="pdp-main-item_right-about">
               <span dangerouslySetInnerHTML={this.createMarkUp()}></span>
             </div>
           </div>

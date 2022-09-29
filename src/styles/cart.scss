@@ -1,19 +1,10 @@
 @import "fonts.scss";
 @import "main.scss";
 
-.cart-main {
+.cart {
     position: relative;
-    .back-arrow-cart {
-        & img {
-            width: 80px;
-            height: 50px;
-        }
-        position: absolute;
-        top: -90px;
-        left: -100px;
-        cursor: pointer;
-    }
-    .cart-title {
+
+    &-title {
         font-size: 32px;
         font-weight: 700;
         line-height: 40px;
@@ -23,7 +14,7 @@
         border-bottom: 1px solid #e5e5e5;
         margin-bottom: 25px;
     }
-    .cart-clear {
+    &-clear {
         position: absolute;
         top: 15px;
         right: 0;
@@ -42,7 +33,7 @@
             display: inline-block;
         }
     }
-    .cart-items {
+    &-items {
         display: flex;
         flex-direction: column;
         .cart-item {
@@ -52,32 +43,32 @@
             padding-bottom: 20px;
             border-bottom: 1px solid #e5e5e5;
             margin-bottom: 24px;
-            .cart-item_left {
+            &_left {
                 display: flex;
                 flex-direction: column;
                 row-gap: 18px;
-                .item-title {
+                &-title {
                     font-size: 30px;
                     font-weight: 600;
                     line-height: 27px;
                     letter-spacing: 0em;
                     text-align: left;
                 }
-                .item-description {
+                &-description {
                     font-size: 30px;
                     font-weight: 400;
                     line-height: 27px;
                     letter-spacing: 0em;
                     text-align: left;
                 }
-                .item-price {
+                &-price {
                     font-size: 24px;
                     font-weight: 700;
                     line-height: 24px;
                     letter-spacing: 0em;
                     text-align: left;
                 }
-                .item-size {
+                &-size {
                     .size-text {
                         font-family: Roboto Condensed;
                         font-size: 18px;
@@ -105,6 +96,7 @@
                             line-height: 45px;
                             cursor: pointer;
                             box-sizing: border-box;
+                            font-family: Source Sans Pro;
 
                             &.active {
                                 background-color: black;
@@ -150,7 +142,7 @@
                 justify-content: space-between;
                 height: 288px;
 
-                .item-img {
+                &-img {
                     width: 200px;
                     height: 288px;
                     position: relative;
@@ -186,7 +178,7 @@
                     }
                 }
 
-                .item-count {
+                &-count {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -312,39 +304,33 @@
         }
     }
 }
-@media (max-width: 1430px) {
-    .cart-main {
-        .back-arrow-cart {
-            left: 0;
-        }
-    }
-}
+
 @media (max-width: 700px) {
-    .cart-main {
-        .cart-check {
+    .cart {
+        &-check {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-        .cart-items {
+        &-items {
             .cart-item {
                 flex-direction: column;
                 justify-content: center;
-                .cart-item_left {
+                &_left {
                     order: 2;
                     align-items: center;
-                    .item-size {
+                    &-size {
                         .sizes {
                             justify-content: center;
                         }
                     }
                 }
-                .cart-item_right {
+                &_right {
                     order: 1;
                     margin-bottom: 20px;
                     justify-content: center;
 
-                    .item-count {
+                    &-count {
                         margin-right: 10px;
                     }
                     .delete {

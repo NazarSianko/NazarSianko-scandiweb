@@ -47,17 +47,17 @@ class HomeItem extends PureComponent {
 
     return (
       <div
-        className={classNames('showcase-main-item', { out: !inStock })}
+        className={classNames('showcase-main-content_item', { out: !inStock })}
         onClick={() => this.props.setCurrentId(id)}>
-        <div className="main-item-img">
+        <div className="showcase-main-content_item-img">
           <img src={gallery[0]} alt="product"></img>
         </div>
-        <div className="main-item-description">{`${brand} ${name}`}</div>
-        <div className="main-item-price">
+        <div className="showcase-main-content_item-description">{`${brand} ${name}`}</div>
+        <div className="showcase-main-content_item-price">
           {price[this.props.currIndex].currency.symbol + ' ' + price[this.props.currIndex].amount}
         </div>
 
-        <button className="main-item-btn" onClick={this.setCartItem}>
+        <button className="showcase-main-content_item-btn" onClick={this.setCartItem}>
           <img src="./Empty-white-Cart.png" alt=""></img>
         </button>
       </div>

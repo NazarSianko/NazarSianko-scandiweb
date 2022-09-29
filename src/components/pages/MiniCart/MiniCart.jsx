@@ -62,8 +62,8 @@ class MiniCart extends PureComponent {
         </div>
         {this.props.flag ? (
           <div className="cart-overlay">
-            <div className="overlay-header">
-              <div className="overlay-tittle">
+            <div className="cart-overlay-header">
+              <div className="cart-overlay-tittle">
                 My Bag. <span className="overlay-quantity">{this.props.totalCount} items</span>
               </div>
               <div className="cart-clear" onClick={this.onClearCart}>
@@ -91,13 +91,13 @@ class MiniCart extends PureComponent {
                   />
                 ))
               : ''}
-            <div className="overlay-total">
+            <div className="cart-overlay-total">
               <div className="total">Total</div>
               <div className="price">{` ${
                 products.length > 0 ? products[0].price[this.props.currIndex].currency.symbol : ''
               } ${getTotalPrice(items, currIndex).toFixed(2)} `}</div>
             </div>
-            <div className="overlay-btns">
+            <div className="cart-overlay-btns">
               <NavLink to="/cart">
                 <button className="view-btn" onClick={() => this.setActiveOverlay()}>
                   VIEW BAG

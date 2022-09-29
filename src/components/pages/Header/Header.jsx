@@ -32,7 +32,7 @@ class Header extends PureComponent {
     const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
-        <div className="header-sort">
+        <div className="showcase-header-sort">
           {sortItems.map((el, index) => (
             <div
               onClick={() => this.setActive(index, el)}
@@ -45,11 +45,11 @@ class Header extends PureComponent {
           ))}
         </div>
 
-        <div className="header-logo" onClick={() => this.props.router.navigate(-1)}>
+        <div className="showcase-header-logo" onClick={() => this.props.router.navigate(-1)}>
           <img src="./a-logo.png" alt="logo"></img>
         </div>
 
-        <div className="header-right">
+        <div className="showcase-header-right">
           <ChangeCurrency />
 
           <MiniCart />

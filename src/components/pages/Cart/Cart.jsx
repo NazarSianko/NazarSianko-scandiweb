@@ -1,4 +1,4 @@
-import React, { PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import '../../../styles/cart.scss';
 import CartItem from './CartItem';
@@ -26,7 +26,7 @@ class Cart extends PureComponent {
     });
 
     return (
-      <main className="cart-main">
+      <main className="cart">
         {this.props.overlayFlag ? <Overlay /> : ''}
         <h1 className="cart-title">CART</h1>
         <div className="cart-clear" onClick={this.onClearCart}>

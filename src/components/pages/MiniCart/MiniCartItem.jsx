@@ -15,17 +15,17 @@ class MiniCartItem extends PureComponent {
   render() {
     const { brand, name, price, image, itemsCount, attributes, state } = this.props;
     return (
-      <div className="overlay-item">
-        <div className="overlay-item_left">
-          <div className="item-name">{name}</div>
-          <div className="item-brand"> {brand}</div>
-          <div className="item-price">
+      <div className="cart-overlay-item">
+        <div className="cart-overlay-item_left">
+          <div className="cart-overlay-item_left-name">{name}</div>
+          <div className="cart-overlay-item_left-brand"> {brand}</div>
+          <div className="cart-overlay-item_left-price">
             {price[this.props.currIndex].currency.symbol +
               ' ' +
               (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
           {attributes.map((el) => (
-            <div className="item-size" key={el.id}>
+            <div className="cart-overlay-item_left-size" key={el.id}>
               <span className="size-text">
                 {el.name.toUpperCase() + ':'}
                 <br></br>
@@ -45,8 +45,8 @@ class MiniCartItem extends PureComponent {
             </div>
           ))}
         </div>
-        <div className="overlay-item_right">
-          <div className="item-count">
+        <div className="cart-overlay-item_right">
+          <div className="cart-overlay-item_right-count">
             <div className="plus" onClick={this.plusItem}>
               +
             </div>
@@ -55,7 +55,7 @@ class MiniCartItem extends PureComponent {
               <span className="minus-content"></span>
             </div>
           </div>
-          <div className="item-img">
+          <div className="cart-overlay-item_right-img">
             <img src={image[0]} alt="overlay-img"></img>
           </div>
           <div className="delete" onClick={this.deleteItem}>

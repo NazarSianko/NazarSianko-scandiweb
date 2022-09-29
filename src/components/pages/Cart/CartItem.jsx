@@ -38,15 +38,15 @@ class CartItem extends PureComponent {
     return (
       <div className="cart-item">
         <div className="cart-item_left">
-          <div className="item-title">{name}</div>
-          <div className="item-description">{brand}</div>
-          <div className="item-price">
+          <div className="cart-item_left-title">{name}</div>
+          <div className="cart-item_left-description">{brand}</div>
+          <div className="cart-item_left-price">
             {price[this.props.currIndex].currency.symbol +
               ' ' +
               (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
           {attributes.map((el) => (
-            <div className="item-size" key={el.id}>
+            <div className="cart-item_left-size" key={el.id}>
               <span className="size-text">
                 {el.name.toUpperCase() + ':'}
                 <br></br>
@@ -73,7 +73,7 @@ class CartItem extends PureComponent {
           ))}
         </div>
         <div className="cart-item_right">
-          <div className="item-count">
+          <div className="cart-item_right-count">
             <div className="plus" onClick={this.plusItem}>
               +
             </div>
@@ -82,7 +82,7 @@ class CartItem extends PureComponent {
               <span className="minus-content"></span>
             </div>
           </div>
-          <div className="item-img">
+          <div className="cart-item_right-img">
             <img src={`${image[this.state.imgIndex]}`} alt="cart img"></img>
 
             {image.length > 1 ? (
