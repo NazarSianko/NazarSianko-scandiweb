@@ -48,7 +48,24 @@ class MiniCart extends PureComponent {
   componentWillUnmount = () => {
     document.removeEventListener('click', this.handleOutsideClick);
   };
-
+  renderMiniCartItems = (products, items) => {
+    return products.map((el) => (
+      <MiniCartItem
+        key={JSON.stringify(el.objState)}
+        id={el.id}
+        price={el.price}
+        brand={el.brand}
+        name={el.name}
+        image={el.image}
+        itemsCount={items[JSON.stringify(el.objState)].items.length}
+        plusItem={this.props.plusItem}
+        minusItem={this.props.minusItem}
+        deleteItem={this.props.deleteItem}
+        attributes={el.attributes}
+        state={el.objState}
+      />
+    ));
+  };
   render() {
     const { items, currIndex } = this.props;
     const products = Object.keys(items).map((key) => {
@@ -73,24 +90,7 @@ class MiniCart extends PureComponent {
                 <span className="clear-cart">Clear cart</span>
               </div>
             </div>
-            {products
-              ? products.map((el) => (
-                  <MiniCartItem
-                    key={JSON.stringify(el.objState)}
-                    id={el.id}
-                    price={el.price}
-                    brand={el.brand}
-                    name={el.name}
-                    image={el.image}
-                    itemsCount={items[JSON.stringify(el.objState)].items.length}
-                    plusItem={this.props.plusItem}
-                    minusItem={this.props.minusItem}
-                    deleteItem={this.props.deleteItem}
-                    attributes={el.attributes}
-                    state={el.objState}
-                  />
-                ))
-              : ''}
+            {products ? this.renderMiniCartItems(products, items) : ''}
             <div className="cart-overlay-total">
               <div className="total">Total</div>
               <div className="price">{` ${

@@ -18,7 +18,25 @@ class Cart extends PureComponent {
       this.props.clearCart();
     }
   };
-
+  renderProducts = (products, items) => {
+    return products.map((el) => (
+      <CartItem
+        key={JSON.stringify(el.objState)}
+        id={el.id}
+        price={el.price}
+        brand={el.brand}
+        name={el.name}
+        image={el.image}
+        itemsCount={items[JSON.stringify(el.objState)].items.length}
+        plusItem={this.props.plusItem}
+        minusItem={this.props.minusItem}
+        deleteItem={this.props.deleteItem}
+        attributes={el.attributes}
+        state={el.objState}
+        items={this.products}
+      />
+    ));
+  };
   render() {
     const { items, currIndex } = this.props;
     const products = Object.keys(items).map((key) => {
@@ -33,27 +51,7 @@ class Cart extends PureComponent {
           <img src="./trash.svg" alt="trash-img"></img>
           <span>Clear cart</span>
         </div>
-        <div className="cart-items">
-          {products
-            ? products.map((el) => (
-                <CartItem
-                  key={JSON.stringify(el.objState)}
-                  id={el.id}
-                  price={el.price}
-                  brand={el.brand}
-                  name={el.name}
-                  image={el.image}
-                  itemsCount={items[JSON.stringify(el.objState)].items.length}
-                  plusItem={this.props.plusItem}
-                  minusItem={this.props.minusItem}
-                  deleteItem={this.props.deleteItem}
-                  attributes={el.attributes}
-                  state={el.objState}
-                  items={this.products}
-                />
-              ))
-            : ''}
-        </div>
+        <div className="cart-items">{products ? this.renderProducts(products, items) : ''}</div>
         <div className="cart-check">
           <div className="total-check">
             <div className="check-description">

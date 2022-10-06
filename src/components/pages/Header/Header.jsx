@@ -27,23 +27,23 @@ class Header extends PureComponent {
     this.props.setFilterIndex(index);
     this.props.setFIlterName(name);
   };
-
+  renderSort = (sortItems) => {
+    return sortItems.map((el, index) => (
+      <div
+        onClick={() => this.setActive(index, el)}
+        key={el}
+        className={classNames('sort-item', {
+          'sort-item-active': this.props.filterIndex === index,
+        })}>
+        {el}
+      </div>
+    ));
+  };
   render() {
     const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
-        <div className="showcase-header-sort">
-          {sortItems.map((el, index) => (
-            <div
-              onClick={() => this.setActive(index, el)}
-              key={el}
-              className={classNames('sort-item', {
-                'sort-item-active': this.props.filterIndex === index,
-              })}>
-              {el}
-            </div>
-          ))}
-        </div>
+        <div className="showcase-header-sort">{this.renderSort(sortItems)}</div>
 
         <div className="showcase-header-logo" onClick={() => this.props.router.navigate(-1)}>
           <img src="./a-logo.png" alt="logo"></img>

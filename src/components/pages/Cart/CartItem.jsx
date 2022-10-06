@@ -32,6 +32,46 @@ class CartItem extends PureComponent {
   deleteItem = () => {
     this.props.deleteItem(this.props.state);
   };
+  renderAttributes = (attributes, state) => {
+    return attributes.map((el) => (
+      <div className="cart-item_left-size" key={el.id}>
+        <span className="size-text">
+          {el.name.toUpperCase() + ':'}
+          <br></br>
+        </span>
+        <div className="sizes">
+          {el.items.map((item, index) => (
+            <div
+              key={item.value}
+              className={
+                'size' +
+                ' ' +
+                `${el.name === 'Color' ? 'color' : ''}` +
+                ' ' +
+                `${setActiveClass(el.id, index, state)}`
+              }
+              style={{
+                background: `${el.name === 'Color' ? item.value : ''}`,
+              }}>
+              {el.name === 'Color' ? '' : item.value}
+            </div>
+          ))}
+        </div>
+      </div>
+    ));
+  };
+  renderImageArrows = () => {
+    return (
+      <div>
+        <button className="arrow-left" onClick={this.prevImg}>
+          <img src="./left.png" alt="arrow-left"></img>
+        </button>
+        <button className="arrow-right" onClick={this.nextImg}>
+          <img src="./right.png" alt="arrow-right"></img>
+        </button>
+      </div>
+    );
+  };
   render() {
     const { brand, name, price, image, itemsCount, attributes, state } = this.props;
 
@@ -45,32 +85,7 @@ class CartItem extends PureComponent {
               ' ' +
               (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
-          {attributes.map((el) => (
-            <div className="cart-item_left-size" key={el.id}>
-              <span className="size-text">
-                {el.name.toUpperCase() + ':'}
-                <br></br>
-              </span>
-              <div className="sizes">
-                {el.items.map((item, index) => (
-                  <div
-                    key={item.value}
-                    className={
-                      'size' +
-                      ' ' +
-                      `${el.name === 'Color' ? 'color' : ''}` +
-                      ' ' +
-                      `${setActiveClass(el.id, index, state)}`
-                    }
-                    style={{
-                      background: `${el.name === 'Color' ? item.value : ''}`,
-                    }}>
-                    {el.name === 'Color' ? '' : item.value}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          {this.renderAttributes(attributes, state)}
         </div>
         <div className="cart-item_right">
           <div className="cart-item_right-count">
@@ -85,18 +100,7 @@ class CartItem extends PureComponent {
           <div className="cart-item_right-img">
             <img src={`${image[this.state.imgIndex]}`} alt="cart img"></img>
 
-            {image.length > 1 ? (
-              <div>
-                <button className="arrow-left" onClick={this.prevImg}>
-                  <img src="./left.png" alt="arrow-left"></img>
-                </button>
-                <button className="arrow-right" onClick={this.nextImg}>
-                  <img src="./right.png" alt="arrow-right"></img>
-                </button>
-              </div>
-            ) : (
-              ''
-            )}
+            {image.length > 1 ? this.renderImageArrows() : ''}
           </div>
           <div className="delete" onClick={this.deleteItem}>
             x

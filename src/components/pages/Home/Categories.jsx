@@ -20,25 +20,21 @@ class Categories extends PureComponent {
     this.props.onChangeCategory(this.props.data.categories[index].name);
     store.dispatch(saveActiveCategory(this.props.data.categories[index].name));
   };
-
+  renderCategories = (data) => {
+    return data.categories.map((el, index) => (
+      <h1
+        className={classNames('category-title', {
+          'category-active': this.props.categoryIndex === index,
+        })}
+        key={el.name}
+        onClick={() => this.setActiveCategory(index)}>
+        {el.name}
+      </h1>
+    ));
+  };
   render() {
     const { data } = this.props;
-    return (
-      <div className="categories">
-        {data.categories
-          ? data.categories.map((el, index) => (
-              <h1
-                className={classNames('category-title', {
-                  'category-active': this.props.categoryIndex === index,
-                })}
-                key={el.name}
-                onClick={() => this.setActiveCategory(index)}>
-                {el.name}
-              </h1>
-            ))
-          : ''}
-      </div>
-    );
+    return <div className="categories">{data.categories ? this.renderCategories(data) : ''}</div>;
   }
 }
 

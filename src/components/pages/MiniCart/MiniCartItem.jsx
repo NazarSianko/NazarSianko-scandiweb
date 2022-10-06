@@ -12,6 +12,28 @@ class MiniCartItem extends PureComponent {
   deleteItem = () => {
     this.props.deleteItem(this.props.state);
   };
+  renderAttributes = (attributes, state) => {
+    return attributes.map((el) => (
+      <div className="cart-overlay-item_left-size" key={el.id}>
+        <span className="size-text">
+          {el.name.toUpperCase() + ':'}
+          <br></br>
+        </span>
+        <div className="sizes">
+          {el.items.map((item, index) => (
+            <div
+              key={item.value}
+              className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
+              style={{
+                background: `${el.name === 'Color' ? item.value : ''}`,
+              }}>
+              {el.name === 'Color' ? '' : item.value}
+            </div>
+          ))}
+        </div>
+      </div>
+    ));
+  };
   render() {
     const { brand, name, price, image, itemsCount, attributes, state } = this.props;
     return (
@@ -24,26 +46,7 @@ class MiniCartItem extends PureComponent {
               ' ' +
               (price[this.props.currIndex].amount * itemsCount).toFixed(2)}
           </div>
-          {attributes.map((el) => (
-            <div className="cart-overlay-item_left-size" key={el.id}>
-              <span className="size-text">
-                {el.name.toUpperCase() + ':'}
-                <br></br>
-              </span>
-              <div className="sizes">
-                {el.items.map((item, index) => (
-                  <div
-                    key={item.value}
-                    className={'size' + ' ' + `${setActiveClass(el.id, index, state)}`}
-                    style={{
-                      background: `${el.name === 'Color' ? item.value : ''}`,
-                    }}>
-                    {el.name === 'Color' ? '' : item.value}
-                  </div>
-                ))}
-              </div>
-            </div>
-          ))}
+          {this.renderAttributes(attributes, state)}
         </div>
         <div className="cart-overlay-item_right">
           <div className="cart-overlay-item_right-count">

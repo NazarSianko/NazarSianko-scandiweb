@@ -31,40 +31,42 @@ class ChangeCurrency extends PureComponent {
   componentWillUnmount = () => {
     document.body.removeEventListener('click', this.handleOutsideClick);
   };
+  renderCurrencyList = (data) => {
+    return (
+      <div className="currency-list">
+        {!data.loading && !data.error
+          ? data.currencies.map((el, index) => (
+              <div
+                key={el.symbol}
+                className={classNames('currency-list-item', {
+                  active: this.props.currIndex === index,
+                })}
+                onClick={() => this.props.setActiveCurrency(index)}>
+                {el.symbol} {el.label}
+              </div>
+            ))
+          : ''}
+      </div>
+    );
+  };
+  renderCurrencySymbol = (data) => {
+    return (
+      <div className="currency-symbol">
+        {data.currencies[this.props.currIndex].symbol}
+        <div className="arrow">
+          <i className={classNames('arrow-down', { 'arrow-up': this.state.currencyFlag })}></i>
+        </div>
+      </div>
+    );
+  };
 
   render() {
     const { data } = this.props;
     return (
       <div className="header-change" ref={this.currencyRef} onClick={() => this.openCurrencyList()}>
-        {!data.loading && !data.error ? (
-          <div className="currency-symbol">
-            {data.currencies[this.props.currIndex].symbol}
-            <div className="arrow">
-              <i className={classNames('arrow-down', { 'arrow-up': this.state.currencyFlag })}></i>
-            </div>
-          </div>
-        ) : (
-          ''
-        )}
+        {!data.loading && !data.error ? this.renderCurrencySymbol(data) : ''}
 
-        {this.state.currencyFlag ? (
-          <div className="currency-list">
-            {!data.loading && !data.error
-              ? data.currencies.map((el, index) => (
-                  <div
-                    key={el.symbol}
-                    className={classNames('currency-list-item', {
-                      active: this.props.currIndex === index,
-                    })}
-                    onClick={() => this.props.setActiveCurrency(index)}>
-                    {el.symbol} {el.label}
-                  </div>
-                ))
-              : ''}
-          </div>
-        ) : (
-          ''
-        )}
+        {this.state.currencyFlag ? this.renderCurrencyList(data) : ''}
       </div>
     );
   }
