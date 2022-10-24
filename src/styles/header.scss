@@ -9,34 +9,31 @@
     box-sizing: border-box;
     height: 80px;
     margin-bottom: 80px;
-
-    &-sort {
+    .categories {
         display: flex;
-        font-family: "Raleway";
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 19px;
-        letter-spacing: 0px;
-        text-align: center;
-        color: #1d1f22;
-
-        .sort-item {
-            cursor: pointer;
-            margin-right: 32px;
-            &:nth-last-child(1) {
-                margin-right: 0px;
+    
+        column-gap: 40px;
+        
+            .category-title {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 19px;
+                letter-spacing: 0px;
+               
+                text-align: left;
+                cursor: pointer;
+                &:hover {
+                    color: #5ece7b;
+                }
+                &.category-active {
+                    color: #5ece7b;
+                }
             }
-            &:hover {
-                color: #5ece7b;
-            }
-            &.sort-item-active {
-                color: #5ece7b;
-            }
-        }
     }
+  
     &-logo {
-        margin-left: -70px;
-        margin-top: 15px;
+        margin-left: -110px;
+        margin-top: 5px;
         width: 41px;
         cursor: pointer;
         & img {
@@ -54,7 +51,6 @@
             cursor: pointer;
             position: relative;
             .currency-symbol {
-                font-family: "Raleway";
                 font-size: 18px;
                 font-weight: 500;
                 line-height: 45px;
@@ -101,7 +97,6 @@
                 background: #ffffff;
                 filter: drop-shadow(0px 4px 35px rgba(168, 172, 176, 0.19));
                 &-item {
-                    font-family: "Raleway";
                     font-size: 18px;
                     font-weight: 500;
                     line-height: 45px;
@@ -164,7 +159,6 @@
                     }
                     .clear-cart {
                         color: #b6b6b6;
-                        font-family: Raleway;
                         font-size: 18px;
                         font-weight: 300;
                         line-height: 29px;

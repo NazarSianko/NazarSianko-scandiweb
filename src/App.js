@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Home from './components/pages/Home/Home';
 import Header from './components/pages/Header/Header';
 import Cart from './components/pages/Cart/Cart';
@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 import './styles/index.scss';
 import NotFoundPage from './components/NotFoundPage';
 
-export class App extends Component {
+export class App extends PureComponent {
  
   render() {
     return (

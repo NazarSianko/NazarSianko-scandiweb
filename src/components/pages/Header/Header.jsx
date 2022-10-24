@@ -3,9 +3,10 @@ import '../../../styles/header.scss';
 import ChangeCurrency from './ChangeCurrency';
 import { connect } from 'react-redux';
 import MiniCart from '../MiniCart/MiniCart';
-import classNames from 'classnames';
+
 import { setFilterName, setFilterIndex } from '../../../redux/actions/filter';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import Categories from './Categories';
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
     let location = useLocation();
@@ -17,33 +18,12 @@ function withRouter(Component) {
   return ComponentWithRouterProp;
 }
 class Header extends PureComponent {
-  constructor(props) {
-    super(props);
-    this.state = {
-      activeIndex: 0,
-    };
-  }
-  setActive = (index, name) => {
-    this.props.setFilterIndex(index);
-    this.props.setFIlterName(name);
-  };
-  renderSort = (sortItems) => {
-    return sortItems.map((el, index) => (
-      <div
-        onClick={() => this.setActive(index, el)}
-        key={el}
-        className={classNames('sort-item', {
-          'sort-item-active': this.props.filterIndex === index,
-        })}>
-        {el}
-      </div>
-    ));
-  };
   render() {
-    const sortItems = ['WOMEN', 'MEN', 'KIDS'];
     return (
       <header className="showcase-header">
-        <div className="showcase-header-sort">{this.renderSort(sortItems)}</div>
+        <div className="showcase-header-sort">
+          <Categories />
+        </div>
 
         <div className="showcase-header-logo" onClick={() => this.props.router.navigate(-1)}>
           <img src="./a-logo.png" alt="logo"></img>

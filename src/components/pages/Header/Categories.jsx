@@ -6,6 +6,7 @@ import { changeCategory, saveActiveCategory } from '../../../redux/actions/categ
 import { graphql } from '@apollo/client/react/hoc';
 import classNames from 'classnames';
 import { ALLCATEGORIES } from '../../../apollo/queries';
+import { NavLink } from 'react-router-dom';
 
 class Categories extends PureComponent {
   constructor(props) {
@@ -17,19 +18,20 @@ class Categories extends PureComponent {
 
   setActiveCategory = (index) => {
     store.dispatch(changeCategory(index));
-    this.props.onChangeCategory(this.props.data.categories[index].name);
     store.dispatch(saveActiveCategory(this.props.data.categories[index].name));
   };
   renderCategories = (data) => {
     return data.categories.map((el, index) => (
-      <h1
-        className={classNames('category-title', {
-          'category-active': this.props.categoryIndex === index,
-        })}
-        key={el.name}
-        onClick={() => this.setActiveCategory(index)}>
-        {el.name}
-      </h1>
+      <NavLink to="/">
+        <h1
+          className={classNames('category-title', {
+            'category-active': this.props.categoryIndex === index,
+          })}
+          key={el.name}
+          onClick={() => this.setActiveCategory(index)}>
+          {el.name}
+        </h1>
+      </NavLink>
     ));
   };
   render() {

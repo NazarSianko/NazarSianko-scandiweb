@@ -66,6 +66,7 @@ class MiniCart extends PureComponent {
       />
     ));
   };
+
   render() {
     const { items, currIndex } = this.props;
     const products = Object.keys(items).map((key) => {

@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { setAttributes } from '../../../redux/actions/productAttributes';
 import setActiveClass from '../../../util/setActiveClass';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import DOMPurify from 'dompurify';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -64,10 +65,69 @@ class ProductDescription extends PureComponent {
       imgIndex: index,
     });
   };
-  createMarkUp = () => ({
-    __html: this.props.data.product ? this.props.data.product.description : '',
-  });
 
+  renderDescription = (data) => {
+    let descriptionSpan = document.createElement('span');
+    descriptionSpan.innerHTML = data.product.description;
+    return descriptionSpan.innerHTML;
+  };
+  renderSmallImgs = (data) => {
+    return data.product.gallery.map((el, index) => (
+      <div
+        key={el}
+        className={classNames('pdp-left-img', {
+          'active-color': this.state.imgIndex === index,
+        })}
+        onClick={() => this.setImageId(index)}>
+        <img src={el} alt="small img"></img>
+      </div>
+    ));
+  };
+  renderAttributes = (data) => {
+    return data.product.attributes.map((el) => (
+      <div className="pdp-main-item_right-size" key={el.name}>
+        <span className="size-text">
+          {el.name.toUpperCase() + ':'}
+          <br></br>
+        </span>
+        <div className="sizes">
+          {el.items.map((item, index) => (
+            <div
+              key={item.value}
+              className={
+                'size' +
+                ' ' +
+                `${
+                  data.product.inStock
+                    ? setActiveClass(el.id, index, this.state.activeAttributes)
+                    : ' '
+                }`
+              }
+              style={{
+                backgroundColor: `${
+                  data.product.inStock ? (el.name === 'Color' ? item.value : '') : '#d4d4d4'
+                }`,
+                opacity: `${!data.product.inStock ? '0.2' : '1'}`,
+                width: `${el.name === 'Color' ? '39px' : ''}`,
+                height: `${el.name === 'Color' ? '39px' : ''}`,
+                pointerEvents: data.product.inStock ? 'auto' : 'none',
+              }}
+              onClick={() =>
+                this.setState((state) => ({
+                  activeAttributes: {
+                    ...state.activeAttributes,
+                    [el.id]: index,
+                    id: this.props.router.params.id,
+                  },
+                }))
+              }>
+              {el.name === 'Color' ? '' : item.value}
+            </div>
+          ))}
+        </div>
+      </div>
+    ));
+  };
   render() {
     const { overlayFlag, data } = this.props;
 
@@ -82,18 +142,7 @@ class ProductDescription extends PureComponent {
         {overlayFlag ? <Overlay /> : ''}
         <div className="pdp-cart">
           <div className="pdp-cart-main">
-            <div className="pdp-cart-left-imgs">
-              {data.product.gallery.map((el, index) => (
-                <div
-                  key={el}
-                  className={classNames('pdp-left-img', {
-                    'active-color': this.state.imgIndex === index,
-                  })}
-                  onClick={() => this.setImageId(index)}>
-                  <img src={el} alt="small img"></img>
-                </div>
-              ))}
-            </div>
+            <div className="pdp-cart-left-imgs">{this.renderSmallImgs(data)}</div>
 
             <div className="pdp-cart-main-img">
               <img src={data.product.gallery[this.state.imgIndex]} alt="pdp img"></img>
@@ -103,49 +152,7 @@ class ProductDescription extends PureComponent {
             <div className="pdp-main-item_right-title">{data.product.name}</div>
             <div className="pdp-main-item_right-description">{data.product.brand}</div>
 
-            {data.product.attributes.map((el) => (
-              <div className="pdp-main-item_right-size" key={el.name}>
-                <span className="size-text">
-                  {el.name.toUpperCase() + ':'}
-                  <br></br>
-                </span>
-                <div className="sizes">
-                  {el.items.map((item, index) => (
-                    <div
-                      key={item.value}
-                      className={
-                        'size' +
-                        ' ' +
-                        `${
-                          data.product.inStock
-                            ? setActiveClass(el.id, index, this.state.activeAttributes)
-                            : ' '
-                        }`
-                      }
-                      style={{
-                        backgroundColor: `${
-                          data.product.inStock ? (el.name === 'Color' ? item.value : '') : '#d4d4d4'
-                        }`,
-                        opacity: `${!data.product.inStock ? '0.2' : '1'}`,
-                        width: `${el.name === 'Color' ? '39px' : ''}`,
-                        height: `${el.name === 'Color' ? '39px' : ''}`,
-                        pointerEvents: data.product.inStock ? 'auto' : 'none',
-                      }}
-                      onClick={() =>
-                        this.setState((state) => ({
-                          activeAttributes: {
-                            ...state.activeAttributes,
-                            [el.id]: index,
-                            id: this.props.router.params.id,
-                          },
-                        }))
-                      }>
-                      {el.name === 'Color' ? '' : item.value}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+            {this.renderAttributes(data)}
             <div className="pdp-main-item_right-price">
               <span className="price-text">PRICE:</span>
               <br></br>
@@ -162,7 +169,10 @@ class ProductDescription extends PureComponent {
               <span>ADD TO CART</span>
             </button>
             <div className="pdp-main-item_right-about">
-              <span dangerouslySetInnerHTML={this.createMarkUp()}></span>
+              <span
+                dangerouslySetInnerHTML={{
+                  __html: DOMPurify.sanitize(data.product.description),
+                }}></span>
             </div>
           </div>
         </div>
