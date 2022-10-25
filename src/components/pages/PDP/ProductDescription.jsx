@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { setAttributes } from '../../../redux/actions/productAttributes';
 import setActiveClass from '../../../util/setActiveClass';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import DOMPurify from 'dompurify';
+import ReactHtmlParser from 'react-html-parser';
 
 function withRouter(Component) {
   function ComponentWithRouterProp(props) {
@@ -137,6 +137,7 @@ class ProductDescription extends PureComponent {
     if (!data.product) {
       return <NotFoundProduct />;
     }
+
     return (
       <div className="pdp-main">
         {overlayFlag ? <Overlay /> : ''}
@@ -169,10 +170,7 @@ class ProductDescription extends PureComponent {
               <span>ADD TO CART</span>
             </button>
             <div className="pdp-main-item_right-about">
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(data.product.description),
-                }}></span>
+              <span>{ReactHtmlParser(data.product.description)}</span>
             </div>
           </div>
         </div>
